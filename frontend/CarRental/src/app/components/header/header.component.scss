@@ -1,0 +1,50 @@
+i {
+  font-size: 2.5rem;
+}
+
+.navbar span {
+  margin-right: 20px;
+}
+
+button {
+  background-color: transparent;
+  color: white;
+  padding: 16px;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 2rem;
+  padding-top: 0px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 8px 20px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  color: var(--primary-color);
+}
+
+.nav-button:hover .dropdown-content {
+  display: block;
+}
+
+button:hover {
+  color: var(--primary-color);
+}
+
+.nav-button:hover .dropbtn {
+  color: var(--primary-color);
+}
+
+.active-link {
+  color: var(--primary-color);
+}
