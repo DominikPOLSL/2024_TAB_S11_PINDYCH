@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS public."Vehicle"
     purpose text,
     "totalTime" double precision,
     "totalDistance" double precision,
-    "brandId" integer,
+    "modelId" integer,
     CONSTRAINT br PRIMARY KEY ("vehicleId")
 );
 
@@ -19,7 +19,6 @@ CREATE TABLE IF NOT EXISTS public."Brand"
 (
     "brandId" integer NOT NULL,
     "brandName" text,
-    "modelId" integer,
     PRIMARY KEY ("brandId")
 );
 
@@ -27,6 +26,7 @@ CREATE TABLE IF NOT EXISTS public."Model"
 (
     "modelId" integer NOT NULL,
     "modelName" text,
+    "brandId" integer,
     PRIMARY KEY ("modelId")
 );
 
@@ -112,16 +112,16 @@ CREATE TABLE IF NOT EXISTS public."Admin"
 );
 
 ALTER TABLE IF EXISTS public."Vehicle"
-    ADD CONSTRAINT "brandId" FOREIGN KEY ("brandId")
-    REFERENCES public."Brand" ("brandId") MATCH SIMPLE
+    ADD FOREIGN KEY ("modelId")
+    REFERENCES public."Model" ("modelId") MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS public."Brand"
-    ADD CONSTRAINT "modelId" FOREIGN KEY ("modelId")
-    REFERENCES public."Model" ("modelId") MATCH SIMPLE
+ALTER TABLE IF EXISTS public."Model"
+    ADD CONSTRAINT "brandId" FOREIGN KEY ("brandId")
+    REFERENCES public."Brand" ("brandId") MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
