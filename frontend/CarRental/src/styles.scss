@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeflex/primeflex.scss";
+@import "primeicons/primeicons.css";
+
+body {
+  background-image: url("https://media.discordapp.net/attachments/630044407269163009/1232729197949223043/photo-1492144534655-ae79c964c9d7.png?ex=663c5047&is=663afec7&hm=2434ff40ffce87f5aa7af3aae22f758e1e7b62e0e29684d5c505cad18804927a&=&format=webp&quality=lossless&width=878&height=519");
+  background-size: cover;
+  background-attachment: fixed;
+}
