@@ -1,0 +1,192 @@
+2024-05-08T17:46:58.358+02:00  INFO 12372 --- [carrent] [main] com.example.carrent.CarrentApplication   : Starting CarrentApplication using Java 21.0.1 with PID 12372 (D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent\target\classes started by dawid in D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent)
+2024-05-08T17:46:58.361+02:00  INFO 12372 --- [carrent] [main] com.example.carrent.CarrentApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-08T17:46:59.007+02:00  INFO 12372 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-08T17:46:59.029+02:00  INFO 12372 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 JPA repository interfaces.
+2024-05-08T17:46:59.550+02:00  INFO 12372 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-08T17:46:59.565+02:00  INFO 12372 --- [carrent] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-08T17:46:59.568+02:00  INFO 12372 --- [carrent] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-05-08T17:46:59.643+02:00  INFO 12372 --- [carrent] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-08T17:46:59.643+02:00  INFO 12372 --- [carrent] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1205 ms
+2024-05-08T17:46:59.813+02:00  INFO 12372 --- [carrent] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-08T17:46:59.871+02:00  INFO 12372 --- [carrent] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-05-08T17:46:59.905+02:00  INFO 12372 --- [carrent] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-08T17:47:00.128+02:00  INFO 12372 --- [carrent] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-08T17:47:00.155+02:00  INFO 12372 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-08T17:47:00.519+02:00  INFO 12372 --- [carrent] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@489110c2
+2024-05-08T17:47:00.521+02:00  INFO 12372 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-08T17:47:01.362+02:00  INFO 12372 --- [carrent] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-08T17:47:01.549+02:00  WARN 12372 --- [carrent] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2024-05-08T17:47:01.549+02:00  WARN 12372 --- [carrent] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : tabela "brand" nie istnieje, pominięto
+2024-05-08T17:47:01.594+02:00  WARN 12372 --- [carrent] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2024-05-08T17:47:01.595+02:00  WARN 12372 --- [carrent] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : sekwencja "brand_sequence" nie istnieje, pominięto
+2024-05-08T17:47:02.149+02:00  INFO 12372 --- [carrent] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-08T17:47:02.196+02:00  WARN 12372 --- [carrent] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-08T17:47:02.575+02:00  INFO 12372 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-08T17:47:02.582+02:00  INFO 12372 --- [carrent] [main] com.example.carrent.CarrentApplication   : Started CarrentApplication in 4.633 seconds (process running for 4.999)
+2024-05-08T17:57:27.481+02:00  INFO 3736 --- [carrent] [main] com.example.carrent.CarrentApplication   : Starting CarrentApplication using Java 21.0.1 with PID 3736 (D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent\target\classes started by dawid in D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent)
+2024-05-08T17:57:27.484+02:00  INFO 3736 --- [carrent] [main] com.example.carrent.CarrentApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-08T17:57:28.132+02:00  INFO 3736 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-08T17:57:28.197+02:00  INFO 3736 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 1 JPA repository interface.
+2024-05-08T17:57:28.775+02:00  INFO 3736 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-08T17:57:28.791+02:00  INFO 3736 --- [carrent] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-08T17:57:28.791+02:00  INFO 3736 --- [carrent] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-05-08T17:57:28.876+02:00  INFO 3736 --- [carrent] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-08T17:57:28.876+02:00  INFO 3736 --- [carrent] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1337 ms
+2024-05-08T17:57:29.059+02:00  INFO 3736 --- [carrent] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-08T17:57:29.126+02:00  INFO 3736 --- [carrent] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-05-08T17:57:29.163+02:00  INFO 3736 --- [carrent] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-08T17:57:29.402+02:00  INFO 3736 --- [carrent] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-08T17:57:29.426+02:00  INFO 3736 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-08T17:57:29.643+02:00  INFO 3736 --- [carrent] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6befbb12
+2024-05-08T17:57:29.644+02:00  INFO 3736 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-08T17:57:30.446+02:00  INFO 3736 --- [carrent] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-08T17:57:30.500+02:00  INFO 3736 --- [carrent] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-08T17:57:30.760+02:00  WARN 3736 --- [carrent] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-08T17:57:31.082+02:00  INFO 3736 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-08T17:57:31.089+02:00  INFO 3736 --- [carrent] [main] com.example.carrent.CarrentApplication   : Started CarrentApplication in 4.047 seconds (process running for 4.381)
+2024-05-08T17:57:39.246+02:00  INFO 3736 --- [carrent] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-08T17:57:39.247+02:00  INFO 3736 --- [carrent] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-08T17:57:39.248+02:00  INFO 3736 --- [carrent] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-05-08T17:57:56.838+02:00  INFO 11420 --- [carrent] [main] com.example.carrent.CarrentApplication   : Starting CarrentApplication using Java 21.0.1 with PID 11420 (D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent\target\classes started by dawid in D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent)
+2024-05-08T17:57:56.841+02:00  INFO 11420 --- [carrent] [main] com.example.carrent.CarrentApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-08T17:57:57.452+02:00  INFO 11420 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-08T17:57:57.502+02:00  INFO 11420 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 43 ms. Found 1 JPA repository interface.
+2024-05-08T17:57:58.055+02:00  INFO 11420 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-08T17:57:58.072+02:00  INFO 11420 --- [carrent] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-08T17:57:58.073+02:00  INFO 11420 --- [carrent] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-05-08T17:57:58.169+02:00  INFO 11420 --- [carrent] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-08T17:57:58.170+02:00  INFO 11420 --- [carrent] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1268 ms
+2024-05-08T17:57:58.396+02:00  INFO 11420 --- [carrent] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-08T17:57:58.505+02:00  INFO 11420 --- [carrent] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-05-08T17:57:58.551+02:00  INFO 11420 --- [carrent] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-08T17:57:58.808+02:00  INFO 11420 --- [carrent] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-08T17:57:58.831+02:00  INFO 11420 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-08T17:57:59.051+02:00  INFO 11420 --- [carrent] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@15369d73
+2024-05-08T17:57:59.054+02:00  INFO 11420 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-08T17:57:59.918+02:00  INFO 11420 --- [carrent] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-08T17:57:59.967+02:00  INFO 11420 --- [carrent] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-08T17:58:00.279+02:00  WARN 11420 --- [carrent] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-08T17:58:00.708+02:00  INFO 11420 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-08T17:58:00.716+02:00  INFO 11420 --- [carrent] [main] com.example.carrent.CarrentApplication   : Started CarrentApplication in 4.322 seconds (process running for 4.687)
+2024-05-08T17:58:10.286+02:00  INFO 11420 --- [carrent] [http-nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-08T17:58:10.287+02:00  INFO 11420 --- [carrent] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-08T17:58:10.289+02:00  INFO 11420 --- [carrent] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-05-08T17:58:35.630+02:00  INFO 5436 --- [carrent] [main] com.example.carrent.CarrentApplication   : Starting CarrentApplication using Java 21.0.1 with PID 5436 (D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent\target\classes started by dawid in D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent)
+2024-05-08T17:58:35.634+02:00  INFO 5436 --- [carrent] [main] com.example.carrent.CarrentApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-08T17:58:36.248+02:00  INFO 5436 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-08T17:58:36.305+02:00  INFO 5436 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 45 ms. Found 1 JPA repository interface.
+2024-05-08T17:58:36.817+02:00  INFO 5436 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-08T17:58:36.830+02:00  INFO 5436 --- [carrent] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-08T17:58:36.830+02:00  INFO 5436 --- [carrent] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-05-08T17:58:36.907+02:00  INFO 5436 --- [carrent] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-08T17:58:36.908+02:00  INFO 5436 --- [carrent] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1218 ms
+2024-05-08T17:58:37.074+02:00  INFO 5436 --- [carrent] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-08T17:58:37.139+02:00  INFO 5436 --- [carrent] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-05-08T17:58:37.176+02:00  INFO 5436 --- [carrent] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-08T17:58:37.404+02:00  INFO 5436 --- [carrent] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-08T17:58:37.431+02:00  INFO 5436 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-08T17:58:37.670+02:00  INFO 5436 --- [carrent] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@48cdb156
+2024-05-08T17:58:37.672+02:00  INFO 5436 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-08T17:58:38.520+02:00  INFO 5436 --- [carrent] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-08T17:58:38.567+02:00  INFO 5436 --- [carrent] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-08T17:58:38.818+02:00  WARN 5436 --- [carrent] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-08T17:58:39.158+02:00  INFO 5436 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-08T17:58:39.165+02:00  INFO 5436 --- [carrent] [main] com.example.carrent.CarrentApplication   : Started CarrentApplication in 4.012 seconds (process running for 4.407)
+2024-05-08T17:58:42.375+02:00  INFO 5436 --- [carrent] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-08T17:58:42.376+02:00  INFO 5436 --- [carrent] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-08T17:58:42.377+02:00  INFO 5436 --- [carrent] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-05-08T18:00:08.686+02:00  INFO 13200 --- [carrent] [main] com.example.carrent.CarrentApplication   : Starting CarrentApplication using Java 21.0.1 with PID 13200 (D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent\target\classes started by dawid in D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent)
+2024-05-08T18:00:08.689+02:00  INFO 13200 --- [carrent] [main] com.example.carrent.CarrentApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-08T18:00:09.297+02:00  INFO 13200 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-08T18:00:09.352+02:00  INFO 13200 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 1 JPA repository interface.
+2024-05-08T18:00:09.868+02:00  INFO 13200 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-08T18:00:09.881+02:00  INFO 13200 --- [carrent] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-08T18:00:09.882+02:00  INFO 13200 --- [carrent] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-05-08T18:00:09.955+02:00  INFO 13200 --- [carrent] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-08T18:00:09.956+02:00  INFO 13200 --- [carrent] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1210 ms
+2024-05-08T18:00:10.132+02:00  INFO 13200 --- [carrent] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-08T18:00:10.197+02:00  INFO 13200 --- [carrent] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-05-08T18:00:10.232+02:00  INFO 13200 --- [carrent] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-08T18:00:10.455+02:00  INFO 13200 --- [carrent] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-08T18:00:10.478+02:00  INFO 13200 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-08T18:00:10.707+02:00  INFO 13200 --- [carrent] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@45e140ae
+2024-05-08T18:00:10.709+02:00  INFO 13200 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-08T18:00:11.494+02:00  INFO 13200 --- [carrent] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-08T18:00:11.534+02:00  INFO 13200 --- [carrent] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-08T18:00:11.788+02:00  WARN 13200 --- [carrent] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-08T18:00:12.101+02:00  INFO 13200 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-08T18:00:12.108+02:00  INFO 13200 --- [carrent] [main] com.example.carrent.CarrentApplication   : Started CarrentApplication in 3.864 seconds (process running for 4.219)
+2024-05-08T18:01:26.197+02:00  INFO 14996 --- [carrent] [main] com.example.carrent.CarrentApplication   : Starting CarrentApplication using Java 21.0.1 with PID 14996 (D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent\target\classes started by dawid in D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent)
+2024-05-08T18:01:26.199+02:00  INFO 14996 --- [carrent] [main] com.example.carrent.CarrentApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-08T18:01:26.804+02:00  INFO 14996 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-08T18:01:26.861+02:00  INFO 14996 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 1 JPA repository interface.
+2024-05-08T18:01:27.399+02:00  INFO 14996 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-08T18:01:27.412+02:00  INFO 14996 --- [carrent] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-08T18:01:27.413+02:00  INFO 14996 --- [carrent] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-05-08T18:01:27.487+02:00  INFO 14996 --- [carrent] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-08T18:01:27.488+02:00  INFO 14996 --- [carrent] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1229 ms
+2024-05-08T18:01:27.643+02:00  INFO 14996 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-08T18:01:27.871+02:00  INFO 14996 --- [carrent] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@67bf0480
+2024-05-08T18:01:27.873+02:00  INFO 14996 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-08T18:01:27.927+02:00  INFO 14996 --- [carrent] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-08T18:01:27.989+02:00  INFO 14996 --- [carrent] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-05-08T18:01:28.035+02:00  INFO 14996 --- [carrent] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-08T18:01:28.295+02:00  INFO 14996 --- [carrent] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-08T18:01:29.231+02:00  INFO 14996 --- [carrent] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-08T18:01:29.235+02:00  INFO 14996 --- [carrent] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-08T18:01:29.538+02:00  WARN 14996 --- [carrent] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-08T18:01:29.908+02:00  INFO 14996 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-08T18:01:29.916+02:00  INFO 14996 --- [carrent] [main] com.example.carrent.CarrentApplication   : Started CarrentApplication in 4.116 seconds (process running for 4.579)
+2024-05-08T18:01:55.819+02:00  INFO 14996 --- [carrent] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-08T18:01:55.820+02:00  INFO 14996 --- [carrent] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-08T18:01:55.823+02:00  INFO 14996 --- [carrent] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-05-08T18:02:14.142+02:00  INFO 6648 --- [carrent] [main] com.example.carrent.CarrentApplication   : Starting CarrentApplication using Java 21.0.1 with PID 6648 (D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent\target\classes started by dawid in D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent)
+2024-05-08T18:02:14.146+02:00  INFO 6648 --- [carrent] [main] com.example.carrent.CarrentApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-08T18:02:14.770+02:00  INFO 6648 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-08T18:02:14.824+02:00  INFO 6648 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 1 JPA repository interface.
+2024-05-08T18:02:15.338+02:00  INFO 6648 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-08T18:02:15.358+02:00  INFO 6648 --- [carrent] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-08T18:02:15.359+02:00  INFO 6648 --- [carrent] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-05-08T18:02:15.428+02:00  INFO 6648 --- [carrent] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-08T18:02:15.429+02:00  INFO 6648 --- [carrent] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1220 ms
+2024-05-08T18:02:15.581+02:00  INFO 6648 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-08T18:02:15.783+02:00  INFO 6648 --- [carrent] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4816ee24
+2024-05-08T18:02:15.784+02:00  INFO 6648 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-08T18:02:15.837+02:00  INFO 6648 --- [carrent] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-08T18:02:15.901+02:00  INFO 6648 --- [carrent] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-05-08T18:02:15.944+02:00  INFO 6648 --- [carrent] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-08T18:02:16.216+02:00  INFO 6648 --- [carrent] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-08T18:02:17.017+02:00  INFO 6648 --- [carrent] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-08T18:02:17.019+02:00  INFO 6648 --- [carrent] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-08T18:02:17.262+02:00  WARN 6648 --- [carrent] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-08T18:02:17.592+02:00  INFO 6648 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-08T18:02:17.599+02:00  INFO 6648 --- [carrent] [main] com.example.carrent.CarrentApplication   : Started CarrentApplication in 3.91 seconds (process running for 4.305)
+2024-05-08T18:02:22.055+02:00  INFO 6648 --- [carrent] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-08T18:02:22.056+02:00  INFO 6648 --- [carrent] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-08T18:02:22.057+02:00  INFO 6648 --- [carrent] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-05-08T18:12:58.301+02:00  INFO 13400 --- [carrent] [main] com.example.carrent.CarrentApplication   : Starting CarrentApplication using Java 21.0.1 with PID 13400 (D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent\target\classes started by dawid in D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent)
+2024-05-08T18:12:58.304+02:00  INFO 13400 --- [carrent] [main] com.example.carrent.CarrentApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-08T18:12:59.018+02:00  INFO 13400 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-08T18:12:59.082+02:00  INFO 13400 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 1 JPA repository interface.
+2024-05-08T18:12:59.672+02:00  INFO 13400 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-08T18:12:59.690+02:00  INFO 13400 --- [carrent] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-08T18:12:59.691+02:00  INFO 13400 --- [carrent] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-05-08T18:12:59.772+02:00  INFO 13400 --- [carrent] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-08T18:12:59.773+02:00  INFO 13400 --- [carrent] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1392 ms
+2024-05-08T18:12:59.962+02:00  INFO 13400 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-08T18:13:00.240+02:00  INFO 13400 --- [carrent] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@68c9e023
+2024-05-08T18:13:00.242+02:00  INFO 13400 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-08T18:13:00.324+02:00  INFO 13400 --- [carrent] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-08T18:13:00.401+02:00  INFO 13400 --- [carrent] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-05-08T18:13:00.465+02:00  INFO 13400 --- [carrent] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-08T18:13:00.754+02:00  INFO 13400 --- [carrent] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-08T18:13:01.660+02:00  INFO 13400 --- [carrent] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-08T18:13:01.664+02:00  INFO 13400 --- [carrent] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-08T18:13:01.947+02:00  WARN 13400 --- [carrent] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-08T18:13:02.250+02:00  INFO 13400 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-08T18:13:02.257+02:00  INFO 13400 --- [carrent] [main] com.example.carrent.CarrentApplication   : Started CarrentApplication in 4.427 seconds (process running for 4.847)
+2024-05-08T18:13:52.493+02:00  INFO 13400 --- [carrent] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-08T18:13:52.494+02:00  INFO 13400 --- [carrent] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-08T18:13:52.495+02:00  INFO 13400 --- [carrent] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-05-08T18:14:31.174+02:00  WARN 13400 --- [carrent] [http-nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'multipart/form-data;boundary=--------------------------700627560639109235727392;charset=UTF-8' is not supported]
+2024-05-08T18:15:28.018+02:00  WARN 13400 --- [carrent] [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'multipart/form-data;boundary=--------------------------385383341982324565839299;charset=UTF-8' is not supported]
