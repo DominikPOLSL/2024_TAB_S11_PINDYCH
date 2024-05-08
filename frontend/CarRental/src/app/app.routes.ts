@@ -7,26 +7,11 @@ export const routes: Routes = [
   //     pathMatch: 'full',
   //   },
   {
-    path: 'pojazdy/dodaj',
-    loadComponent: () =>
-      import('./vehicles/add-vehicle/add-vehicle.component').then(
-        (m) => m.AddVehicleComponent
-      ),
+    path: 'pojazdy',
+    loadChildren: () =>
+      import('./vehicles/vehicles.routes').then((m) => m.vehicleRoutes),
   },
-  {
-    path: 'pojazdy/przegladaj',
-    loadComponent: () =>
-      import('./vehicles/browse-vehicles/browse-vehicles.component').then(
-        (m) => m.BrowseVehiclesComponent
-      ),
-  },
-  {
-    path: 'pojazdy/przegladaj',
-    loadComponent: () =>
-      import('./vehicles/edit-vehicles/edit-vehicles.component').then(
-        (m) => m.EditVehiclesComponent
-      ),
-  },
+
   //   {
   //     path: '**',
   //     component: komponentprofilu,

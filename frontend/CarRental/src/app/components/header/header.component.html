@@ -13,14 +13,26 @@
   <div class="col-7 flex flex flex-wrap align-items-center justify-content-end">
     <div class="flex flex-row flex-wrap h-5rem">
       <div class="nav-button">
-        <button class="dropbtn">Pojazdy</button>
+        <button
+          class="dropbtn"
+          [routerLink]="['/pojazdy']"
+          routerLinkActive="active-link"
+        >
+          Pojazdy
+        </button>
         <div class="dropdown-content">
-          <a href="#">Przeglądaj</a>
-          <a href="#">Dodaj</a>
+          <a [routerLink]="['/pojazdy/przegladaj']">Przeglądaj</a>
+          <a [routerLink]="['/pojazdy/dodaj']">Dodaj</a>
         </div>
       </div>
       <div class="nav-button">
-        <button class="dropbtn">Użytkownicy</button>
+        <button
+          class="dropbtn"
+          [routerLink]="['/uzytkownicy']"
+          routerLinkActive="active-link"
+        >
+          Użytkownicy
+        </button>
         <div class="dropdown-content">
           <a href="#">Przeglądaj</a>
           <a href="#">Dodaj</a>
