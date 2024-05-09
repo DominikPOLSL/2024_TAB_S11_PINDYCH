@@ -3,7 +3,7 @@
     class="col-3 col-offset-1 flex flex flex-wrap align-items-center justify-content-start vertical-align-middle"
   >
     <div class="flex flex-row flex-wrap h-5rem">
-      <i class="pi pi-car text-white"></i>
+      <i class="pi pi-car text-white text-2xl"></i>
       <p class="ml-3 mt-1">
         <span class="text-primary">Car</span
         ><span class="text-white"> Rental</span>
@@ -30,12 +30,12 @@
           class="dropbtn"
           [routerLink]="['/uzytkownicy']"
           routerLinkActive="active-link"
-        >
+          >
           Użytkownicy
         </button>
         <div class="dropdown-content">
-          <a href="#">Przeglądaj</a>
-          <a href="#">Dodaj</a>
+          <a [routerLink]="['/uzytkownicy/przegladaj']">Przeglądaj</a>
+          <a [routerLink]="['/uzytkownicy/dodaj']">Dodaj</a>
         </div>
       </div>
       <div class="nav-button">
