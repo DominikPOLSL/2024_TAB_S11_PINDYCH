@@ -1,1 +1,42 @@
-<p>browse-vehicles works!</p>
+<div class="min-w-full min-h-full flex justify-content-center flex-wrap mt-8">
+  <div class="form-container border-round-3xl">
+    <div class="grid">
+      <div class="col-8">
+        <p class="text-3xl font-bold ml-6">Przeglądaj pojazdy</p>
+      </div>
+      <div class="col-4">
+        <p-iconField iconPosition="right">
+          <p-inputIcon styleClass="pi pi-search" />
+          <input
+            type="text"
+            pInputText
+            class="mt-4"
+            [(ngModel)]="searchedVehicle"
+            (input)="onSearch()"
+            placeholder="Wyszukaj..."
+          />
+        </p-iconField>
+      </div>
+      <div class="col-11 max-h-24rem vehicles-list ml-6">
+        <div *ngFor="let vehicle of results">
+          <div class="vehicle-container border-round-3xl flex">
+            <div class="col-8 font-semibold ml-5">
+              <p>Marka: {{ vehicle.model }}</p>
+              <p>Model: {{ vehicle.version }}</p>
+              <p>Identyfikator: {{ vehicle.id }}</p>
+              <p>Opiekun: {{ vehicle.carGiver }}</p>
+            </div>
+            <div
+              class="col-3 flex flex-wrap align-items-center justify-content-center"
+            >
+              <div class="vertical-align-middle">
+                <p-button label="Edytuj" class="vertical-align-middle" />
+              </div>
+            </div>
+          </div>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
