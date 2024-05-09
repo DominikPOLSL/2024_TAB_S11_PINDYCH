@@ -5,13 +5,8 @@ import { InputIconModule } from 'primeng/inputicon';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
-
-interface Vehicle {
-  model: string;
-  version: string;
-  id: string;
-  carGiver: string;
-}
+import { Vehicle } from './vehicle.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-browse-vehicles',
@@ -58,6 +53,8 @@ export class BrowseVehiclesComponent {
   results = [...this.vehicles];
   searchedVehicle: string = '';
 
+  constructor(private router: Router) {}
+
   onSearch(): void {
     if (this.searchedVehicle.trim() === '') {
       this.results = this.vehicles;
@@ -72,5 +69,9 @@ export class BrowseVehiclesComponent {
         vehicle.carGiver.toLowerCase().includes(searchTextLower) ||
         vehicle.id.toLowerCase().includes(searchTextLower)
     );
+  }
+
+  onEditVehicle(vehicle: Vehicle) {
+    this.router.navigate(['pojazdy', 'edytuj', vehicle.id]);
   }
 }
