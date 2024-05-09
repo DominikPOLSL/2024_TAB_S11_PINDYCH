@@ -1,0 +1,15 @@
+.form-container {
+  background-color: var(--gray-300);
+  width: 50%;
+  min-height: 500px;
+}
+
+::ng-deep .p-dropdown {
+  width: 17vw;
+  height: 48px;
+}
+
+.error-message {
+  color: red;
+  font-size: smaller;
+}

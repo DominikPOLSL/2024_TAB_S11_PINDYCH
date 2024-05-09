@@ -1,1 +1,128 @@
-<p>add-vehicle works!</p>
+<div class="min-w-full min-h-full flex justify-content-center flex-wrap mt-8">
+  <div class="form-container border-round-3xl">
+    <div class="grid">
+      <div class="col-12 text-center">
+        <p class="text-4xl font-bold">Dodaj pojazd</p>
+      </div>
+      <form [formGroup]="addCarForm">
+        <div class="flex">
+          <div class="col-6 flex justify-content-center flex-wrap">
+            <div class="flex flex-column h-3rem">
+              <p-dropdown
+                [options]="brands"
+                placeholder="Marka"
+                formControlName="brand"
+              />
+
+              <p
+                *ngIf="
+                  addCarForm.controls['brand'].invalid &&
+                  addCarForm.controls['brand'].dirty
+                "
+                class="error-message"
+              >
+                Podaj marke!
+              </p>
+            </div>
+
+            <div class="flex flex-column h-3rem mt-6">
+              <p-dropdown
+                [options]="models"
+                placeholder="Model"
+                formControlName="model"
+              />
+              <p
+                *ngIf="
+                  addCarForm.controls['model'].invalid &&
+                  addCarForm.controls['model'].dirty
+                "
+                class="error-message"
+              >
+                Podaj model!
+              </p>
+            </div>
+
+            <div class="flex flex-column h-3rem mt-6">
+              <input
+                class="h-3rem w-20rem"
+                type="text"
+                pInputText
+                placeholder="Wersja"
+                formControlName="version"
+              />
+              <p
+                *ngIf="
+                  addCarForm.controls['version'].invalid &&
+                  addCarForm.controls['version'].dirty
+                "
+                class="error-message"
+              >
+                Podaj wersje!
+              </p>
+            </div>
+          </div>
+          <div class="col-6 flex justify-content-center flex-wrap">
+            <div class="flex flex-column h-3rem">
+              <input
+                class="h-3rem w-20rem"
+                type="text"
+                pInputText
+                formControlName="mileage"
+                placeholder="Przebieg"
+              />
+              <p
+                *ngIf="
+                  addCarForm.controls['mileage'].invalid &&
+                  addCarForm.controls['mileage'].dirty
+                "
+                class="error-message"
+              >
+                Podaj przebieg!
+              </p>
+            </div>
+            <div class="flex flex-column h-3rem mt-6">
+              <input
+                class="h-3rem w-20rem"
+                type="text"
+                pInputText
+                formControlName="yearOfProduction"
+                placeholder="Rok produkcji"
+              />
+              <p
+                *ngIf="
+                  addCarForm.controls['yearOfProduction'].invalid &&
+                  addCarForm.controls['yearOfProduction'].dirty
+                "
+                class="error-message"
+              >
+                Podaj rok produkcji!
+              </p>
+            </div>
+            <div class="flex flex-column h-3rem mt-6">
+              <input
+                class="h-3rem w-20rem"
+                type="number"
+                pInputText
+                formControlName="power"
+                placeholder="Moc"
+                min="0"
+              />
+              <p
+                *ngIf="
+                  addCarForm.controls['power'].invalid &&
+                  addCarForm.controls['power'].dirty
+                "
+                class="error-message"
+              >
+                Podaj moc!
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="col-12 flex justify-content-center flex-wrap mt-5">
+        <p-button label="Dodaj" [disabled]="addCarForm.invalid" />
+      </div>
+    </div>
+  </div>
+</div>
