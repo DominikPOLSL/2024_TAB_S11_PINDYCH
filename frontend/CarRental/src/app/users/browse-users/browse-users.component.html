@@ -1,1 +1,49 @@
-<p>browse-users works!</p>
+<div class="min-w-full min-h-full flex justify-content-center flex-wrap mt-8">
+  <div class="form-container border-round-3xl">
+    <div class="grid">
+      <div class="col-8">
+        <p class="text-3xl font-bold ml-6 text-primary">
+          Przeglądaj użytkowników
+        </p>
+      </div>
+      <div class="col-4">
+        <p-iconField iconPosition="right">
+          <p-inputIcon styleClass="pi pi-search" />
+          <input
+            type="text"
+            pInputText
+            class="mt-4"
+            [(ngModel)]="query"
+            placeholder="Wyszukaj..."
+          />
+        </p-iconField>
+      </div>
+      <ng-container *ngIf="users$ | async as users; else loading">
+        <ng-container *ngIf="users; else noData">
+          <div class="col-11 max-h-24rem users-list ml-6">
+            <ng-container *ngFor="let user of users">
+              <div class="col-3">
+                <p-card [style]="{ width: '14rem' }" class="card">
+                  <div
+                    class="flex flex-column align-items-center"
+                  >
+                    <div class="mt-0">
+                      {{ user.id }}
+                    </div>
+                    <p>{{ user.name }}</p>
+                    <p>{{ user.surname }}</p>
+                    <div>footer</div>
+                  </div>
+                </p-card>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-template #loading>
+        <app-spinner></app-spinner>
+      </ng-template>
+      <ng-template #noData> brak danych </ng-template>
+    </div>
+  </div>
+</div>
