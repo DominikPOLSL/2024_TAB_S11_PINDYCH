@@ -11,9 +11,14 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./vehicles/vehicles.routes').then((m) => m.vehicleRoutes),
   },
+  {
+    path: 'uzytkownicy',
+    loadChildren: () =>
+      import('./users/users.routes').then((m) => m.usersRoutes),
+  },
 
-  //   {
-  //     path: '**',
-  //     component: komponentprofilu,
-  //   },
+  // {
+  //   path: '**',
+  //   component: komponentprofilu,
+  // },
 ];
