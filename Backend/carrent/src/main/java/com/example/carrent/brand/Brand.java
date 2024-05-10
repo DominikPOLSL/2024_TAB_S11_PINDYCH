@@ -1,10 +1,6 @@
 package com.example.carrent.brand;
 
-import java.util.Objects;
-
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RestController;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,13 +9,16 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "\"Brand\"")
 public class Brand {
 
     @Id
     @SequenceGenerator(name = "brand_sequence", sequenceName = "brand_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "brand_sequence")
+    @Column(name = "\"brandId\"")
     private int brandId;
+
+    @Column(name = "\"brandName\"")
     private String brandName;
 
     public Brand() {
@@ -44,6 +43,14 @@ public class Brand {
 
     public void setBrandName(String brandName) {
         this.brandName = brandName;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " brandId='" + getBrandId() + "'" +
+                ", brandName='" + getBrandName() + "'" +
+                "}";
     }
 
 }

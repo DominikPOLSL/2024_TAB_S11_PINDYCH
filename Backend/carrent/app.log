@@ -190,3 +190,131 @@
 2024-05-08T18:13:52.495+02:00  INFO 13400 --- [carrent] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 2024-05-08T18:14:31.174+02:00  WARN 13400 --- [carrent] [http-nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'multipart/form-data;boundary=--------------------------700627560639109235727392;charset=UTF-8' is not supported]
 2024-05-08T18:15:28.018+02:00  WARN 13400 --- [carrent] [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'multipart/form-data;boundary=--------------------------385383341982324565839299;charset=UTF-8' is not supported]
+2024-05-08T18:24:26.941+02:00  INFO 15752 --- [carrent] [main] com.example.carrent.CarrentApplication   : Starting CarrentApplication using Java 21.0.1 with PID 15752 (D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent\target\classes started by dawid in D:\Dokumenty\TAB\2024_TAB_S11_PINDYCH\Backend\carrent)
+2024-05-08T18:24:26.945+02:00  INFO 15752 --- [carrent] [main] com.example.carrent.CarrentApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-08T18:24:27.713+02:00  INFO 15752 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-08T18:24:27.785+02:00  INFO 15752 --- [carrent] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 1 JPA repository interface.
+2024-05-08T18:24:28.410+02:00  INFO 15752 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-08T18:24:28.422+02:00  INFO 15752 --- [carrent] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-08T18:24:28.423+02:00  INFO 15752 --- [carrent] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-05-08T18:24:28.491+02:00  INFO 15752 --- [carrent] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-08T18:24:28.492+02:00  INFO 15752 --- [carrent] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1484 ms
+2024-05-08T18:24:28.627+02:00  INFO 15752 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-08T18:24:28.935+02:00  INFO 15752 --- [carrent] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@161dd92a
+2024-05-08T18:24:28.936+02:00  INFO 15752 --- [carrent] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-08T18:24:28.987+02:00  INFO 15752 --- [carrent] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-08T18:24:29.056+02:00  INFO 15752 --- [carrent] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-05-08T18:24:29.095+02:00  INFO 15752 --- [carrent] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-08T18:24:29.344+02:00  INFO 15752 --- [carrent] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-08T18:24:30.159+02:00  INFO 15752 --- [carrent] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-08T18:24:30.162+02:00  INFO 15752 --- [carrent] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-08T18:24:30.439+02:00  WARN 15752 --- [carrent] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-08T18:24:30.816+02:00  INFO 15752 --- [carrent] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-08T18:24:30.826+02:00  INFO 15752 --- [carrent] [main] com.example.carrent.CarrentApplication   : Started CarrentApplication in 4.318 seconds (process running for 4.672)
+2024-05-08T18:24:44.758+02:00  INFO 15752 --- [carrent] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-08T18:24:44.758+02:00  INFO 15752 --- [carrent] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-08T18:24:44.759+02:00  INFO 15752 --- [carrent] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-05-08T18:24:44.992+02:00  WARN 15752 --- [carrent] [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 23505
+2024-05-08T18:24:44.993+02:00 ERROR 15752 --- [carrent] [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : BŁĄD: podwójna wartość klucza narusza ograniczenie unikalności "brand_pkey"
+  Szczegóły: Klucz (brand_id)=(1) już istnieje.
+2024-05-08T18:24:45.004+02:00 ERROR 15752 --- [carrent] [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: could not execute statement [BŁĄD: podwójna wartość klucza narusza ograniczenie unikalności "brand_pkey"
+  Szczegóły: Klucz (brand_id)=(1) już istnieje.] [insert into brand (brand_name,brand_id) values (?,?)]; SQL [insert into brand (brand_name,brand_id) values (?,?)]; constraint [null]] with root cause
+
+org.postgresql.util.PSQLException: BŁĄD: podwójna wartość klucza narusza ograniczenie unikalności "brand_pkey"
+  Szczegóły: Klucz (brand_id)=(1) już istnieje.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2713) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2401) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:368) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:498) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:415) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:190) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:152) ~[postgresql-42.6.0.jar:42.6.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:107) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:40) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:52) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:175) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:113) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2873) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.action.internal.EntityInsertAction.execute(EntityInsertAction.java:104) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:632) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:499) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:363) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:41) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1423) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:504) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2339) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:1996) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:439) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:169) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:267) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:561) ~[spring-orm-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:794) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:757) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:669) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:419) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164) ~[spring-data-jpa-3.2.2.jar:3.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:220) ~[spring-aop-6.1.3.jar:6.1.3]
+	at jdk.proxy2/jdk.proxy2.$Proxy109.save(Unknown Source) ~[na:na]
+	at com.example.carrent.brand.BrandService.addNewBrand(BrandService.java:25) ~[classes/:na]
+	at com.example.carrent.brand.BrandController.addNewBrand(BrandController.java:31) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.18.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.18.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+

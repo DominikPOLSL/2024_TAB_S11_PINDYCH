@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Service
 public class BrandService {
@@ -21,8 +20,16 @@ public class BrandService {
 
     }
 
-    public void addNewBrand(Brand brand) {
-        brandRepository.save(brand);
+    public Brand addNewBrand(Brand brand) {
+        return brandRepository.save(brand);
+    }
+
+    public boolean existById(int id) {
+        return brandRepository.existsById(id);
+    }
+
+    public void deleteBrandById(int id) {
+        brandRepository.deleteById(id);
     }
 
 }
