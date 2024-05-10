@@ -16,7 +16,6 @@ public class Model {
     @Id
     @SequenceGenerator(name = "model_sequence", sequenceName = "model_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "model_sequence")
-
     @Column(name = "\"modelId\"")
     private int modelId;
 

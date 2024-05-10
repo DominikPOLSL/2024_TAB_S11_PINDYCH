@@ -20,12 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping(path = "api/model")
 public class ModelController {
 
-    private final ModelService modelService;
-
     @Autowired
-    public ModelController(ModelService modelService) {
-        this.modelService = modelService;
-    }
+    private ModelService modelService;
 
     @Autowired
     private BrandService brandService;
@@ -39,12 +35,21 @@ public class ModelController {
     @PostMapping()
     public ResponseEntity<?> addNewModel(@RequestBody Model model) {
         int brandId = model.getBrandId();
-        if (!brandService.existById(model.getBrandId())) {
+        if (!brandService.existById(brandId)) {
             return ResponseEntity.badRequest().body("Brand does not exist.");
         }
         Model createdModel = modelService.addNewModel(model);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdModel);
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getModelById(@PathVariable("id") int id) {
+        Model model = modelService.findById(id);
+        if (model == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(model);
     }
 
     @DeleteMapping("/{id}")
