@@ -36,6 +36,15 @@ public class BrandController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBrand);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getBrandById(@PathVariable("id") int id) {
+        Brand brand = brandService.findById(id);
+        if (brand == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(brand);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBrand(@PathVariable("id") int id) {
         if (!brandService.existById(id)) {

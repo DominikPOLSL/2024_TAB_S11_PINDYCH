@@ -8,12 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BrandService {
 
-    private final BrandRepository brandRepository;
-
     @Autowired
-    public BrandService(BrandRepository brandRepository) {
-        this.brandRepository = brandRepository;
-    }
+    private BrandRepository brandRepository;
 
     public List<Brand> getBrands() {
         return brandRepository.findAll();
@@ -30,6 +26,10 @@ public class BrandService {
 
     public void deleteBrandById(int id) {
         brandRepository.deleteById(id);
+    }
+
+    public Brand findById(int id) {
+        return brandRepository.findById(id).orElse(null);
     }
 
 }

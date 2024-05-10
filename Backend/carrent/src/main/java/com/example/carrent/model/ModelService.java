@@ -30,4 +30,8 @@ public class ModelService {
     public void deleteModelById(int id) {
         modelRepository.deleteById(id);
     }
+
+    public Model findById(int id) {
+        return modelRepository.findById(id).orElse(null);
+    }
 }
