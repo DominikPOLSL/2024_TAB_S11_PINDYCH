@@ -10,6 +10,7 @@ import { User } from '../user-interface';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { Observable } from 'rxjs';
 import { UsersService } from '../users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-browse-users',
@@ -29,27 +30,15 @@ import { UsersService } from '../users.service';
 })
 export class BrowseUsersComponent implements OnInit {
   users$!: Observable<User[]>;
-
   query: string = '';
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, private router: Router) {}
 
   ngOnInit(): void {
     this.users$ = this.usersService.getUsers();
   }
 
-  // onSearch(): void {
-  //   if (this.query.trim() === '') {
-  //     return;
-  //   }
-
-  //   const searchText = this.query.toLowerCase();
-  //   this.results = this.users.filter(
-  //     (user) =>
-  //       user.role.toLowerCase().includes(searchText) ||
-  //       user.surname.toLowerCase().includes(searchText) ||
-  //       user.name.toLowerCase().includes(searchText) ||
-  //       user.id.toLowerCase().includes(searchText)
-  //   );
-  // }
+  onUser(id: string) {
+    this.router.navigate(['uzytkownicy', 'edytuj', `${id}`]);
+  }
 }

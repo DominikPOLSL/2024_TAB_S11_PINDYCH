@@ -25,7 +25,7 @@ import { UserRole } from '../role-enum';
   styleUrl: './add-user.component.scss',
 })
 export class AddUserComponent {
-  roles = [UserRole.ADMIN, UserRole.KEEPER, UserRole.USER];
+  roles = Object.keys(UserRole);
 
   form: FormGroup;
 
@@ -46,6 +46,10 @@ export class AddUserComponent {
   }
 
   onSubmit(): void {
-    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      //submit form action
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 }
