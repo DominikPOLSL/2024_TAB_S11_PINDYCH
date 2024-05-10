@@ -16,8 +16,37 @@
 }
 
 .card {
-  max-width: 14rem;
-  min-width: 14rem;
-  min-height: 14rem;
-  max-height: 14rem;
+  width: 15rem;
+  height: 15rem;
+  max-height: 15rem;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.4s;
+  cursor: pointer;
+
+  & p{
+    color: black;
+  }
+
+  & .line {
+    width: 30%;
+    height: 1px;
+    border: none;
+    background: #3B82F6;
+  }
+
+  &:hover {
+    transform: scale(1.02) perspective(1000px);
+  }
+}
+
+
+::ng-deep {
+  & p-card .p-card .p-card-body {
+    padding: 0;
+  }
+
+  & .p-card .p-card-content {
+    padding: 0;
+  }
 }

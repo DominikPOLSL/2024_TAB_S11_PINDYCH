@@ -22,17 +22,17 @@
         <ng-container *ngIf="users; else noData">
           <div class="col-11 max-h-24rem users-list ml-6">
             <ng-container *ngFor="let user of users">
-              <div class="col-3">
-                <p-card [style]="{ width: '14rem' }" class="card">
-                  <div
-                    class="flex flex-column align-items-center"
-                  >
-                    <div class="mt-0">
+              <div class="col-3 card">
+                <p-card [style]="{ width: '13rem', height: '13rem' }">
+                  <div class="flex flex-column align-items-center">
+                    <div class="mt-2 font-bold text-gray-500">
                       {{ user.id }}
                     </div>
-                    <p>{{ user.name }}</p>
-                    <p>{{ user.surname }}</p>
-                    <div>footer</div>
+                    <hr class="line" />
+                    <p class="mt-5 mb-2 font-bold text-xl">{{ user.surname }}</p>
+                    <p class="mt-0 font-bold text-black-500">{{ user.name }}</p>
+                    <hr class="line mt-4" />
+                    <div class="lowercase text-sm">{{ user.role }}</div>
                   </div>
                 </p-card>
               </div>
