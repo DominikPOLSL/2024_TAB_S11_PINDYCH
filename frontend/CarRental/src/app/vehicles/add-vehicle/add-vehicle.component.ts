@@ -41,4 +41,8 @@ export class AddVehicleComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  onSubmit(): void {
+    this.addCarForm.reset();
+  }
 }
