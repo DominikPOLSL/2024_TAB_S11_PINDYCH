@@ -1,0 +1,40 @@
+.form-container {
+  background-color: var(--gray-300);
+  width: 50%;
+  min-height: 500px;
+}
+
+::ng-deep .p-dropdown {
+  width: 20rem;
+  height: 48px;
+}
+
+.error-message {
+  color: red;
+  font-size: smaller;
+}
+
+::ng-deep {
+  .p-inputswitch {
+    & .p-inputswitch-slider {
+      background: white;
+
+      &:before {
+        background: var(--gray-500);
+      }
+    }
+
+    &.p-inputswitch-checked {
+      & .p-inputswitch-slider:before {
+        background: white;
+      }
+      & .p-inputswitch-slider {
+        background: var(--primary-color);
+      }
+    }
+  }
+}
+
+.switch {
+  margin-right: 3.5rem;
+}

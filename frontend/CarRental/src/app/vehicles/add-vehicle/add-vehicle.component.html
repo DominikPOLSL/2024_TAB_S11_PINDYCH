@@ -121,7 +121,11 @@
         </div>
       </form>
       <div class="col-12 flex justify-content-center flex-wrap mt-5">
-        <p-button label="Dodaj" [disabled]="addCarForm.invalid" />
+        <p-button
+          label="Dodaj"
+          [disabled]="addCarForm.invalid"
+          (onClick)="onSubmit()"
+        />
       </div>
     </div>
   </div>
