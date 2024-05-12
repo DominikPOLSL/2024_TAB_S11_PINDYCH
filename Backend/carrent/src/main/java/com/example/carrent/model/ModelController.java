@@ -61,4 +61,9 @@ public class ModelController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/getModelsByBrandId/{id}")
+    public List<Model> getModelsByBrandId(@PathVariable("id") int id) {
+        return ModelService.getModelsByBrandId(id);
+    }
+
 }
