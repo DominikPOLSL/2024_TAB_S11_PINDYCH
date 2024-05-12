@@ -1,0 +1,46 @@
+<div class="min-w-full min-h-full flex justify-content-center flex-wrap mt-8">
+  <div class="form-container border-round-3xl">
+    <div class="col-12 text-center">
+      <p class="text-4xl font-bold text-primary">Dodaj użytkownika</p>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="flex flex-column align-items-center">
+        <div class="flex flex-column h-5rem mt-6">
+          <input
+            class="h-3rem w-20rem"
+            type="text"
+            pInputText
+            placeholder="Imię"
+            formControlName="name"
+          />
+          <p *ngIf="isControlValid('name')" class="error-message ml-1 mt-1">
+            Wpisz imię!
+          </p>
+        </div>
+        <div class="flex flex-column h-5rem">
+          <input
+            class="h-3rem w-20rem"
+            type="text"
+            pInputText
+            placeholder="Nazwisko"
+            formControlName="surname"
+          />
+          <p *ngIf="isControlValid('surname')" class="error-message ml-1 mt-1">
+            Wpisz nazwisko!
+          </p>
+        </div>
+        <div class="flex flex-column h-5rem">
+          <p-dropdown
+            [options]="roles"
+            placeholder="Marka"
+            formControlName="role"
+          />
+          <p *ngIf="isControlValid('role')" class="error-message ml-1 mt-1">
+            Wybierz rolę!
+          </p>
+        </div>
+        <p-button label="Dodaj" type="submit" />
+      </div>
+    </form>
+  </div>
+</div>
