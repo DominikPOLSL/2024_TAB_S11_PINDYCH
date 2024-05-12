@@ -10,9 +10,12 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { VehiclesService } from '../vehicles.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { Vehicle } from '../vehicle.interface';
+import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Brand } from '../brand.interface';
+import { Model } from '../model.interface';
+import { ModelsService } from '../models.service';
+import { BrandsService } from '../brands.service';
 
 @Component({
   selector: 'app-edit-vehicle',
@@ -30,6 +33,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EditVehicleComponent implements OnInit {
   editCarForm: FormGroup;
   id: number = 0;
+  brands: Brand[] = [];
+  models: Model[] = [];
 
   private readonly _destroying$ = new Subject<void>();
 
@@ -37,16 +42,18 @@ export class EditVehicleComponent implements OnInit {
     private fb: FormBuilder,
     private vehiclesService: VehiclesService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modelsService: ModelsService,
+    private brandsService: BrandsService
   ) {
     this.editCarForm = this.fb.group({
       brand: ['', Validators.required],
-      model: ['', Validators.required],
+      model: [{ value: '', disabled: true }, Validators.required],
       fuel: ['', [Validators.required]],
       totalDistance: ['', [Validators.required]],
       yearOfProduction: ['', [Validators.required]],
       power: ['', [Validators.required, Validators.min(0)]],
-      carGiver: [''],
+      carGiver: [{ value: '', disabled: true }],
     });
   }
 
@@ -61,20 +68,43 @@ export class EditVehicleComponent implements OnInit {
       .subscribe((vehicle) => {
         this.editCarForm.patchValue(vehicle);
       });
+
+    this.brandsService
+      .getBrands()
+      .pipe(takeUntil(this._destroying$))
+      .subscribe((brands) => {
+        this.brands = brands;
+      });
+  }
+
+  getModelsByBrand(): void {
+    const brandId = this.editCarForm.get('brand')?.value.brandId;
+    this.modelsService
+      .getModelsByBrand(brandId)
+      .pipe(takeUntil(this._destroying$))
+      .subscribe((models) => {
+        this.models = models;
+        this.editCarForm.get('model')?.enable();
+      });
   }
 
   onEditVehicle(): void {
     this.vehiclesService
-      .editVehicle(this.id, this.editCarForm.value)
+      .editVehicle(
+        this.id,
+        this.editCarForm.value,
+        this.editCarForm.get('model')?.value.modelId
+      )
       .pipe(takeUntil(this._destroying$))
       .subscribe(() => {
-        this.router.navigateByUrl('pojazdy/przeglądaj');
+        this.router.navigateByUrl('pojazdy/przegladaj');
       });
   }
 
   onDeleteVehicle(): void {
-    this.vehiclesService.deleteVehicle(this.id).subscribe();
-    this.router.navigateByUrl('pojazdy/przegladaj');
+    this.vehiclesService.deleteVehicle(this.id).subscribe(() => {
+      this.router.navigateByUrl('pojazdy/przegladaj');
+    });
   }
   onEndReservation(): void {}
 

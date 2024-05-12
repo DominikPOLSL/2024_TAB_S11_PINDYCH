@@ -1,9 +1,11 @@
 export interface Vehicle {
-  vehicleId: number;
-  equipment: string;
-  version: string;
-  purpose: string;
-  totalTime: number;
+  id: number;
+  model: string;
+  brand: string;
+  fuel: string;
   totalDistance: number;
-  modelId: number;
+  yearOfProduction: number;
+  power: number;
+  guardianName: string;
+  guardianSurname: string;
 }

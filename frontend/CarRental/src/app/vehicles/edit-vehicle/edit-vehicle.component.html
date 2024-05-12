@@ -8,7 +8,13 @@
         <div class="flex">
           <div class="col-6 flex justify-content-center flex-wrap">
             <div class="flex flex-column h-3rem">
-              <p-dropdown placeholder="Marka" formControlName="brand" />
+              <p-dropdown
+                placeholder="Marka"
+                formControlName="brand"
+                [options]="brands"
+                (onChange)="getModelsByBrand()"
+                optionLabel="brandName"
+              />
 
               <p
                 *ngIf="
@@ -22,7 +28,12 @@
             </div>
 
             <div class="flex flex-column h-3rem mt-6">
-              <p-dropdown placeholder="Model" formControlName="model" />
+              <p-dropdown
+                placeholder="Model"
+                formControlName="model"
+                [options]="models"
+                optionLabel="modelName"
+              />
               <p
                 *ngIf="
                   editCarForm.controls['model'].invalid &&
@@ -127,6 +138,7 @@
             label="Edytuj"
             class="vertical-align-middle"
             (onClick)="onEditVehicle()"
+            [disabled]="editCarForm.invalid"
           />
 
           <p-button
@@ -140,6 +152,7 @@
             label="Zakończ rezerwację"
             class="vertical-align-middle"
             (onClick)="onEndReservation()"
+            disabled="true"
           />
         </div>
       </form>
