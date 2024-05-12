@@ -6,6 +6,7 @@ import com.example.carrent.vehicle.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,5 +41,36 @@ public class EmployeeService {
 
     public Employee save(Employee existingEmployee) {
         return employeeRepository.save(existingEmployee);
+    }
+
+    public ArrayList<Employee> findByAttribute(String data) {
+        ArrayList<Employee> list = new ArrayList<>();
+        for(Employee e : employeeRepository.findAll()) {
+
+            if(e.getEmployeeName().contains(data)) {
+                list.add(e);
+            }
+
+            if(e.getEmployeeSurname().contains(data)) {
+                list.add(e);
+            }
+
+            if(e.getRoleType().contains(data)) {
+                list.add(e);
+            }
+
+            String employeeIdString = String.valueOf(e.getEmployeeId());
+            if(employeeIdString.contains(data)) {
+                list.add(e);
+            }
+
+        }
+        ArrayList<Employee> uniqueList = new ArrayList<>();
+        for (Employee e : list) {
+            if (!uniqueList.contains(e)) {
+                uniqueList.add(e);
+            }
+        }
+        return uniqueList;
     }
 }
