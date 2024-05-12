@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ModelService {
 
-    private static ModelRepository modelRepository;
+    public static ModelRepository modelRepository;
 
     @Autowired
     public ModelService(ModelRepository modelRepository) {

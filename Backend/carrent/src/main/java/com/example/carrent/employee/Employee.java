@@ -12,10 +12,10 @@ public class Employee {
     @Column(name = "\"employeeId\"")
     private int employeeId;
 
-    @Column(name = "\"employeeName\"")
+    @Column(name = "\"Name\"")
     private String employeeName;
 
-    @Column(name = "\"employeeSurname\"")
+    @Column(name = "\"Surname\"")
     private String employeeSurname;
     public Employee() {
     }
