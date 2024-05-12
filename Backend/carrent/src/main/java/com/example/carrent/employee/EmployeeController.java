@@ -1,10 +1,10 @@
 package com.example.carrent.employee;
-import com.example.carrent.vehicle.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +52,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateVehicle(@PathVariable("id") int id, @RequestBody Employee updatedEmployee) {
+    public ResponseEntity<?> updateEmployee(@PathVariable("id") int id, @RequestBody Employee updatedEmployee) {
 
         Employee existingEmployee = employeeService.findById(id);
 
@@ -66,5 +66,9 @@ public class EmployeeController {
 
         Employee saveEmployee = employeeService.save(existingEmployee);
         return ResponseEntity.ok(saveEmployee);
+    }
+    @GetMapping("/searchEmployee/{data}")
+    public ArrayList<Employee>  getEmployeesByAttribute(@PathVariable("data") String data) {
+        return employeeService.findByAttribute(data);
     }
 }
