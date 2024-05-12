@@ -7,8 +7,7 @@ import com.example.carrent.brand.BrandRepository;
 import com.example.carrent.brand.BrandService;
 import com.example.carrent.model.Model;
 import com.example.carrent.model.ModelRepository;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,20 +19,12 @@ import com.example.carrent.model.ModelService;
 @RequestMapping(path = "api/vehicle")
 public class VehicleController {
 
-
-    private VehicleRepository vehicleRepository;
-    private ModelRepository modelRepository;
-    private BrandRepository brandRepository;
-
-
     private final VehicleService vehicleService;
     private final ModelService modelService;
-    private final BrandService brandService;
 
     public VehicleController(VehicleService vehicleService, ModelService modelService, BrandService brandService) {
         this.vehicleService = vehicleService;
         this.modelService = modelService;
-        this.brandService = brandService;
     }
 
     @GetMapping
@@ -98,5 +89,11 @@ public class VehicleController {
     public VehiclePrint PrintVehicle(@PathVariable("id") int id)
     {
         return vehicleService.PrintVehicle(id);
+    }
+
+    @GetMapping("/printVehicle")
+    public List<VehiclePrint> PrintVehicle()
+    {
+        return vehicleService.printAllVehicles();
     }
 }
