@@ -1,5 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable, delay, map, of, switchMap, tap } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  debounceTime,
+  delay,
+  map,
+  of,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { users } from './mock-users-data';
 import { User, UserDTO } from './user-interface';
 import { UserRole } from './role-enum';
@@ -11,6 +20,8 @@ import { mapUser, mapUserDTO, mapUsers } from './users.mapper';
 })
 export class UsersService {
   private userId!: number;
+
+  private currentUsers = new Subject<User[]>();
 
   constructor(private http: HttpClient) {}
 
@@ -57,6 +68,18 @@ export class UsersService {
       .pipe(
         delay(1000),
         map((user) => mapUser(user))
+      );
+  }
+
+  searchUsers(query: string): Observable<User[]> {
+    return this.http
+      .get<UserDTO[]>(
+        `http://localhost:8080/api/employee/searchEmployee/${query}`
+      )
+      .pipe(
+        debounceTime(400),
+        delay(500),
+        map((users) => mapUsers(users))
       );
   }
 }

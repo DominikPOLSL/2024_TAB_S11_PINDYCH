@@ -41,4 +41,25 @@ export class BrowseUsersComponent implements OnInit {
   onUser(id: string) {
     this.router.navigate(['uzytkownicy', 'edytuj', `${id}`]);
   }
+
+  onSearch(): void {
+    if (this.query === '') {
+      this.users$ = this.usersService.getUsers();
+    } else {
+      this.users$ = this.usersService.searchUsers(this.query);
+    }
+  }
+
+  getSearchIconName(): string {
+    if (this.query === '') {
+      return 'search';
+    } else {
+      return 'times';
+    }
+  }
+
+  clearQuery() {
+    this.users$ = this.usersService.getUsers();
+    this.query = '';
+  }
 }
