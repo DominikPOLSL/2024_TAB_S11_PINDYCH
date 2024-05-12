@@ -1,5 +1,6 @@
 package com.example.carrent.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ModelService {
 
-    private final ModelRepository modelRepository;
+    private static ModelRepository modelRepository;
 
     @Autowired
     public ModelService(ModelRepository modelRepository) {
@@ -33,5 +34,17 @@ public class ModelService {
 
     public Model findById(int id) {
         return modelRepository.findById(id).orElse(null);
+    }
+
+    public static List<Model> getModelsByBrandId(int id) {
+        List<Model> list = new ArrayList<Model>();
+        for(Model m : modelRepository.findAll())
+        {
+            if(m.getBrandId()==id)
+            {
+                list.add(m);
+            }
+        }
+        return list;
     }
 }
