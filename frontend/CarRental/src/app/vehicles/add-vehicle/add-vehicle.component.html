@@ -32,6 +32,7 @@
                 [options]="models"
                 placeholder="Model"
                 formControlName="model"
+                optionLabel="modelName"
               />
               <p
                 *ngIf="
@@ -49,7 +50,7 @@
                 class="h-3rem w-20rem"
                 type="text"
                 pInputText
-                placeholder="Wersja"
+                placeholder="Rodzaj paliwa"
                 formControlName="fuel"
               />
               <p
@@ -67,7 +68,7 @@
             <div class="flex flex-column h-3rem">
               <input
                 class="h-3rem w-20rem"
-                type="text"
+                type="number"
                 pInputText
                 formControlName="totalDistance"
                 placeholder="Przebieg"
@@ -85,7 +86,7 @@
             <div class="flex flex-column h-3rem mt-6">
               <input
                 class="h-3rem w-20rem"
-                type="text"
+                type="number"
                 pInputText
                 formControlName="yearOfProduction"
                 placeholder="Rok produkcji"

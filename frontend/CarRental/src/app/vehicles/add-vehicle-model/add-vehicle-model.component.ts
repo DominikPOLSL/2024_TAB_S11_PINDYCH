@@ -32,7 +32,7 @@ import { BrandsService } from '../brands.service';
   styleUrl: './add-vehicle-model.component.scss',
 })
 export class AddVehicleModelComponent implements OnInit, OnDestroy {
-  brands$: Brand[] = [];
+  brands: Brand[] = [];
   newBrand: boolean = false;
   addModelForm: FormGroup;
 
@@ -53,7 +53,7 @@ export class AddVehicleModelComponent implements OnInit, OnDestroy {
       .getBrands()
       .pipe(takeUntil(this._destroying$))
       .subscribe((brands) => {
-        this.brands$ = brands;
+        this.brands = brands;
       });
   }
 
@@ -63,9 +63,14 @@ export class AddVehicleModelComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     const modelName = this.addModelForm.get('model')?.value;
-    const brandId = this.addModelForm.get('brand')?.value.brandId;
+    let brandName: string;
+    if (this.newBrand) {
+      brandName = this.addModelForm.get('brand')?.value;
+    } else {
+      brandName = this.addModelForm.get('brand')?.value.brandName;
+    }
     this.modelsService
-      .addModel(modelName, brandId)
+      .addModel(modelName, brandName)
       .pipe(takeUntil(this._destroying$))
       .subscribe();
     this.addModelForm.reset();

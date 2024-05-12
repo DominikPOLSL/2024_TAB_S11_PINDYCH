@@ -34,6 +34,7 @@ export class AddVehicleComponent implements OnInit {
   models: Model[] = [];
 
   addCarForm: FormGroup;
+  isModelDisabled: boolean = false;
 
   private readonly _destroying$ = new Subject<void>();
 
@@ -45,10 +46,10 @@ export class AddVehicleComponent implements OnInit {
   ) {
     this.addCarForm = this.fb.group({
       brand: ['', Validators.required],
-      model: ['', Validators.required],
+      model: [{ value: '', disabled: true }, Validators.required],
       fuel: ['', [Validators.required]],
-      totalDistance: ['', [Validators.required]],
-      yearOfProduction: ['', [Validators.required]],
+      totalDistance: ['', [Validators.required, Validators.min(0)]],
+      yearOfProduction: ['', [Validators.required, Validators.min(0)]],
       power: ['', [Validators.required, Validators.min(0)]],
     });
   }
@@ -69,11 +70,18 @@ export class AddVehicleComponent implements OnInit {
       .pipe(takeUntil(this._destroying$))
       .subscribe((models) => {
         this.models = models;
+        this.addCarForm.get('model')?.enable();
       });
   }
 
   onSubmit(): void {
-    this.vehiclesService;
+    this.vehiclesService
+      .addVehicle(
+        this.addCarForm.value,
+        this.addCarForm.get('model')?.value.modelId
+      )
+      .pipe(takeUntil(this._destroying$))
+      .subscribe();
     this.addCarForm.reset();
   }
 

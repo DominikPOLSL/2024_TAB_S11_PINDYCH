@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { VehiclesService } from '../vehicles.service';
 import { Vehicle } from '../vehicle.interface';
 import { Subject, takeUntil } from 'rxjs';
-import { CdkVirtualScrollable, ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-browse-vehicles',
@@ -57,15 +56,15 @@ export class BrowseVehiclesComponent implements OnInit, OnDestroy {
     const searchTextLower = this.searchedVehicle.toLowerCase();
     this.results = this.vehicles.filter(
       (vehicle) =>
-        vehicle.equipment.toLowerCase().includes(searchTextLower) ||
-        vehicle.version.toLowerCase().includes(searchTextLower) ||
-        vehicle.purpose.toLowerCase().includes(searchTextLower) ||
-        vehicle.vehicleId.toString().includes(searchTextLower)
+        vehicle.brand.toLowerCase().includes(searchTextLower) ||
+        vehicle.model.toLowerCase().includes(searchTextLower) ||
+        vehicle.id.toString().includes(searchTextLower) ||
+        vehicle.guardianSurname.toString().includes(searchTextLower)
     );
   }
 
   onEditVehicle(vehicle: Vehicle): void {
-    this.router.navigate(['pojazdy', 'edytuj', vehicle.vehicleId]);
+    this.router.navigate(['pojazdy', 'edytuj', vehicle.id]);
   }
 
   ngOnDestroy(): void {

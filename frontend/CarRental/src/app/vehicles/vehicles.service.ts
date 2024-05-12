@@ -10,22 +10,43 @@ export class VehiclesService {
   constructor(private http: HttpClient) {}
 
   getVehicles(): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>('http://localhost:8080/api/vehicle');
+    return this.http.get<Vehicle[]>(
+      'http://localhost:8080/api/vehicle/printVehicle'
+    );
   }
 
   getVehicleById(id: number): Observable<Vehicle> {
     return this.http.get<Vehicle>(`http://localhost:8080/api/vehicle/${id}`);
   }
 
-  editVehicle(id: number, vehicle: Vehicle): Observable<Vehicle> {
+  editVehicle(
+    id: number,
+    vehicle: Vehicle,
+    modelId: number
+  ): Observable<Vehicle> {
+    const params = {
+      totalDistance: vehicle.totalDistance,
+      modelId: modelId,
+      fuel: vehicle.fuel,
+      yearOfProduction: vehicle.yearOfProduction,
+      power: vehicle.power,
+    };
+
     return this.http.put<Vehicle>(
-      'http://localhost:8080/api/vehicle/1',
-      vehicle
+      `http://localhost:8080/api/vehicle/${id}`,
+      params
     );
   }
 
-  addVehicle(vehicle: Vehicle) {
-    return this.http.post('http://localhost:8080/api/vehicle', vehicle);
+  addVehicle(vehicle: Vehicle, modelId: string): Observable<Vehicle> {
+    const params = {
+      fuel: vehicle.fuel,
+      power: vehicle.power,
+      totalDistance: vehicle.totalDistance,
+      yearOfProduction: vehicle.yearOfProduction,
+      modelId: modelId,
+    };
+    return this.http.post<Vehicle>('http://localhost:8080/api/vehicle', params);
   }
 
   deleteVehicle(id: number) {

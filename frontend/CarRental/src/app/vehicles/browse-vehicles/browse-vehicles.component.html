@@ -21,10 +21,13 @@
         <div *ngFor="let vehicle of results">
           <div class="vehicle-container border-round-3xl flex">
             <div class="col-8 font-semibold ml-5">
-              <p>Marka: {{ vehicle.equipment }}</p>
-              <p>Model: {{ vehicle.version }}</p>
-              <p>Identyfikator: {{ vehicle.vehicleId }}</p>
-              <p>Opiekun: {{ vehicle.purpose }}</p>
+              <p>Marka: {{ vehicle.brand }}</p>
+              <p>Model: {{ vehicle.model }}</p>
+              <p>Identyfikator: {{ vehicle.id }}</p>
+              <p>
+                Opiekun: {{ vehicle.guardianName }}
+                {{ vehicle.guardianSurname }}
+              </p>
             </div>
             <div
               class="col-3 flex flex-wrap align-items-center justify-content-center"
