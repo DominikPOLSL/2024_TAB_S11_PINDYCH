@@ -4,7 +4,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -12,7 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { UserRole } from '../role-enum';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../user-interface';
 import {
   Observable,
@@ -25,6 +24,7 @@ import {
 } from 'rxjs';
 import { UsersService } from '../users.service';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-user',
@@ -51,7 +51,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private router: Router
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -73,7 +74,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
     this.user$.pipe(takeUntil(this._destroying$)).subscribe((user) => {
       this.isLoading = false;
-      console.log(user);
       this.form.patchValue({
         name: user?.name,
         surname: user?.surname,
@@ -92,7 +92,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.form.valid) {
-      //TODO submit form action
+      // todo
     } else {
       this.form.markAllAsTouched();
     }
@@ -103,7 +103,13 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   onDelete(): void {
-    //TODO
+    this.usersService
+      .deleteUser()
+      .pipe(
+        finalize(() => this.router.navigate(['uzytkownicy'])),
+        takeUntil(this._destroying$)
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,6 +10,9 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { UserRole } from '../role-enum';
+import { UsersService } from '../users.service';
+import { Subject, finalize, takeUntil } from 'rxjs';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-add-user',
@@ -20,16 +23,19 @@ import { UserRole } from '../role-enum';
     ButtonModule,
     ReactiveFormsModule,
     CommonModule,
+    SpinnerComponent,
   ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss',
 })
-export class AddUserComponent {
+export class AddUserComponent implements OnDestroy {
   roles = Object.keys(UserRole);
-
+  isLoading = false;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  private readonly _destroying$ = new Subject<void>();
+
+  constructor(private fb: FormBuilder, private usersService: UsersService) {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       surname: ['', [Validators.required]],
@@ -47,9 +53,21 @@ export class AddUserComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      //submit form action
+      this.isLoading = true;
+      this.usersService
+        .addUser(this.form.value)
+        .pipe(
+          finalize(() => (this.isLoading = false)),
+          takeUntil(this._destroying$)
+        )
+        .subscribe();
     } else {
       this.form.markAllAsTouched();
     }
+  }
+
+  ngOnDestroy(): void {
+    this._destroying$.next(undefined);
+    this._destroying$.complete();
   }
 }
