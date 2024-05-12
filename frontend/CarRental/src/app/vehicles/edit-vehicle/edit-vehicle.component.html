@@ -4,20 +4,16 @@
       <div class="col-12 text-center">
         <p class="text-4xl font-bold">Edytuj pojazd</p>
       </div>
-      <form [formGroup]="addCarForm">
+      <form [formGroup]="editCarForm">
         <div class="flex">
           <div class="col-6 flex justify-content-center flex-wrap">
             <div class="flex flex-column h-3rem">
-              <p-dropdown
-                [options]="brands"
-                placeholder="Marka"
-                formControlName="brand"
-              />
+              <p-dropdown placeholder="Marka" formControlName="brand" />
 
               <p
                 *ngIf="
-                  addCarForm.controls['brand'].invalid &&
-                  addCarForm.controls['brand'].dirty
+                  editCarForm.controls['brand'].invalid &&
+                  editCarForm.controls['brand'].dirty
                 "
                 class="error-message"
               >
@@ -26,15 +22,11 @@
             </div>
 
             <div class="flex flex-column h-3rem mt-6">
-              <p-dropdown
-                [options]="models"
-                placeholder="Model"
-                formControlName="model"
-              />
+              <p-dropdown placeholder="Model" formControlName="model" />
               <p
                 *ngIf="
-                  addCarForm.controls['model'].invalid &&
-                  addCarForm.controls['model'].dirty
+                  editCarForm.controls['model'].invalid &&
+                  editCarForm.controls['model'].dirty
                 "
                 class="error-message"
               >
@@ -48,12 +40,12 @@
                 type="text"
                 pInputText
                 placeholder="Wersja"
-                formControlName="version"
+                formControlName="fuel"
               />
               <p
                 *ngIf="
-                  addCarForm.controls['version'].invalid &&
-                  addCarForm.controls['version'].dirty
+                  editCarForm.controls['fuel'].invalid &&
+                  editCarForm.controls['fuel'].dirty
                 "
                 class="error-message"
               >
@@ -67,13 +59,13 @@
                 class="h-3rem w-20rem"
                 type="text"
                 pInputText
-                formControlName="mileage"
+                formControlName="totalDistance"
                 placeholder="Przebieg"
               />
               <p
                 *ngIf="
-                  addCarForm.controls['mileage'].invalid &&
-                  addCarForm.controls['mileage'].dirty
+                  editCarForm.controls['totalDistance'].invalid &&
+                  editCarForm.controls['totalDistance'].dirty
                 "
                 class="error-message"
               >
@@ -90,8 +82,8 @@
               />
               <p
                 *ngIf="
-                  addCarForm.controls['yearOfProduction'].invalid &&
-                  addCarForm.controls['yearOfProduction'].dirty
+                  editCarForm.controls['yearOfProduction'].invalid &&
+                  editCarForm.controls['yearOfProduction'].dirty
                 "
                 class="error-message"
               >
@@ -109,8 +101,8 @@
               />
               <p
                 *ngIf="
-                  addCarForm.controls['power'].invalid &&
-                  addCarForm.controls['power'].dirty
+                  editCarForm.controls['power'].invalid &&
+                  editCarForm.controls['power'].dirty
                 "
                 class="error-message"
               >
