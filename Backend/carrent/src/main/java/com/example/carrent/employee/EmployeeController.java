@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/employee")
@@ -40,14 +41,14 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable("id") int id) {
+    public Optional<Employee> deleteEmployee(@PathVariable("id") int id) {
         if (!employeeService.existById(id)) {
-            return ResponseEntity.notFound().build();
+            //return ResponseEntity.notFound().build();
         }
         Employee emp = employeeService.findById(id);
 
-        employeeService.deleteEmployeeById(id);
-        return ResponseEntity.ok(emp);
+        return employeeService.deleteEmployeeById(id);
+
     }
 
     @PutMapping("/{id}")

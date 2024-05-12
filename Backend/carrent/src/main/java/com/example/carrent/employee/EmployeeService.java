@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -27,8 +28,10 @@ public class EmployeeService {
         return employeeRepository.existsById(id);
     }
 
-    public void deleteEmployeeById(int id) {
+    public  Optional<Employee> deleteEmployeeById(int id) {
+        Optional<Employee> e = employeeRepository.findById(id);
         employeeRepository.deleteById(id);
+        return e;
     }
 
     public Employee findById(int id) {
