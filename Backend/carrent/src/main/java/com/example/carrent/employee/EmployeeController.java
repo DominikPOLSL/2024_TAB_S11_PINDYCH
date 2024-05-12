@@ -43,8 +43,10 @@ public class EmployeeController {
         if (!employeeService.existById(id)) {
             return ResponseEntity.notFound().build();
         }
+        Employee emp = employeeService.findById(id);
+
         employeeService.deleteEmployeeById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(emp);
     }
 
 }
