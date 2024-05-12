@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Service
@@ -37,8 +37,10 @@ public class VehicleService {
         return vehicleRepository.existsById(id);
     }
 
-    public void deleteVehicleById(int id) {
+    public Optional<Vehicle> deleteVehicleById(int id) {
+        Optional<Vehicle> v = vehicleRepository.findById(id);
         vehicleRepository.deleteById(id);
+        return v;
     }
 
     public Vehicle findById(int id) {
