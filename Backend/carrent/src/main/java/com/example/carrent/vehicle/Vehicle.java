@@ -7,10 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.Objects;
 
 @Entity
 @Table(name = "\"Vehicle\"")
+@RestController
 public class Vehicle {
 
     @Id
@@ -154,5 +157,15 @@ public class Vehicle {
                 ", modelId='" + getModelId() + "'" +
                 "}";
     }
-
 }
+record VehiclePrint(
+        int id,
+        String model,
+        String Brand,
+        String fuel,
+        int distance,
+        int yearOfProduction,
+        int power,
+        String guardianName,
+        String guardianSurname
+){}

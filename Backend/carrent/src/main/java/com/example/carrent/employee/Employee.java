@@ -12,6 +12,7 @@ public class Employee {
     @Column(name = "\"employeeId\"")
     private int employeeId;
 
+
     @Column(name = "\"name\"")
     private String employeeName;
 
