@@ -40,11 +40,19 @@ public class Vehicle {
     @Column(name = "\"modelId\"")
     private int modelId;
 
+    @Column(name = "\"fuel\"")
+    private String fuel;
+
+    @Column(name = "\"yearofproduction\"")
+    private int yearOfProduction;
+
+    @Column(name = "\"power\"")
+    private int power;
     public Vehicle() {
     }
 
     public Vehicle(int vehicleId, String equipment, String version, String purpose, double totalTime,
-            double totalDistance, int modelId) {
+            double totalDistance, int modelId, String fuel, int yearOfProduction, int power) {
         this.vehicleId = vehicleId;
         this.equipment = equipment;
         this.version = version;
@@ -52,6 +60,34 @@ public class Vehicle {
         this.totalTime = totalTime;
         this.totalDistance = totalDistance;
         this.modelId = modelId;
+        this.fuel = fuel;
+        this.yearOfProduction = yearOfProduction;
+        this.power = power;
+    }
+
+
+    public String getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(String fuel) {
+        this.fuel = fuel;
+    }
+
+    public int getYearOfProduction() {
+        return yearOfProduction;
+    }
+
+    public void setYearOfProduction(int yearOfProduction) {
+        this.yearOfProduction = yearOfProduction;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
     }
 
     public int getVehicleId() {
@@ -161,9 +197,9 @@ public class Vehicle {
 record VehiclePrint(
         int id,
         String model,
-        String Brand,
+        String brand,
         String fuel,
-        int distance,
+        double distance,
         int yearOfProduction,
         int power,
         String guardianName,

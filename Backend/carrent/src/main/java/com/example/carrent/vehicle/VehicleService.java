@@ -4,9 +4,9 @@ import com.example.carrent.brand.Brand;
 import com.example.carrent.brand.BrandRepository;
 import com.example.carrent.model.Model;
 import com.example.carrent.model.ModelRepository;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -58,11 +58,33 @@ public class VehicleService {
                 vehicle.getVehicleId(),
                 model.getModelName() ,
                 brand.getBrandName(),
-                "fuel",
-                200,
-                2005,
-                120,
+                vehicle.getFuel(),
+                vehicle.getTotalDistance(),
+                vehicle.getYearOfProduction(),
+                vehicle.getPower(),
                 "Kuba",
                 "Małysz");
+    }
+
+
+    public List<VehiclePrint> printAllVehicles() {
+        ArrayList<VehiclePrint> list = new ArrayList<VehiclePrint>();
+
+        for(Vehicle vehicle : vehicleRepository.findAll())
+        {
+            Model model = modelRepository.findById(vehicle.getModelId()).orElse(null);
+            Brand brand = brandRepository.findById(model.getBrandId()).orElse(null);
+            list.add(new VehiclePrint(
+                    vehicle.getVehicleId(),
+                    model.getModelName() ,
+                    brand.getBrandName(),
+                    vehicle.getFuel(),
+                    vehicle.getTotalDistance(),
+                    vehicle.getYearOfProduction(),
+                    vehicle.getPower(),
+                    "Kuba",
+                    "Małysz"));
+        }
+        return list;
     }
 }
