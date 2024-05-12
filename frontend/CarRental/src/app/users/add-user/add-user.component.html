@@ -34,6 +34,33 @@
             </p>
           </div>
           <div class="flex flex-column h-5rem">
+            <input
+              class="h-3rem w-20rem"
+              type="text"
+              pInputText
+              placeholder="Login"
+              formControlName="login"
+            />
+            <p *ngIf="isControlValid('login')" class="error-message ml-1 mt-1">
+              Wpisz login!
+            </p>
+          </div>
+          <div class="flex flex-column h-5rem">
+            <input
+              class="h-3rem w-20rem"
+              type="text"
+              pInputText
+              placeholder="Hasło"
+              formControlName="password"
+            />
+            <p
+              *ngIf="isControlValid('password')"
+              class="error-message ml-1 mt-1"
+            >
+              Wpisz hasło!
+            </p>
+          </div>
+          <div class="flex flex-column h-5rem">
             <p-dropdown
               [options]="roles"
               placeholder="Rola"

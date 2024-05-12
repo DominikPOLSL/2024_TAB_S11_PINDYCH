@@ -39,6 +39,8 @@ export class AddUserComponent implements OnDestroy {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       surname: ['', [Validators.required]],
+      login: ['', [Validators.required]],
+      password: ['', [Validators.required]],
       role: ['', Validators.required],
     });
   }
