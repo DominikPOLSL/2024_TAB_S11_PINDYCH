@@ -12,19 +12,61 @@ public class Employee {
     @Column(name = "\"employeeId\"")
     private int employeeId;
 
-
     @Column(name = "\"name\"")
     private String employeeName;
 
     @Column(name = "\"surname\"")
     private String employeeSurname;
+
+    @Column(name = "\"login\"")
+    private String employeeLogin;
+
+    @Column(name = "\"password\"")
+    private String employeePassword;
+
+    @Column(name = "\"roletype\"")
+    private String roleType;
     public Employee() {
     }
 
-    public Employee(int brandId, String employeeName, String employeeSurname) {
+    public Employee(int employeeId, String employeeName, String employeeSurname, String employeeLogin, String employeePassword, String roleType) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeSurname = employeeSurname;
+        this.employeeLogin = employeeLogin;
+        this.employeePassword = employeePassword;
+        this.roleType = roleType;
+    }
+    public Employee(String employeeName, String employeeSurname, String employeeLogin, String employeePassword, String roleType) {
+        this.employeeName = employeeName;
+        this.employeeSurname = employeeSurname;
+        this.employeeLogin = employeeLogin;
+        this.employeePassword = employeePassword;
+        this.roleType = roleType;
+    }
+
+    public String getEmployeeLogin() {
+        return employeeLogin;
+    }
+
+    public void setEmployeeLogin(String employeeLogin) {
+        this.employeeLogin = employeeLogin;
+    }
+
+    public String getEmployeePassword() {
+        return employeePassword;
+    }
+
+    public void setEmployeePassword(String employeePassword) {
+        this.employeePassword = employeePassword;
+    }
+
+    public String getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(String roleType) {
+        this.roleType = roleType;
     }
 
     public int getEmployeeId() {
