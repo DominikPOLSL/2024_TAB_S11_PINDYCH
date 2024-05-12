@@ -14,6 +14,10 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
+  get userIdentifier(): string {
+    return this.userId.toString();
+  }
+
   getUsers(): Observable<User[]> {
     return this.http.get<UserDTO[]>('http://localhost:8080/api/employee').pipe(
       delay(1000),
@@ -22,11 +26,13 @@ export class UsersService {
   }
 
   getUser(id: string): Observable<User> {
-    return this.http.get<UserDTO>(`http://localhost:8080/api/employee/${id}`).pipe(
-      delay(1000),
-      map((user) => mapUser(user)),
-      tap(() => (this.userId = +id))
-    );
+    return this.http
+      .get<UserDTO>(`http://localhost:8080/api/employee/${id}`)
+      .pipe(
+        delay(1000),
+        map((user) => mapUser(user)),
+        tap(() => (this.userId = +id))
+      );
   }
 
   deleteUser(): Observable<UserDTO> {
@@ -43,7 +49,14 @@ export class UsersService {
       .pipe(delay(1000));
   }
 
-  editUser() {
-    //  TODO
+  editUser(user: User): Observable<User> {
+    const params: UserDTO = mapUserDTO(user);
+
+    return this.http
+      .put<UserDTO>(`http://localhost:8080/api/employee/${this.userId}`, params)
+      .pipe(
+        delay(1000),
+        map((user) => mapUser(user))
+      );
   }
 }

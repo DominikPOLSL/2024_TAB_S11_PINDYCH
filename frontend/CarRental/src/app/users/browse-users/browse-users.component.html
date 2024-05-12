@@ -19,7 +19,7 @@
         </p-iconField>
       </div>
       <ng-container *ngIf="users$ | async as users; else loading">
-        <ng-container *ngIf="users; else noData">
+        <ng-container *ngIf="users.length; else noData">
           <div class="col-11 max-h-24rem users-list ml-6">
             <ng-container *ngFor="let user of users">
               <div class="col-3 card">
@@ -48,7 +48,9 @@
       <ng-template #loading>
         <app-spinner class="col-12 text-center"></app-spinner>
       </ng-template>
-      <ng-template #noData> brak danych </ng-template>
+      <ng-template #noData>
+        <p class="col-12 text-center">Brak zapisanych użytkowników</p>
+      </ng-template>
     </div>
   </div>
 </div>

@@ -10,8 +10,8 @@ export function mapUser(user: UserDTO): User {
     id: user.employeeId,
     name: user.employeeName,
     surname: user.employeeSurname,
-    login: 'any',
-    password: 'any',
+    login: user.employeeLogin,
+    password: user.employeePassword,
     role: UserRole.ADMIN,
   };
 }

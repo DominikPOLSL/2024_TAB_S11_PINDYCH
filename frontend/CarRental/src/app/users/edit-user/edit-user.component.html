@@ -16,7 +16,10 @@
                   placeholder="Imię"
                   formControlName="name"
                 />
-                <p *ngIf="isControlValid('name')" class="error-message">
+                <p
+                  *ngIf="isControlValid('name')"
+                  class="error-message ml-1 mt-1"
+                >
                   Podaj imię!
                 </p>
               </div>
@@ -28,7 +31,10 @@
                   placeholder="nazwisko"
                   formControlName="surname"
                 />
-                <p *ngIf="isControlValid('surname')" class="error-message">
+                <p
+                  *ngIf="isControlValid('surname')"
+                  class="error-message ml-1 mt-1"
+                >
                   Podaj nazwisko!
                 </p>
               </div>
@@ -42,25 +48,49 @@
                   formControlName="login"
                   placeholder="Login"
                 />
-                <p *ngIf="isControlValid('login')" class="error-message">
+                <p
+                  *ngIf="isControlValid('login')"
+                  class="error-message ml-1 mt-1"
+                >
                   Podaj login!
                 </p>
               </div>
-
               <div class="flex flex-column h-3rem mt-6">
-                <p-dropdown
-                  [options]="roleOptions"
-                  placeholder="Rola"
-                  formControlName="role"
+                <input
+                  class="h-3rem w-20rem"
+                  type="text"
+                  pInputText
+                  formControlName="password"
+                  placeholder="Hasło"
                 />
-                <p *ngIf="isControlValid('role')" class="error-message">
-                  Podaj rolę!
+                <p
+                  *ngIf="isControlValid('password')"
+                  class="error-message ml-1 mt-1"
+                >
+                  Podaj hasło!
                 </p>
               </div>
             </div>
           </div>
-          <div class="col-12 flex justify-content-center mt-8 gap-6">
-            <p-button label="Edytuj" class="vertical-align-middle" (click)="onEdit()" />
+          <div class="col-12 flex justify-content-center gap-6">
+            <div class="flex flex-column h-3rem mt-3">
+              <p-dropdown
+                [options]="roleOptions"
+                placeholder="Rola"
+                formControlName="role"
+              />
+              <p *ngIf="isControlValid('role')" class="error-message ml-1 mt-1">
+                Podaj rolę!
+              </p>
+            </div>
+          </div>
+
+          <div class="col-12 flex justify-content-center mt-3 gap-6">
+            <p-button
+              label="Edytuj"
+              class="vertical-align-middle"
+              (click)="onEdit()"
+            />
             <p-button
               label="Usuń"
               severity="danger"

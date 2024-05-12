@@ -41,7 +41,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './edit-user.component.scss',
 })
 export class EditUserComponent implements OnInit, OnDestroy {
-  form!: FormGroup<UserForm>;
+  form!: FormGroup;
   roleOptions = Object.values(UserRole);
   isLoading = true;
   user$!: Observable<User | undefined>;
@@ -58,6 +58,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       name: ['', Validators.required],
       surname: ['', Validators.required],
       login: ['', Validators.required],
+      password: ['', Validators.required],
       role: ['' as UserRole, Validators.required],
     });
   }
@@ -78,28 +79,26 @@ export class EditUserComponent implements OnInit, OnDestroy {
         name: user?.name,
         surname: user?.surname,
         login: user?.login,
+        password: user?.password,
         role: user?.role,
       });
     });
   }
 
-  isControlValid(controlName: string): boolean {
-    const control = this.form.get(controlName);
-    return control
-      ? control?.invalid && control?.dirty && control.touched
-      : false;
-  }
-
-  onSubmit(): void {
+  onEdit(): void {
     if (this.form.valid) {
-      // todo
+      this.isLoading = true;
+
+      this.usersService
+        .editUser({ ...this.form.value, id: this.usersService.userIdentifier })
+        .pipe(
+          finalize(() => (this.isLoading = false)),
+          takeUntil(this._destroying$)
+        )
+        .subscribe();
     } else {
       this.form.markAllAsTouched();
     }
-  }
-
-  onEdit(): void {
-    //TODO
   }
 
   onDelete(): void {
@@ -112,15 +111,16 @@ export class EditUserComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  isControlValid(controlName: string): boolean {
+    return (
+      this.form.controls[controlName].invalid &&
+      (this.form.controls[controlName].dirty ||
+        this.form.controls[controlName].touched)
+    );
+  }
+
   ngOnDestroy(): void {
     this._destroying$.next(undefined);
     this._destroying$.complete();
   }
-}
-
-interface UserForm {
-  name: FormControl<string | null>;
-  surname: FormControl<string | null>;
-  login: FormControl<string | null>;
-  role: FormControl<UserRole | null>;
 }
