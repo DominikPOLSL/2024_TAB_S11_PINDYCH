@@ -7,9 +7,12 @@ import com.example.carrent.brand.BrandRepository;
 import com.example.carrent.brand.BrandService;
 import com.example.carrent.model.Model;
 import com.example.carrent.model.ModelRepository;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.carrent.model.ModelService;
 
@@ -92,8 +95,8 @@ public class VehicleController {
     }
 
     @GetMapping("/printVehicle/{id}")
-    @ResponseBody
-    public String printVehicle(@PathVariable("id") int id) {
-        return vehicleService.printVehicle(id);
+    public VehiclePrint PrintVehicle(@PathVariable("id") int id)
+    {
+        return vehicleService.PrintVehicle(id);
     }
 }
