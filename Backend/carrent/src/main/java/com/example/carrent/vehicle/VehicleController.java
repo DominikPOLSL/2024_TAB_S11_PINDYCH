@@ -1,6 +1,7 @@
 package com.example.carrent.vehicle;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.carrent.brand.Brand;
 import com.example.carrent.brand.BrandRepository;
@@ -57,6 +58,10 @@ public class VehicleController {
         existingVehicle.setPurpose(updatedVehicle.getPurpose());
         existingVehicle.setTotalTime(updatedVehicle.getTotalTime());
         existingVehicle.setTotalDistance(updatedVehicle.getTotalDistance());
+        existingVehicle.setFuel(updatedVehicle.getFuel());
+        existingVehicle.setYearOfProduction(updatedVehicle.getYearOfProduction());
+        existingVehicle.setModelId(updatedVehicle.getModelId());
+        existingVehicle.setPower(updatedVehicle.getPower());
 
         int modelId = updatedVehicle.getModelId();
         if (!modelService.existById(modelId)) {
@@ -77,12 +82,11 @@ public class VehicleController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteVehicle(@PathVariable("id") int id) {
+    public Optional<Vehicle> deleteVehicle(@PathVariable("id") int id) {
         if (!vehicleService.existById(id)) {
-            return ResponseEntity.notFound().build();
+            //return ResponseEntity.notFound().build();
         }
-        vehicleService.deleteVehicleById(id);
-        return ResponseEntity.ok().build();
+        return vehicleService.deleteVehicleById(id);
     }
 
     @GetMapping("/printVehicle/{id}")

@@ -28,6 +28,9 @@ public class Brand {
         this.brandId = brandId;
         this.brandName = brandName;
     }
+    public Brand( String brandName) {
+        this.brandName = brandName;
+    }
 
     public int getBrandId() {
         return this.brandId;
