@@ -7,7 +7,7 @@
       <div class="col-4 flex flex-row-reverse flex-wrap">
         <div class="flex flex-wrap align-items-center gap-2 mr-6">
           <p class="vertical-align-middle">Nowa marka</p>
-          <p-inputSwitch [(ngModel)]="newBrand" />
+          <p-inputSwitch [(ngModel)]="newBrand" (onChange)="onInputChange()" />
         </div>
       </div>
       <div
@@ -26,8 +26,9 @@
             </ng-container>
             <ng-template #versionTemplate>
               <p-dropdown
-                [options]="brands"
+                [options]="brands$"
                 placeholder="Marka"
+                optionLabel="brandName"
                 formControlName="brand"
               ></p-dropdown>
             </ng-template>
@@ -53,7 +54,7 @@
               class="h-3rem w-20rem"
               type="text"
               pInputText
-              placeholder="Wersja"
+              placeholder="Model"
               formControlName="model"
             />
             <p
@@ -66,14 +67,14 @@
               Podaj wersje!
             </p>
           </div>
+          <div class="col-12 flex justify-content-center flex-wrap mt-7">
+            <p-button
+              label="Dodaj"
+              [disabled]="addModelForm.invalid"
+              (onClick)="onSubmit()"
+            />
+          </div>
         </form>
-        <div class="col-12 flex justify-content-center flex-wrap mt-7">
-          <p-button
-            label="Dodaj"
-            [disabled]="addModelForm.invalid"
-            (onClick)="onSubmit()"
-          />
-        </div>
       </div>
     </div>
   </div>
