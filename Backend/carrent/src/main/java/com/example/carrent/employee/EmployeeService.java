@@ -2,6 +2,7 @@ package com.example.carrent.employee;
 
 //import com.example.carrent.brand.Brand;
 import com.example.carrent.brand.BrandRepository;
+import com.example.carrent.vehicle.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +35,7 @@ public class EmployeeService {
         return employeeRepository.findById(id).orElse(null);
     }
 
+    public Employee save(Employee existingEmployee) {
+        return employeeRepository.save(existingEmployee);
+    }
 }

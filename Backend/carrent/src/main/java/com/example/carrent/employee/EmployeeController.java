@@ -1,4 +1,5 @@
 package com.example.carrent.employee;
+import com.example.carrent.vehicle.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,4 +50,20 @@ public class EmployeeController {
         return ResponseEntity.ok(emp);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateVehicle(@PathVariable("id") int id, @RequestBody Employee updatedEmployee) {
+
+        Employee existingEmployee = employeeService.findById(id);
+
+        existingEmployee.setEmployeeId(updatedEmployee.getEmployeeId());
+        existingEmployee.setEmployeeName(updatedEmployee.getEmployeeName());
+        existingEmployee.setEmployeeSurname(updatedEmployee.getEmployeeSurname());
+        existingEmployee.setEmployeeLogin(updatedEmployee.getEmployeeLogin());
+        existingEmployee.setEmployeePassword(updatedEmployee.getEmployeePassword());
+        existingEmployee.setRoleType(updatedEmployee.getRoleType());
+
+
+        Employee saveEmployee = employeeService.save(existingEmployee);
+        return ResponseEntity.ok(saveEmployee);
+    }
 }
