@@ -11,10 +11,11 @@ import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { BrandsService } from '../brands.service';
 import { Brand } from '../brand.interface';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, finalize, takeUntil } from 'rxjs';
 import { ModelsService } from '../models.service';
 import { VehiclesService } from '../vehicles.service';
 import { Model } from '../model.interface';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-add-vehicle',
@@ -25,6 +26,7 @@ import { Model } from '../model.interface';
     ButtonModule,
     ReactiveFormsModule,
     CommonModule,
+    SpinnerComponent,
   ],
   templateUrl: './add-vehicle.component.html',
   styleUrl: './add-vehicle.component.scss',
@@ -32,6 +34,7 @@ import { Model } from '../model.interface';
 export class AddVehicleComponent implements OnInit {
   brands: Brand[] = [];
   models: Model[] = [];
+  isLoading = false;
 
   addCarForm: FormGroup;
   isModelDisabled: boolean = false;
@@ -75,12 +78,16 @@ export class AddVehicleComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     this.vehiclesService
       .addVehicle(
         this.addCarForm.value,
         this.addCarForm.get('model')?.value.modelId
       )
-      .pipe(takeUntil(this._destroying$))
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
       .subscribe();
     this.addCarForm.reset();
   }

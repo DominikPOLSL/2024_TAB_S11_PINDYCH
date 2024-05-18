@@ -13,8 +13,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ModelsService } from '../models.service';
 import { Brand } from '../brand.interface';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, finalize, takeUntil } from 'rxjs';
 import { BrandsService } from '../brands.service';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-add-vehicle-model',
@@ -27,6 +28,7 @@ import { BrandsService } from '../brands.service';
     CommonModule,
     InputSwitchModule,
     FormsModule,
+    SpinnerComponent,
   ],
   templateUrl: './add-vehicle-model.component.html',
   styleUrl: './add-vehicle-model.component.scss',
@@ -35,6 +37,7 @@ export class AddVehicleModelComponent implements OnInit, OnDestroy {
   brands: Brand[] = [];
   newBrand: boolean = false;
   addModelForm: FormGroup;
+  isLoading = false;
 
   private readonly _destroying$ = new Subject<void>();
 
@@ -62,6 +65,7 @@ export class AddVehicleModelComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     const modelName = this.addModelForm.get('model')?.value;
     let brandName: string;
     if (this.newBrand) {
@@ -71,7 +75,10 @@ export class AddVehicleModelComponent implements OnInit, OnDestroy {
     }
     this.modelsService
       .addModel(modelName, brandName)
-      .pipe(takeUntil(this._destroying$))
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
       .subscribe();
     this.addModelForm.reset();
   }

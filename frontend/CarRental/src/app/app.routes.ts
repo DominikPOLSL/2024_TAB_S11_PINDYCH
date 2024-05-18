@@ -7,6 +7,11 @@ export const routes: Routes = [
   //     pathMatch: 'full',
   //   },
   {
+    path: 'profil',
+    loadChildren: () =>
+      import('./profile/profile.routes').then((m) => m.profileRoutes),
+  },
+  {
     path: 'pojazdy',
     loadChildren: () =>
       import('./vehicles/vehicles.routes').then((m) => m.vehicleRoutes),

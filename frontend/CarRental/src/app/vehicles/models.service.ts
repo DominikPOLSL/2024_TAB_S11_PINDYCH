@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import { Model } from './model.interface';
 
 @Injectable({
@@ -15,10 +15,9 @@ export class ModelsService {
       modelName: modelName,
     };
 
-    return this.http.post(
-      'http://localhost:8080/api/model/createBrandModel',
-      params
-    );
+    return this.http
+      .post('http://localhost:8080/api/model/createBrandModel', params)
+      .pipe(delay(1000));
   }
 
   getModelsByBrand(brandId: number): Observable<Model[]> {
