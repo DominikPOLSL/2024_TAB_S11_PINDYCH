@@ -10,12 +10,13 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { VehiclesService } from '../vehicles.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, finalize, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Brand } from '../brand.interface';
 import { Model } from '../model.interface';
 import { ModelsService } from '../models.service';
 import { BrandsService } from '../brands.service';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-edit-vehicle',
@@ -26,6 +27,7 @@ import { BrandsService } from '../brands.service';
     ButtonModule,
     ReactiveFormsModule,
     CommonModule,
+    SpinnerComponent,
   ],
   templateUrl: './edit-vehicle.component.html',
   styleUrl: './edit-vehicle.component.scss',
@@ -35,6 +37,7 @@ export class EditVehicleComponent implements OnInit {
   id: number = 0;
   brands: Brand[] = [];
   models: Model[] = [];
+  isLoading = true;
 
   private readonly _destroying$ = new Subject<void>();
 
@@ -64,7 +67,10 @@ export class EditVehicleComponent implements OnInit {
 
     this.vehiclesService
       .getVehicleById(this.id)
-      .pipe(takeUntil(this._destroying$))
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
       .subscribe((vehicle) => {
         this.editCarForm.patchValue(vehicle);
       });
@@ -89,22 +95,33 @@ export class EditVehicleComponent implements OnInit {
   }
 
   onEditVehicle(): void {
+    this.isLoading = true;
     this.vehiclesService
       .editVehicle(
         this.id,
         this.editCarForm.value,
         this.editCarForm.get('model')?.value.modelId
       )
-      .pipe(takeUntil(this._destroying$))
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
       .subscribe(() => {
         this.router.navigateByUrl('pojazdy/przegladaj');
       });
   }
 
   onDeleteVehicle(): void {
-    this.vehiclesService.deleteVehicle(this.id).subscribe(() => {
-      this.router.navigateByUrl('pojazdy/przegladaj');
-    });
+    this.isLoading = true;
+    this.vehiclesService
+      .deleteVehicle(this.id)
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
+      .subscribe(() => {
+        this.router.navigateByUrl('pojazdy/przegladaj');
+      });
   }
   onEndReservation(): void {}
 

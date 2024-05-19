@@ -18,31 +18,38 @@
         </p-iconField>
       </div>
       <div class="col-11 max-h-24rem vehicles-list ml-6">
-        <div *ngFor="let vehicle of results">
-          <div class="vehicle-container border-round-3xl flex">
-            <div class="col-8 font-semibold ml-5">
-              <p>Marka: {{ vehicle.brand }}</p>
-              <p>Model: {{ vehicle.model }}</p>
-              <p>Identyfikator: {{ vehicle.id }}</p>
-              <p>
-                Opiekun: {{ vehicle.guardianName }}
-                {{ vehicle.guardianSurname }}
-              </p>
-            </div>
-            <div
-              class="col-3 flex flex-wrap align-items-center justify-content-center"
-            >
-              <div class="vertical-align-middle">
-                <p-button
-                  label="Edytuj"
-                  class="vertical-align-middle"
-                  (onClick)="onEditVehicle(vehicle)"
-                />
+        <ng-container *ngIf="!isLoading; else loading">
+          <div *ngFor="let vehicle of results">
+            <div class="vehicle-container border-round-3xl flex">
+              <div class="col-8 font-semibold ml-5">
+                <p>Marka: {{ vehicle.brand }}</p>
+                <p>Model: {{ vehicle.model }}</p>
+                <p>Identyfikator: {{ vehicle.id }}</p>
+                <p>
+                  Opiekun: {{ vehicle.guardianName }}
+                  {{ vehicle.guardianSurname }}
+                </p>
+              </div>
+              <div
+                class="col-3 flex flex-wrap align-items-center justify-content-center"
+              >
+                <div class="vertical-align-middle">
+                  <p-button
+                    label="Edytuj"
+                    class="vertical-align-middle"
+                    (onClick)="onEditVehicle(vehicle)"
+                  />
+                </div>
               </div>
             </div>
+            <br />
           </div>
-          <br />
-        </div>
+        </ng-container>
+        <ng-template #loading>
+          <div class="col-12 text-center mt-8">
+            <app-spinner></app-spinner>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Vehicle } from './vehicle.interface';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +10,15 @@ export class VehiclesService {
   constructor(private http: HttpClient) {}
 
   getVehicles(): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>(
-      'http://localhost:8080/api/vehicle/printVehicle'
-    );
+    return this.http
+      .get<Vehicle[]>('http://localhost:8080/api/vehicle/printVehicle')
+      .pipe(delay(1000));
   }
 
   getVehicleById(id: number): Observable<Vehicle> {
-    return this.http.get<Vehicle>(`http://localhost:8080/api/vehicle/${id}`);
+    return this.http
+      .get<Vehicle>(`http://localhost:8080/api/vehicle/${id}`)
+      .pipe(delay(1000));
   }
 
   editVehicle(
@@ -32,10 +34,9 @@ export class VehiclesService {
       power: vehicle.power,
     };
 
-    return this.http.put<Vehicle>(
-      `http://localhost:8080/api/vehicle/${id}`,
-      params
-    );
+    return this.http
+      .put<Vehicle>(`http://localhost:8080/api/vehicle/${id}`, params)
+      .pipe(delay(1000));
   }
 
   addVehicle(vehicle: Vehicle, modelId: string): Observable<Vehicle> {
@@ -46,10 +47,14 @@ export class VehiclesService {
       yearOfProduction: vehicle.yearOfProduction,
       modelId: modelId,
     };
-    return this.http.post<Vehicle>('http://localhost:8080/api/vehicle', params);
+    return this.http
+      .post<Vehicle>('http://localhost:8080/api/vehicle', params)
+      .pipe(delay(1000));
   }
 
   deleteVehicle(id: number) {
-    return this.http.delete(`http://localhost:8080/api/vehicle/${id}`);
+    return this.http
+      .delete(`http://localhost:8080/api/vehicle/${id}`)
+      .pipe(delay(1000));
   }
 }

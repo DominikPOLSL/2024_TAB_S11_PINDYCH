@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { VehiclesService } from '../vehicles.service';
 import { Vehicle } from '../vehicle.interface';
 import { Subject, takeUntil } from 'rxjs';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-browse-vehicles',
@@ -20,6 +21,7 @@ import { Subject, takeUntil } from 'rxjs';
     CommonModule,
     ButtonModule,
     FormsModule,
+    SpinnerComponent,
   ],
   templateUrl: './browse-vehicles.component.html',
   styleUrl: './browse-vehicles.component.scss',
@@ -27,6 +29,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class BrowseVehiclesComponent implements OnInit, OnDestroy {
   vehicles: Vehicle[] = [];
   results: Vehicle[] = [];
+  isLoading = true;
 
   searchedVehicle: string = '';
 
@@ -42,6 +45,7 @@ export class BrowseVehiclesComponent implements OnInit, OnDestroy {
       .getVehicles()
       .pipe(takeUntil(this._destroying$))
       .subscribe((vehicles) => {
+        this.isLoading = false;
         this.vehicles = vehicles;
         this.results = vehicles;
       });
