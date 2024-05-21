@@ -40,8 +40,12 @@
         </div>
       </div>
       <div class="nav-button">
-        <button [routerLink]="['/profil']">Profil</button>
-        <button>Wyloguj</button>
+        <button [routerLink]="['/profil']" routerLinkActive="active-link">
+          Profil
+        </button>
+        <button [routerLink]="['/login']" routerLinkActive="active-link">
+          Zaloguj
+        </button>
       </div>
     </div>
   </div>
