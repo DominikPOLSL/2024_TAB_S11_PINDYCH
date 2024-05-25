@@ -1,0 +1,11 @@
+.form-container {
+  background-color: var(--gray-300);
+  width: 50%;
+  min-height: 500px;
+}
+.vehicles-list {
+  overflow-y: auto;
+}
+.vehicle-container {
+  background-color: white;
+}

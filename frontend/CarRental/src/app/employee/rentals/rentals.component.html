@@ -1,0 +1,53 @@
+<div class="min-w-full min-h-full flex justify-content-center flex-wrap mt-8">
+  <div class="form-container border-round-3xl">
+    <div class="grid">
+      <div class="col-8">
+        <p class="text-3xl font-bold ml-6">Przeglądaj aktywne wypożyczenia</p>
+      </div>
+      <div class="col-4">
+        <p-iconField iconPosition="right">
+          <p-inputIcon styleClass="pi pi-search" />
+          <input
+            type="text"
+            pInputText
+            class="mt-4"
+            [(ngModel)]="searchedRental"
+            (input)="onSearch()"
+            placeholder="Wyszukaj..."
+          />
+        </p-iconField>
+      </div>
+      <div class="col-11 max-h-24rem vehicles-list ml-6">
+        <ng-container *ngIf="!isLoading; else loading">
+          <div *ngFor="let vehicle of results">
+            <div class="vehicle-container border-round-3xl flex">
+              <div class="col-8 font-semibold ml-5">
+                <p>Marka: {{ vehicle.brand }}</p>
+                <p>Model: {{ vehicle.model }}</p>
+                <p>Identyfikator: {{ vehicle.id }}</p>
+                <p>Okres wypożyczenia:</p>
+              </div>
+              <div
+                class="col-3 flex flex-wrap align-items-center justify-content-center"
+              >
+                <div class="vertical-align-middle">
+                  <p-button
+                    label="Zakończ wypożyczenie"
+                    class="vertical-align-middle w-6rem test"
+                    (onClick)="onEndRental(vehicle)"
+                  />
+                </div>
+              </div>
+            </div>
+            <br />
+          </div>
+        </ng-container>
+        <ng-template #loading>
+          <div class="col-12 text-center mt-8">
+            <app-spinner></app-spinner>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
