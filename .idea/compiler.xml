@@ -9,6 +9,12 @@
         <module name="demo" />
       </profile>
     </annotationProcessing>
+<<<<<<< HEAD
+    <bytecodeTargetLevel>
+      <module name="demo" target="19" />
+    </bytecodeTargetLevel>
+=======
+>>>>>>> ab7cec4686f8d9432a45b268aee67b88954d3b56
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
