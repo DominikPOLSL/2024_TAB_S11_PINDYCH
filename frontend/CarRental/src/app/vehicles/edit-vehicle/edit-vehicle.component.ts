@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,6 +9,14 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { VehiclesService } from '../vehicles.service';
+import { Subject, finalize, takeUntil } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Brand } from '../brand.interface';
+import { Model } from '../model.interface';
+import { ModelsService } from '../models.service';
+import { BrandsService } from '../brands.service';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-edit-vehicle',
@@ -19,29 +27,106 @@ import { InputTextModule } from 'primeng/inputtext';
     ButtonModule,
     ReactiveFormsModule,
     CommonModule,
+    SpinnerComponent,
   ],
   templateUrl: './edit-vehicle.component.html',
   styleUrl: './edit-vehicle.component.scss',
 })
-export class EditVehicleComponent {
-  brands: string[] = ['test', 'test2'];
-  models: string[] = ['test4', 'test3'];
+export class EditVehicleComponent implements OnInit {
+  editCarForm: FormGroup;
+  id: number = 0;
+  brands: Brand[] = [];
+  models: Model[] = [];
+  isLoading = true;
 
-  addCarForm: FormGroup;
+  private readonly _destroying$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder) {
-    this.addCarForm = this.fb.group({
+  constructor(
+    private fb: FormBuilder,
+    private vehiclesService: VehiclesService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private modelsService: ModelsService,
+    private brandsService: BrandsService
+  ) {
+    this.editCarForm = this.fb.group({
       brand: ['', Validators.required],
-      model: ['', Validators.required],
-      version: ['', [Validators.required]],
-      mileage: ['', [Validators.required]],
+      model: [{ value: '', disabled: true }, Validators.required],
+      fuel: ['', [Validators.required]],
+      totalDistance: ['', [Validators.required]],
       yearOfProduction: ['', [Validators.required]],
       power: ['', [Validators.required, Validators.min(0)]],
-      carGiver: [''],
+      carGiver: [{ value: '', disabled: true }],
     });
   }
 
-  onEditVehicle(): void {}
-  onDeleteVehicle(): void {}
+  ngOnInit(): void {
+    this.route.params.pipe(takeUntil(this._destroying$)).subscribe((params) => {
+      this.id = params['id'];
+    });
+
+    this.vehiclesService
+      .getVehicleById(this.id)
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
+      .subscribe((vehicle) => {
+        this.editCarForm.patchValue(vehicle);
+      });
+
+    this.brandsService
+      .getBrands()
+      .pipe(takeUntil(this._destroying$))
+      .subscribe((brands) => {
+        this.brands = brands;
+      });
+  }
+
+  getModelsByBrand(): void {
+    const brandId = this.editCarForm.get('brand')?.value.brandId;
+    this.modelsService
+      .getModelsByBrand(brandId)
+      .pipe(takeUntil(this._destroying$))
+      .subscribe((models) => {
+        this.models = models;
+        this.editCarForm.get('model')?.enable();
+      });
+  }
+
+  onEditVehicle(): void {
+    this.isLoading = true;
+    this.vehiclesService
+      .editVehicle(
+        this.id,
+        this.editCarForm.value,
+        this.editCarForm.get('model')?.value.modelId
+      )
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
+      .subscribe(() => {
+        this.router.navigateByUrl('pojazdy/przegladaj');
+      });
+  }
+
+  onDeleteVehicle(): void {
+    this.isLoading = true;
+    this.vehiclesService
+      .deleteVehicle(this.id)
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
+      .subscribe(() => {
+        this.router.navigateByUrl('pojazdy/przegladaj');
+      });
+  }
   onEndReservation(): void {}
+
+  ngOnDestroy(): void {
+    this._destroying$.next(undefined);
+    this._destroying$.complete();
+  }
 }

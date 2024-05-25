@@ -1,0 +1,58 @@
+<div class="min-w-full min-h-full flex justify-content-center flex-wrap mt-8">
+  <div class="form-container border-round-3xl">
+    <div class="grid">
+      <div class="col-8">
+        <p class="text-3xl font-bold ml-6">Przeglądaj użytkowników</p>
+      </div>
+      <div class="col-4">
+        <p-iconField iconPosition="right">
+          <p-inputIcon
+            [styleClass]="'pi pi-' + getSearchIconName()"
+            (click)="clearQuery()"
+          />
+          <input
+            type="text"
+            pInputText
+            class="mt-4"
+            (input)="onSearch()"
+            [(ngModel)]="query"
+            placeholder="Wyszukaj..."
+          />
+        </p-iconField>
+      </div>
+      <ng-container *ngIf="users$ | async as users; else loading">
+        <ng-container *ngIf="users.length; else noData">
+          <div class="col-11 max-h-24rem users-list ml-6">
+            <ng-container *ngFor="let user of users">
+              <div class="col-3 card">
+                <p-card
+                  [style]="{ width: '13rem', height: '13rem' }"
+                  (click)="onUser(user.id)"
+                >
+                  <div class="flex flex-column align-items-center">
+                    <div class="mt-2 font-bold text-gray-500">
+                      {{ user.id }}
+                    </div>
+                    <hr class="line" />
+                    <p class="mt-5 mb-2 font-bold text-xl">
+                      {{ user.surname }}
+                    </p>
+                    <p class="mt-0 font-bold text-black-500">{{ user.name }}</p>
+                    <hr class="line mt-4" />
+                    <div class="lowercase text-sm">{{ user.role }}</div>
+                  </div>
+                </p-card>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-template #loading>
+        <app-spinner class="col-12 text-center"></app-spinner>
+      </ng-template>
+      <ng-template #noData>
+        <p class="col-12 text-center">Brak zapisanych użytkowników</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

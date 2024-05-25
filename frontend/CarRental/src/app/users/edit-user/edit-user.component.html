@@ -1,0 +1,109 @@
+<div class="min-w-full min-h-full flex justify-content-center flex-wrap mt-8">
+  <div class="form-container border-round-3xl">
+    <div class="grid">
+      <div class="col-12 text-center">
+        <p class="text-4xl font-bold">Edytuj użytkownika</p>
+      </div>
+      <ng-container *ngIf="!isLoading; else loading">
+        <form [formGroup]="form">
+          <div class="flex">
+            <div class="col-6 flex justify-content-center flex-wrap">
+              <div class="flex flex-column h-3rem mt-4">
+                <input
+                  class="h-3rem w-20rem"
+                  type="text"
+                  pInputText
+                  placeholder="Imię"
+                  formControlName="name"
+                />
+                <p
+                  *ngIf="isControlValid('name')"
+                  class="error-message ml-1 mt-1"
+                >
+                  Podaj imię!
+                </p>
+              </div>
+              <div class="flex flex-column h-3rem mt-6">
+                <input
+                  class="h-3rem w-20rem"
+                  type="text"
+                  pInputText
+                  placeholder="nazwisko"
+                  formControlName="surname"
+                />
+                <p
+                  *ngIf="isControlValid('surname')"
+                  class="error-message ml-1 mt-1"
+                >
+                  Podaj nazwisko!
+                </p>
+              </div>
+            </div>
+            <div class="col-6 flex justify-content-center flex-wrap">
+              <div class="flex flex-column h-3rem mt-4">
+                <input
+                  class="h-3rem w-20rem"
+                  type="text"
+                  pInputText
+                  formControlName="login"
+                  placeholder="Login"
+                />
+                <p
+                  *ngIf="isControlValid('login')"
+                  class="error-message ml-1 mt-1"
+                >
+                  Podaj login!
+                </p>
+              </div>
+              <div class="flex flex-column h-3rem mt-6">
+                <input
+                  class="h-3rem w-20rem"
+                  type="text"
+                  pInputText
+                  formControlName="password"
+                  placeholder="Hasło"
+                />
+                <p
+                  *ngIf="isControlValid('password')"
+                  class="error-message ml-1 mt-1"
+                >
+                  Podaj hasło!
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 flex justify-content-center gap-6">
+            <div class="flex flex-column h-3rem mt-3">
+              <p-dropdown
+                [options]="roleOptions"
+                placeholder="Rola"
+                formControlName="role"
+              />
+              <p *ngIf="isControlValid('role')" class="error-message ml-1 mt-1">
+                Podaj rolę!
+              </p>
+            </div>
+          </div>
+
+          <div class="col-12 flex justify-content-center mt-3 gap-6">
+            <p-button
+              label="Edytuj"
+              class="vertical-align-middle"
+              (click)="onEdit()"
+            />
+            <p-button
+              label="Usuń"
+              severity="danger"
+              class="vertical-align-middle"
+              (click)="onDelete()"
+            />
+          </div></form
+      ></ng-container>
+      <ng-template #loading>
+        <div class="col-12 text-center mt-8">
+          <app-spinner></app-spinner>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

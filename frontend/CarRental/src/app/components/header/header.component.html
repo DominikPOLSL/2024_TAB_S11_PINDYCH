@@ -6,7 +6,7 @@
       <i class="pi pi-car text-white text-2xl"></i>
       <p class="ml-3 mt-1">
         <span class="text-primary">Car</span
-        ><span class="text-white"> Rental</span>
+        ><span class="text-white">Rental</span>
       </p>
     </div>
   </div>
@@ -40,8 +40,12 @@
         </div>
       </div>
       <div class="nav-button">
-        <button>Profil</button>
-        <button>Wyloguj</button>
+        <button [routerLink]="['/profil']" routerLinkActive="active-link">
+          Profil
+        </button>
+        <button [routerLink]="['/login']" routerLinkActive="active-link">
+          Zaloguj
+        </button>
       </div>
     </div>
   </div>

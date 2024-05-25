@@ -34,6 +34,11 @@ public class Model {
         this.brandId = brandId;
     }
 
+    public Model( String modelName, int brandId) {
+        this.modelName = modelName;
+        this.brandId = brandId;
+    }
+
     public int getModelId() {
         return this.modelId;
     }
@@ -82,3 +87,4 @@ public class Model {
                 "}";
     }
 }
+

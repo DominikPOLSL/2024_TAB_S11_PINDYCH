@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/2024_TAB_S11_PINDYCH.iml" filepath="$PROJECT_DIR$/.idea/2024_TAB_S11_PINDYCH.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/Backend/carrent/demo.iml" filepath="$PROJECT_DIR$/Backend/carrent/demo.iml" />
+=======
+>>>>>>> ab7cec4686f8d9432a45b268aee67b88954d3b56
     </modules>
   </component>
 </project>

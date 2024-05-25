@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
-import { Vehicle } from './vehicle.interface';
 import { Router } from '@angular/router';
+import { VehiclesService } from '../vehicles.service';
+import { Vehicle } from '../vehicle.interface';
+import { Subject, takeUntil } from 'rxjs';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-browse-vehicles',
@@ -18,42 +21,35 @@ import { Router } from '@angular/router';
     CommonModule,
     ButtonModule,
     FormsModule,
+    SpinnerComponent,
   ],
   templateUrl: './browse-vehicles.component.html',
   styleUrl: './browse-vehicles.component.scss',
 })
-export class BrowseVehiclesComponent {
-  vehicles: Vehicle[] = [
-    {
-      model: 'Audi',
-      version: 'A4',
-      id: 'f1nsdufnosidfsd',
-      carGiver: 'brak',
-    },
-    {
-      model: 'Volkswagen',
-      version: 'T4',
-      id: 'f2nsdufnosidfsd',
-      carGiver: 'brak',
-    },
-    {
-      model: 'Seat',
-      version: 'Ibiza',
-      id: 'f3nsdufnosidfsd',
-      carGiver: 'brak',
-    },
-    {
-      model: 'Volkswagen',
-      version: 'T1',
-      id: 'f4nsdufnosidfsd',
-      carGiver: 'Robert Kubica',
-    },
-  ];
+export class BrowseVehiclesComponent implements OnInit, OnDestroy {
+  vehicles: Vehicle[] = [];
+  results: Vehicle[] = [];
+  isLoading = true;
 
-  results = [...this.vehicles];
   searchedVehicle: string = '';
 
-  constructor(private router: Router) {}
+  private readonly _destroying$ = new Subject<void>();
+
+  constructor(
+    private router: Router,
+    private vehicleService: VehiclesService
+  ) {}
+
+  ngOnInit(): void {
+    this.vehicleService
+      .getVehicles()
+      .pipe(takeUntil(this._destroying$))
+      .subscribe((vehicles) => {
+        this.isLoading = false;
+        this.vehicles = vehicles;
+        this.results = vehicles;
+      });
+  }
 
   onSearch(): void {
     if (this.searchedVehicle.trim() === '') {
@@ -64,14 +60,19 @@ export class BrowseVehiclesComponent {
     const searchTextLower = this.searchedVehicle.toLowerCase();
     this.results = this.vehicles.filter(
       (vehicle) =>
+        vehicle.brand.toLowerCase().includes(searchTextLower) ||
         vehicle.model.toLowerCase().includes(searchTextLower) ||
-        vehicle.version.toLowerCase().includes(searchTextLower) ||
-        vehicle.carGiver.toLowerCase().includes(searchTextLower) ||
-        vehicle.id.toLowerCase().includes(searchTextLower)
+        vehicle.id.toString().includes(searchTextLower) ||
+        vehicle.guardianSurname.toString().includes(searchTextLower)
     );
   }
 
-  onEditVehicle(vehicle: Vehicle) {
+  onEditVehicle(vehicle: Vehicle): void {
     this.router.navigate(['pojazdy', 'edytuj', vehicle.id]);
+  }
+
+  ngOnDestroy(): void {
+    this._destroying$.next(undefined);
+    this._destroying$.complete();
   }
 }

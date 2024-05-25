@@ -7,73 +7,81 @@
       <div class="col-4 flex flex-row-reverse flex-wrap">
         <div class="flex flex-wrap align-items-center gap-2 mr-6">
           <p class="vertical-align-middle">Nowa marka</p>
-          <p-inputSwitch [(ngModel)]="newBrand" />
+          <p-inputSwitch [(ngModel)]="newBrand" (onChange)="onInputChange()" />
         </div>
       </div>
       <div
         class="col-12 flex flex-wrap justify-content-center align-items-center"
       >
-        <form [formGroup]="addModelForm">
-          <div class="flex flex-column h-3rem mt-6">
-            <ng-container *ngIf="newBrand; else versionTemplate">
+        <ng-container *ngIf="!isLoading; else loading">
+          <form [formGroup]="addModelForm">
+            <div class="flex flex-column h-3rem mt-6">
+              <ng-container *ngIf="newBrand; else versionTemplate">
+                <input
+                  class="h-3rem w-20rem"
+                  type="text"
+                  pInputText
+                  placeholder="Marka"
+                  formControlName="brand"
+                />
+              </ng-container>
+              <ng-template #versionTemplate>
+                <p-dropdown
+                  [options]="brands"
+                  placeholder="Marka"
+                  optionLabel="brandName"
+                  formControlName="brand"
+                ></p-dropdown>
+              </ng-template>
+              <p
+                *ngIf="
+                  (newBrand
+                    ? addModelForm.controls['brand']
+                    : addModelForm.controls['brand']
+                  ).invalid &&
+                  (newBrand
+                    ? addModelForm.controls['brand']
+                    : addModelForm.controls['brand']
+                  ).dirty
+                "
+                class="error-message"
+              >
+                {{ newBrand ? "Podaj markę!" : "Podaj markę!" }}
+              </p>
+            </div>
+
+            <div class="flex flex-column h-3rem mt-6">
               <input
                 class="h-3rem w-20rem"
                 type="text"
                 pInputText
-                placeholder="Marka"
-                formControlName="brand"
+                placeholder="Model"
+                formControlName="model"
               />
-            </ng-container>
-            <ng-template #versionTemplate>
-              <p-dropdown
-                [options]="brands"
-                placeholder="Marka"
-                formControlName="brand"
-              ></p-dropdown>
-            </ng-template>
-            <p
-              *ngIf="
-                (newBrand
-                  ? addModelForm.controls['brand']
-                  : addModelForm.controls['brand']
-                ).invalid &&
-                (newBrand
-                  ? addModelForm.controls['brand']
-                  : addModelForm.controls['brand']
-                ).dirty
-              "
-              class="error-message"
-            >
-              {{ newBrand ? "Podaj markę!" : "Podaj markę!" }}
-            </p>
+              <p
+                *ngIf="
+                  addModelForm.controls['model'].invalid &&
+                  addModelForm.controls['model'].dirty
+                "
+                class="error-message"
+              >
+                Podaj wersje!
+              </p>
+            </div>
+            <div class="col-12 flex justify-content-center flex-wrap mt-7">
+              <p-button
+                label="Dodaj"
+                [disabled]="addModelForm.invalid"
+                (onClick)="onSubmit()"
+              />
+            </div>
+          </form>
+        </ng-container>
+        <ng-template #loading>
+          <div class="col-12 text-center mt-8">
+            <app-spinner></app-spinner>
           </div>
-
-          <div class="flex flex-column h-3rem mt-6">
-            <input
-              class="h-3rem w-20rem"
-              type="text"
-              pInputText
-              placeholder="Wersja"
-              formControlName="model"
-            />
-            <p
-              *ngIf="
-                addModelForm.controls['model'].invalid &&
-                addModelForm.controls['model'].dirty
-              "
-              class="error-message"
-            >
-              Podaj wersje!
-            </p>
-          </div>
-        </form>
-        <div class="col-12 flex justify-content-center flex-wrap mt-7">
-          <p-button
-            label="Dodaj"
-            [disabled]="addModelForm.invalid"
-            (onClick)="onSubmit()"
-          />
-        </div>
+        </ng-template>
       </div>
     </div>
   </div>

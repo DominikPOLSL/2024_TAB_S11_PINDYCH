@@ -4,153 +4,165 @@
       <div class="col-12 text-center">
         <p class="text-4xl font-bold">Edytuj pojazd</p>
       </div>
-      <form [formGroup]="addCarForm">
-        <div class="flex">
-          <div class="col-6 flex justify-content-center flex-wrap">
-            <div class="flex flex-column h-3rem">
-              <p-dropdown
-                [options]="brands"
-                placeholder="Marka"
-                formControlName="brand"
-              />
+      <ng-container *ngIf="!isLoading; else loading">
+        <form [formGroup]="editCarForm">
+          <div class="flex">
+            <div class="col-6 flex justify-content-center flex-wrap">
+              <div class="flex flex-column h-3rem">
+                <p-dropdown
+                  placeholder="Marka"
+                  formControlName="brand"
+                  [options]="brands"
+                  (onChange)="getModelsByBrand()"
+                  optionLabel="brandName"
+                />
 
-              <p
-                *ngIf="
-                  addCarForm.controls['brand'].invalid &&
-                  addCarForm.controls['brand'].dirty
-                "
-                class="error-message"
-              >
-                Podaj marke!
-              </p>
+                <p
+                  *ngIf="
+                    editCarForm.controls['brand'].invalid &&
+                    editCarForm.controls['brand'].dirty
+                  "
+                  class="error-message"
+                >
+                  Podaj marke!
+                </p>
+              </div>
+
+              <div class="flex flex-column h-3rem mt-6">
+                <p-dropdown
+                  placeholder="Model"
+                  formControlName="model"
+                  [options]="models"
+                  optionLabel="modelName"
+                />
+                <p
+                  *ngIf="
+                    editCarForm.controls['model'].invalid &&
+                    editCarForm.controls['model'].dirty
+                  "
+                  class="error-message"
+                >
+                  Podaj model!
+                </p>
+              </div>
+
+              <div class="flex flex-column h-3rem mt-6">
+                <input
+                  class="h-3rem w-20rem"
+                  type="text"
+                  pInputText
+                  placeholder="Wersja"
+                  formControlName="fuel"
+                />
+                <p
+                  *ngIf="
+                    editCarForm.controls['fuel'].invalid &&
+                    editCarForm.controls['fuel'].dirty
+                  "
+                  class="error-message"
+                >
+                  Podaj wersje!
+                </p>
+              </div>
             </div>
-
-            <div class="flex flex-column h-3rem mt-6">
-              <p-dropdown
-                [options]="models"
-                placeholder="Model"
-                formControlName="model"
-              />
-              <p
-                *ngIf="
-                  addCarForm.controls['model'].invalid &&
-                  addCarForm.controls['model'].dirty
-                "
-                class="error-message"
-              >
-                Podaj model!
-              </p>
-            </div>
-
-            <div class="flex flex-column h-3rem mt-6">
-              <input
-                class="h-3rem w-20rem"
-                type="text"
-                pInputText
-                placeholder="Wersja"
-                formControlName="version"
-              />
-              <p
-                *ngIf="
-                  addCarForm.controls['version'].invalid &&
-                  addCarForm.controls['version'].dirty
-                "
-                class="error-message"
-              >
-                Podaj wersje!
-              </p>
+            <div class="col-6 flex justify-content-center flex-wrap">
+              <div class="flex flex-column h-3rem">
+                <input
+                  class="h-3rem w-20rem"
+                  type="text"
+                  pInputText
+                  formControlName="totalDistance"
+                  placeholder="Przebieg"
+                />
+                <p
+                  *ngIf="
+                    editCarForm.controls['totalDistance'].invalid &&
+                    editCarForm.controls['totalDistance'].dirty
+                  "
+                  class="error-message"
+                >
+                  Podaj przebieg!
+                </p>
+              </div>
+              <div class="flex flex-column h-3rem mt-6">
+                <input
+                  class="h-3rem w-20rem"
+                  type="text"
+                  pInputText
+                  formControlName="yearOfProduction"
+                  placeholder="Rok produkcji"
+                />
+                <p
+                  *ngIf="
+                    editCarForm.controls['yearOfProduction'].invalid &&
+                    editCarForm.controls['yearOfProduction'].dirty
+                  "
+                  class="error-message"
+                >
+                  Podaj rok produkcji!
+                </p>
+              </div>
+              <div class="flex flex-column h-3rem mt-6">
+                <input
+                  class="h-3rem w-20rem"
+                  type="number"
+                  pInputText
+                  formControlName="power"
+                  placeholder="Moc"
+                  min="0"
+                />
+                <p
+                  *ngIf="
+                    editCarForm.controls['power'].invalid &&
+                    editCarForm.controls['power'].dirty
+                  "
+                  class="error-message"
+                >
+                  Podaj moc!
+                </p>
+              </div>
             </div>
           </div>
-          <div class="col-6 flex justify-content-center flex-wrap">
+          <div class="col-12 flex justify-content-center flex-wrap mt-5">
             <div class="flex flex-column h-3rem">
               <input
                 class="h-3rem w-20rem"
                 type="text"
                 pInputText
-                formControlName="mileage"
-                placeholder="Przebieg"
+                formControlName="carGiver"
+                placeholder="Opiekun"
               />
-              <p
-                *ngIf="
-                  addCarForm.controls['mileage'].invalid &&
-                  addCarForm.controls['mileage'].dirty
-                "
-                class="error-message"
-              >
-                Podaj przebieg!
-              </p>
-            </div>
-            <div class="flex flex-column h-3rem mt-6">
-              <input
-                class="h-3rem w-20rem"
-                type="text"
-                pInputText
-                formControlName="yearOfProduction"
-                placeholder="Rok produkcji"
-              />
-              <p
-                *ngIf="
-                  addCarForm.controls['yearOfProduction'].invalid &&
-                  addCarForm.controls['yearOfProduction'].dirty
-                "
-                class="error-message"
-              >
-                Podaj rok produkcji!
-              </p>
-            </div>
-            <div class="flex flex-column h-3rem mt-6">
-              <input
-                class="h-3rem w-20rem"
-                type="number"
-                pInputText
-                formControlName="power"
-                placeholder="Moc"
-                min="0"
-              />
-              <p
-                *ngIf="
-                  addCarForm.controls['power'].invalid &&
-                  addCarForm.controls['power'].dirty
-                "
-                class="error-message"
-              >
-                Podaj moc!
-              </p>
             </div>
           </div>
-        </div>
-        <div class="col-12 flex justify-content-center flex-wrap mt-5">
-          <div class="flex flex-column h-3rem">
-            <input
-              class="h-3rem w-20rem"
-              type="text"
-              pInputText
-              formControlName="carGiver"
-              placeholder="Opiekun"
+          <div class="col-12 flex justify-content-center mt-4 gap-6">
+            <p-button
+              label="Edytuj"
+              class="vertical-align-middle"
+              (onClick)="onEditVehicle()"
+              [disabled]="editCarForm.invalid"
+            />
+
+            <p-button
+              label="Usuń"
+              severity="danger"
+              class="vertical-align-middle"
+              (onClick)="onDeleteVehicle()"
+            />
+
+            <p-button
+              label="Zakończ rezerwację"
+              class="vertical-align-middle"
+              (onClick)="onEndReservation()"
+              disabled="true"
             />
           </div>
+        </form>
+      </ng-container>
+      <ng-template #loading>
+        <div class="col-12 text-center mt-8">
+          <app-spinner></app-spinner>
         </div>
-        <div class="col-12 flex justify-content-center mt-4 gap-6">
-          <p-button
-            label="Edytuj"
-            class="vertical-align-middle"
-            (onClick)="onEditVehicle()"
-          />
-
-          <p-button
-            label="Usuń"
-            severity="danger"
-            class="vertical-align-middle"
-            (onClick)="onDeleteVehicle()"
-          />
-
-          <p-button
-            label="Zakończ rezerwację"
-            class="vertical-align-middle"
-            (onClick)="onEndReservation()"
-          />
-        </div>
-      </form>
+      </ng-template>
     </div>
   </div>
 </div>

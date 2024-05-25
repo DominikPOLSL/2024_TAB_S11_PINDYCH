@@ -1,47 +1,48 @@
 package com.example.carrent.vehicle;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.carrent.brand.Brand;
+import com.example.carrent.brand.BrandRepository;
+import com.example.carrent.brand.BrandService;
+import com.example.carrent.model.Model;
+import com.example.carrent.model.ModelRepository;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.carrent.model.ModelService;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping(path = "api/vehicle")
 public class VehicleController {
 
-    @Autowired
-    private VehicleService vehicleService;
+    private final VehicleService vehicleService;
+    private final ModelService modelService;
 
-    @Autowired
-    private ModelService modelService;
+    public VehicleController(VehicleService vehicleService, ModelService modelService, BrandService brandService) {
+        this.vehicleService = vehicleService;
+        this.modelService = modelService;
+    }
 
     @GetMapping
     public List<Vehicle> getVehicles() {
         return vehicleService.getVehicles();
-
     }
 
     @PostMapping()
     public ResponseEntity<?> addNewVehicle(@RequestBody Vehicle vehicle) {
         int modelId = vehicle.getModelId();
+
         if (!modelService.existById(modelId)) {
-            return ResponseEntity.badRequest().body("Model does not exist.");
+
         }
+
         Vehicle createdVehicle = vehicleService.addNewVehicle(vehicle);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdVehicle);
-
     }
 
     @PutMapping("/{id}")
@@ -57,6 +58,10 @@ public class VehicleController {
         existingVehicle.setPurpose(updatedVehicle.getPurpose());
         existingVehicle.setTotalTime(updatedVehicle.getTotalTime());
         existingVehicle.setTotalDistance(updatedVehicle.getTotalDistance());
+        existingVehicle.setFuel(updatedVehicle.getFuel());
+        existingVehicle.setYearOfProduction(updatedVehicle.getYearOfProduction());
+        existingVehicle.setModelId(updatedVehicle.getModelId());
+        existingVehicle.setPower(updatedVehicle.getPower());
 
         int modelId = updatedVehicle.getModelId();
         if (!modelService.existById(modelId)) {
@@ -77,12 +82,22 @@ public class VehicleController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteVehicle(@PathVariable("id") int id) {
+    public Optional<Vehicle> deleteVehicle(@PathVariable("id") int id) {
         if (!vehicleService.existById(id)) {
-            return ResponseEntity.notFound().build();
+            //return ResponseEntity.notFound().build();
         }
-        vehicleService.deleteVehicleById(id);
-        return ResponseEntity.ok().build();
+        return vehicleService.deleteVehicleById(id);
     }
 
+    @GetMapping("/printVehicle/{id}")
+    public VehiclePrint PrintVehicle(@PathVariable("id") int id)
+    {
+        return vehicleService.PrintVehicle(id);
+    }
+
+    @GetMapping("/printVehicle")
+    public List<VehiclePrint> PrintVehicle()
+    {
+        return vehicleService.printAllVehicles();
+    }
 }
