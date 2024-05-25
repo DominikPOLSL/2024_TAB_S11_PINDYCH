@@ -12,6 +12,11 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'uzytkownik',
+    loadChildren: () =>
+      import('./employee/employee.routes').then((m) => m.employeeRoutes),
+  },
+  {
     path: 'profil',
     loadChildren: () =>
       import('./profile/profile.routes').then((m) => m.profileRoutes),

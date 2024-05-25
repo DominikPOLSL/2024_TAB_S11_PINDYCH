@@ -11,7 +11,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { SpinnerComponent } from '../components/spinner/spinner.component';
 import { Subject } from 'rxjs';
-import { UserRole } from '../users/role-enum';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +27,6 @@ import { UserRole } from '../users/role-enum';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  roles = Object.keys(UserRole);
   isLoading = false;
   form: FormGroup;
 
@@ -52,6 +50,7 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.form.valid) {
       this.isLoading = true;
+      //TODO
     } else {
       this.form.markAllAsTouched();
     }
