@@ -10,7 +10,9 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { SpinnerComponent } from '../components/spinner/spinner.component';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -32,10 +34,14 @@ export class LoginComponent {
 
   private readonly _destroying$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.form = this.fb.group({
       login: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
@@ -47,10 +53,19 @@ export class LoginComponent {
     );
   }
 
-  onSubmit(): void {
+  onLogin(): void {
     if (this.form.valid) {
       this.isLoading = true;
-      //TODO
+      this.authService
+        .login({
+          username: this.form.controls['login'].value,
+          password: this.form.controls['password'].value,
+        })
+        .pipe(takeUntil(this._destroying$))
+        .subscribe((response) => {
+          this.authService.saveToken(response.token);
+          this.router.navigate(['/']);
+        });
     } else {
       this.form.markAllAsTouched();
     }

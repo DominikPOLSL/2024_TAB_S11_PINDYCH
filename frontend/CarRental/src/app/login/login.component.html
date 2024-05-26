@@ -4,7 +4,7 @@
       <p class="text-4xl font-bold">Zaloguj</p>
     </div>
     <ng-container *ngIf="!isLoading; else loading">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form [formGroup]="form" (ngSubmit)="onLogin()">
         <div class="flex flex-column align-items-center">
           <div class="flex flex-column h-5rem mt-3">
             <input
