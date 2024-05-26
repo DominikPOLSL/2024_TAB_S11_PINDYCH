@@ -39,6 +39,12 @@ export class AddVehicleComponent implements OnInit {
   addCarForm: FormGroup;
   isModelDisabled: boolean = false;
 
+  fuelOptions: any[] = [
+    { label: 'LPG', value: 'autogas' },
+    { label: 'Benzyna', value: 'petrol' },
+    { label: 'Diesel', value: 'diesel' },
+  ];
+
   private readonly _destroying$ = new Subject<void>();
 
   constructor(

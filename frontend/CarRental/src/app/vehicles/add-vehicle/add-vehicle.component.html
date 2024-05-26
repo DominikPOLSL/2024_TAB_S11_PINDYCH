@@ -47,13 +47,13 @@
               </div>
 
               <div class="flex flex-column h-3rem mt-6">
-                <input
+                <p-dropdown
                   class="h-3rem w-20rem"
-                  type="text"
-                  pInputText
+                  [options]="fuelOptions"
                   placeholder="Rodzaj paliwa"
                   formControlName="fuel"
-                />
+                >
+                </p-dropdown>
                 <p
                   *ngIf="
                     addCarForm.controls['fuel'].invalid &&
