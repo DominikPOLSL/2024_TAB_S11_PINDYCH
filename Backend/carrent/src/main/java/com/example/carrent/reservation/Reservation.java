@@ -134,8 +134,8 @@ record ReservationRecord(
 record ReservationSave(
         String model,
         String brand,
-        String dataOd,
-        String dataDo,
+        String startTime,
+        String endTime,
         int employeeId,
         int carGiverId
 ){}

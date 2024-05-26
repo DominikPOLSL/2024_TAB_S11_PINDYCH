@@ -55,7 +55,7 @@ public class ReservationController {
         return reservationService.PrintAllReservationGiverId(id);
     }
     @PostMapping("/AddReservation")
-    public int addReservation(@RequestBody ReservationSave reservationSave) {
+    public Reservation addReservation(@RequestBody ReservationSave reservationSave) {
         return reservationService.addReservation(reservationSave);
     }
 }
