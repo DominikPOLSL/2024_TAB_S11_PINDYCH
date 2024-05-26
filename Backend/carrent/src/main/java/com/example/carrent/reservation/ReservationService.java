@@ -119,13 +119,13 @@ public class ReservationService {
         }
         return list;
     }
-    public int addReservation(@NotNull ReservationSave reservationSave) {
-        int returnInt=0;
+    public Reservation addReservation(@NotNull ReservationSave reservationSave) {
         Reservation reservation = new Reservation();
 
         reservation.setEmployeeId(reservationSave.employeeId());
         reservation.setCarGiverId(reservationSave.carGiverId());
-
+        reservation.setEndTime(Date.valueOf(reservationSave.endTime()));
+        reservation.setStartTime(Date.valueOf(reservationSave.endTime()));
         reservation.setPrivateUsage(false);
 
         for (Vehicle vehicle : vehicleRepository.findAll()) {
@@ -134,13 +134,12 @@ public class ReservationService {
                 Brand brand = brandRepository.findById(model.getBrandId()).orElse(null);
                 if (brand != null && brand.getBrandName().equals(reservationSave.brand())) {
                     reservation.setVehicleId(vehicle.getVehicleId());
-                    returnInt= 1;
                     break;
                 }
             }
         }
         reservationRepository.save(reservation);
-        return returnInt;
+        return reservation;
     }
 
 }
