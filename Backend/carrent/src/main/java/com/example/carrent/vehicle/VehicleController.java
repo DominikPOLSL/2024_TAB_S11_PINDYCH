@@ -100,4 +100,10 @@ public class VehicleController {
     {
         return vehicleService.printAllVehicles();
     }
+
+    @GetMapping("/printAvailableCars")
+    public List<VehicleBrandModel> printAvailableCars()
+    {
+        return vehicleService.printAvailableCars();
+    }
 }

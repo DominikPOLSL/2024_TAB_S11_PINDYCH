@@ -205,3 +205,9 @@ record VehiclePrint(
         String guardianName,
         String guardianSurname
 ){}
+
+
+record VehicleBrandModel(
+        String model,
+        String brand
+){}

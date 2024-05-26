@@ -89,4 +89,21 @@ public class VehicleService {
         }
         return list;
     }
+
+    public List<VehicleBrandModel> printAvailableCars() {
+        ArrayList<VehicleBrandModel> list = new ArrayList<VehicleBrandModel>();
+        for(Vehicle vehicle : vehicleRepository.findAll())
+        {
+            Model model = modelRepository.findById(vehicle.getModelId()).orElse(null);
+            Brand brand = brandRepository.findById(model.getBrandId()).orElse(null);
+
+            list.add(new VehicleBrandModel(
+                    model.getModelName(),
+                    brand.getBrandName()
+            ));
+
+        }
+        return list;
+
+    }
 }
