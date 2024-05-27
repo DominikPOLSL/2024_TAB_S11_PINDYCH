@@ -178,7 +178,7 @@ public class ReservationService {
                     list.add(r);
                 }
 
-                String employeeIdString = String.valueOf(r.getEmployeeId());
+                String employeeIdString = String.valueOf(r.getReservationId());
                 if(employeeIdString.contains(data)) {
                     list.add(r);
                 }

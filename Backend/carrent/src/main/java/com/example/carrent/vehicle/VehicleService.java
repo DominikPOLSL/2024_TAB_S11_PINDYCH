@@ -76,6 +76,7 @@ public class VehicleService {
         {
             Model model = modelRepository.findById(vehicle.getModelId()).orElse(null);
             Brand brand = brandRepository.findById(model.getBrandId()).orElse(null);
+
             list.add(new VehiclePrint(
                     vehicle.getVehicleId(),
                     model.getModelName() ,
@@ -96,7 +97,8 @@ public class VehicleService {
         {
             Model model = modelRepository.findById(vehicle.getModelId()).orElse(null);
             Brand brand = brandRepository.findById(model.getBrandId()).orElse(null);
-            list.add(brand);
+            if(!list.contains(brand))
+                list.add(brand);
 
         }
         return list;
@@ -107,7 +109,8 @@ public class VehicleService {
         for(Vehicle vehicle : vehicleRepository.findAll())
         {
             Model model = modelRepository.findById(vehicle.getModelId()).orElse(null);
-            list.add(model);
+            if(!list.contains(model))
+                list.add(model);
         }
         return list;
     }
