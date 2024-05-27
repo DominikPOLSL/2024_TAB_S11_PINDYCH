@@ -90,18 +90,24 @@ public class VehicleService {
         return list;
     }
 
-    public List<VehicleBrandModel> printAvailableCars() {
-        ArrayList<VehicleBrandModel> list = new ArrayList<VehicleBrandModel>();
+    public List<Brand> printAvailableBrands() {
+        ArrayList<Brand> list = new ArrayList<Brand>();
         for(Vehicle vehicle : vehicleRepository.findAll())
         {
             Model model = modelRepository.findById(vehicle.getModelId()).orElse(null);
             Brand brand = brandRepository.findById(model.getBrandId()).orElse(null);
+            list.add(brand);
 
-            list.add(new VehicleBrandModel(
-                    model.getModelName(),
-                    brand.getBrandName()
-            ));
+        }
+        return list;
 
+    }
+    public List<Model> printAvailableModels() {
+        ArrayList<Model> list = new ArrayList<Model>();
+        for(Vehicle vehicle : vehicleRepository.findAll())
+        {
+            Model model = modelRepository.findById(vehicle.getModelId()).orElse(null);
+            list.add(model);
         }
         return list;
 

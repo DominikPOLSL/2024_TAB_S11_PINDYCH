@@ -101,9 +101,14 @@ public class VehicleController {
         return vehicleService.printAllVehicles();
     }
 
-    @GetMapping("/printAvailableCars")
-    public List<VehicleBrandModel> printAvailableCars()
+    @GetMapping("/printAvailableModels")
+    public List<Model> printAvailableModels()
     {
-        return vehicleService.printAvailableCars();
+        return vehicleService.printAvailableModels();
+    }
+    @GetMapping("/printAvailableBrands")
+    public List<Brand> printAvailableBrands()
+    {
+        return vehicleService.printAvailableBrands();
     }
 }
