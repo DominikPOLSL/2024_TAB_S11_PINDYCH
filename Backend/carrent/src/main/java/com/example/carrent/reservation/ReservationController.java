@@ -1,8 +1,10 @@
 package com.example.carrent.reservation;
 
+import com.example.carrent.employee.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,5 +59,10 @@ public class ReservationController {
     @PostMapping("/AddReservation")
     public Reservation addReservation(@RequestBody ReservationSave reservationSave) {
         return reservationService.addReservation(reservationSave);
+    }
+
+    @GetMapping("/searchReservation/{data}")
+    public ArrayList<Reservation> getReservationByAttribute(@PathVariable("data") String data) {
+        return reservationService.getReservationByAttribute(data);
     }
 }
