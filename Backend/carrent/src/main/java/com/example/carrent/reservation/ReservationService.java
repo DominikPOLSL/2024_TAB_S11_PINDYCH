@@ -177,9 +177,9 @@ public class ReservationService {
                 if (r.getStartTime().toString().compareTo(data) <= 0 && data.compareTo(r.getEndTime().toString()) <= 0) {
                     list.add(r);
                 }
+                String reservationIdString = String.valueOf(r.getReservationId());
+                if(reservationIdString.contains(data)) {
 
-                String employeeIdString = String.valueOf(r.getEmployeeId());
-                if(employeeIdString.contains(data)) {
                     list.add(r);
                 }
             }
