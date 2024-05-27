@@ -27,7 +27,7 @@ public class RentService {
     public void addRent(Rent rent) {
 
         rentRepository.save(rent);
-        //reservationRepository.deleteById(rent.getReservationId()); //baza jest zla xd XD
+        //reservationRepository.deleteById(rent.getReservationId()); //baza jest zla xd XD XDDDDD
     }
 
     public Optional<Rent> getRentById(int id) {
