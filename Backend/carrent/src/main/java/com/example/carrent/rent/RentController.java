@@ -1,20 +1,31 @@
 package com.example.carrent.rent;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.carrent.reservation.ReservationService;
 
 @RestController
 @RequestMapping("/rents")
 public class RentController {
 
     private final RentService rentService;
+    private final ReservationService resService;
 
     @Autowired
-    public RentController(RentService rentService) {
+    public RentController(RentService rentService, ReservationService resService) {
         this.rentService = rentService;
+        this.resService = resService;
     }
 
     @GetMapping("/getAllRents")
@@ -42,4 +53,11 @@ public class RentController {
         rent.setRentId(id);
         rentService.updateRent(rent);
     }
+
+    // @GetMapping("/findRR/{id}")
+    //     public List<Optional<?>> findRentAndReservationById(Integer id) {
+    //         return Arrays.asList(rentService.getRentById(id), resService.getReservationById(id));
+    //     }
+
+
 }
