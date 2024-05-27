@@ -61,7 +61,9 @@ export class ReservationsComponent implements OnInit, OnDestroy {
       this.reservations$ = this.reservationsService.getAllReservations();
     } else {
       //TODO
-      //this.users$ = this.usersService.searchUsers(this.query);
+      this.reservations$ = this.reservationsService.searchReservations(
+        this.query
+      );
     }
   }
 

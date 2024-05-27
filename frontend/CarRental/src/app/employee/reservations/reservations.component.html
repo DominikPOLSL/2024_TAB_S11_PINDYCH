@@ -27,9 +27,9 @@
           <div *ngFor="let reservation of reservations">
             <div class="vehicle-container border-round-3xl flex">
               <div class="col-8 font-semibold ml-5">
+                <p>Identyfikator: {{ reservation.id }}</p>
                 <p>Marka: {{ reservation.brand }}</p>
                 <p>Model: {{ reservation.model }}</p>
-                <p>Identyfikator: {{ reservation.reservationId }}</p>
                 <p>
                   Okres wypożyczenia: {{ reservation.startTime }} -
                   {{ reservation.endTime }}

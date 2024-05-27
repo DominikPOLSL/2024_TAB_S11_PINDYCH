@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Reservation } from './reservation.interface';
-import { Observable, delay } from 'rxjs';
+import { Observable, debounceTime, delay, tap } from 'rxjs';
 import { Model } from '../vehicles/model.interface';
 import { Brand } from '../vehicles/brand.interface';
 
@@ -11,9 +11,9 @@ import { Brand } from '../vehicles/brand.interface';
 export class ResertavionsService {
   constructor(private http: HttpClient) {}
 
-  getAvailableModels(): Observable<Model[]> {
+  getAvailableModels(brandId: number): Observable<Model[]> {
     return this.http.get<Model[]>(
-      'http://localhost:8080/api/vehicle/printAvailableModels'
+      `http://localhost:8080/api/vehicle/printAvailableModelsByBrandId/${brandId}`
     );
   }
 
@@ -31,18 +31,17 @@ export class ResertavionsService {
 
   endReservation(reservation: Reservation) {
     return this.http.delete(
-      `http://localhost:8080/reservations/${reservation.reservationId}`
+      `http://localhost:8080/reservations/${reservation.id}`
     );
   }
 
-  //TODO
-  // searchReservations(query: string): Observable<Reservation[]> {
-  //   return this.http
-  //     .get<Reservation[]>(
-  //       `http://localhost:8080/api/employee/searchEmployee/${query}`
-  //     )
-  //     .pipe(debounceTime(400), delay(500));
-  // }
+  searchReservations(query: string): Observable<Reservation[]> {
+    return this.http
+      .get<Reservation[]>(
+        `http://localhost:8080/reservations/searchReservation/${query}`
+      )
+      .pipe(debounceTime(400), delay(500));
+  }
 
   //TODO
   addReservation(

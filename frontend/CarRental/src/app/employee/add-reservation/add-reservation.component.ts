@@ -16,6 +16,7 @@ import { ModelsService } from '../../vehicles/models.service';
 import { Brand } from '../../vehicles/brand.interface';
 import { Model } from '../../vehicles/model.interface';
 import { CalendarModule } from 'primeng/calendar';
+import { ResertavionsService } from '../resertavions.service';
 
 @Component({
   selector: 'app-add-reservation',
@@ -42,8 +43,8 @@ export class AddReservationComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private brandsService: BrandsService,
-    private modelsService: ModelsService
+    private modelsService: ModelsService,
+    private reservationsService: ResertavionsService
   ) {
     this.form = this.fb.group({
       brand: ['', [Validators.required]],
@@ -53,8 +54,8 @@ export class AddReservationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.brandsService
-      .getBrands()
+    this.reservationsService
+      .getAvailableBrands()
       .pipe(takeUntil(this._destroying$))
       .subscribe((brands) => {
         this.brands = brands;
@@ -63,8 +64,8 @@ export class AddReservationComponent implements OnInit, OnDestroy {
 
   getModelsByBrand(): void {
     const brandId = this.form.get('brand')?.value.brandId;
-    this.modelsService
-      .getModelsByBrand(brandId)
+    this.reservationsService
+      .getAvailableModels(brandId)
       .pipe(takeUntil(this._destroying$))
       .subscribe((models) => {
         this.models = models;
@@ -84,7 +85,20 @@ export class AddReservationComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       //this.isLoading = true;
       //TODO
-      console.log(this.form.get('date')?.value);
+      const modelName = this.form.get('model')?.value.modelName;
+      const brandName = this.form.get('brand')?.value.brandName;
+      const date: Date[] = this.form.get('date')?.value;
+      this.reservationsService
+        .addReservation(
+          modelName,
+          brandName,
+          date[0].toLocaleDateString(),
+          date[1].toLocaleDateString()
+        )
+        .pipe(takeUntil(this._destroying$))
+        .subscribe((res) => {
+          console.log(res);
+        });
     } else {
       this.form.markAllAsTouched();
     }
