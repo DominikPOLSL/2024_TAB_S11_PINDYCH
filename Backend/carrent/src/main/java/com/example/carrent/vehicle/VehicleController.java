@@ -63,7 +63,7 @@ public class VehicleController {
         existingVehicle.setModelId(updatedVehicle.getModelId());
         existingVehicle.setPower(updatedVehicle.getPower());
 
-        int modelId = updatedVehicle.getModelId();
+        int modelId = (int) updatedVehicle.getModelId();
         if (!modelService.existById(modelId)) {
             return ResponseEntity.badRequest().body("Model does not exist.");
         }
@@ -110,5 +110,11 @@ public class VehicleController {
     public List<Brand> printAvailableBrands()
     {
         return vehicleService.printAvailableBrands();
+    }
+
+    @GetMapping("/printAvailableModelsByBrandId/{id}")
+    public List<Model> printAvailableModelsByBrandId(@PathVariable("id") int id)
+    {
+        return vehicleService.printAvailableModelsByBrandId(id);
     }
 }

@@ -37,8 +37,25 @@ public class ReservationService {
         this.vehicleCarGiverRepository = vehicleCarGiverRepository;
     }
 
-    public List<Reservation> getAllReservations() {
-        return reservationRepository.findAll();
+    public List<ReservationRecord> getAllReservations() {
+        ArrayList<ReservationRecord> list = new ArrayList<ReservationRecord>();
+
+        for(Reservation reservation : reservationRepository.findAll())
+        {
+                Vehicle vehicle = vehicleRepository.findById(reservation.getVehicleId()).orElse(null);
+                Model model = modelRepository.findById(vehicle.getModelId()).orElse(null);
+                Brand brand = brandRepository.findById(model.getBrandId()).orElse(null);
+
+                list.add(new ReservationRecord(
+                        reservation.getReservationId(),
+                        brand.getBrandName(),
+                        model.getModelName(),
+                        reservation.getStartTime().toString(),
+                        reservation.getEndTime().toString()
+                ));
+            }
+
+        return list;
     }
 
 
