@@ -128,8 +128,8 @@ record ReservationRecord(
         int id,
         String model,
         String brand,
-        String dataOd,
-        String dataDo
+        String strartTime,
+        String endTime
 ){}
 record ReservationSave(
         String model,

@@ -9,8 +9,6 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Objects;
-
 @Entity
 @Table(name = "\"Vehicle\"")
 @RestController
