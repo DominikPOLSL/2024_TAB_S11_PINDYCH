@@ -6,9 +6,9 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
-import { Subject, takeUntil } from 'rxjs';
-import { Vehicle } from '../../vehicles/vehicle.interface';
-import { VehiclesService } from '../../vehicles/vehicles.service';
+import { Observable, Subject, finalize, takeUntil } from 'rxjs';
+import { ResertavionsService } from '../resertavions.service';
+import { Reservation } from '../reservation.interface';
 
 @Component({
   selector: 'app-reservations',
@@ -26,50 +26,56 @@ import { VehiclesService } from '../../vehicles/vehicles.service';
   styleUrl: './reservations.component.scss',
 })
 export class ReservationsComponent implements OnInit, OnDestroy {
-  reservations: Vehicle[] = [];
-  results: Vehicle[] = [];
+  reservations$!: Observable<Reservation[]>;
   isLoading = true;
-
-  searchedReservation: string = '';
+  query: string = '';
 
   private readonly _destroying$ = new Subject<void>();
 
-  constructor(private vehicleService: VehiclesService) {}
+  constructor(private reservationsService: ResertavionsService) {}
 
   ngOnInit(): void {
-    this.vehicleService
-      .getVehicles()
-      .pipe(takeUntil(this._destroying$))
-      .subscribe((reservations) => {
-        this.isLoading = false;
-        this.reservations = reservations;
-        this.results = reservations;
+    this.reservations$ = this.reservationsService.getAllReservations();
+  }
+
+  onRentVehicle(reservation: Reservation): void {
+    this.isLoading = true;
+    //TODO
+  }
+
+  onCancelReservation(reservation: Reservation): void {
+    this.isLoading = true;
+    this.reservationsService
+      .endReservation(reservation)
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
+      .subscribe(() => {
+        this.reservations$ = this.reservationsService.getAllReservations();
       });
   }
 
   onSearch(): void {
-    if (this.searchedReservation.trim() === '') {
-      this.results = this.reservations;
-      return;
+    if (this.query === '') {
+      this.reservations$ = this.reservationsService.getAllReservations();
+    } else {
+      //TODO
+      //this.users$ = this.usersService.searchUsers(this.query);
     }
-
-    const searchTextLower = this.searchedReservation.toLowerCase();
-    this.results = this.reservations.filter(
-      (reservation) =>
-        reservation.brand.toLowerCase().includes(searchTextLower) ||
-        reservation.model.toLowerCase().includes(searchTextLower) ||
-        reservation.id.toString().includes(searchTextLower)
-    );
   }
 
-  onRentVehicle(vehicle: Vehicle): void {
-    this.isLoading = true;
-    //TODO
+  getSearchIconName(): string {
+    if (this.query === '') {
+      return 'search';
+    } else {
+      return 'times';
+    }
   }
 
-  onCancelReservation(vehicle: Vehicle): void {
-    this.isLoading = true;
-    //TODO
+  clearQuery() {
+    this.reservations$ = this.reservationsService.getAllReservations();
+    this.query = '';
   }
 
   ngOnDestroy(): void {

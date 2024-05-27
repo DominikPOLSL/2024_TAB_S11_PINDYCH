@@ -6,26 +6,34 @@
       </div>
       <div class="col-4">
         <p-iconField iconPosition="right">
-          <p-inputIcon styleClass="pi pi-search" />
+          <p-inputIcon
+            [styleClass]="'pi pi-' + getSearchIconName()"
+            (click)="clearQuery()"
+          />
           <input
             type="text"
             pInputText
             class="mt-4"
-            [(ngModel)]="searchedReservation"
             (input)="onSearch()"
+            [(ngModel)]="query"
             placeholder="Wyszukaj..."
           />
         </p-iconField>
       </div>
       <div class="col-11 max-h-24rem vehicles-list ml-6">
-        <ng-container *ngIf="!isLoading; else loading">
-          <div *ngFor="let vehicle of results">
+        <ng-container
+          *ngIf="reservations$ | async as reservations; else loading"
+        >
+          <div *ngFor="let reservation of reservations">
             <div class="vehicle-container border-round-3xl flex">
               <div class="col-8 font-semibold ml-5">
-                <p>Marka: {{ vehicle.brand }}</p>
-                <p>Model: {{ vehicle.model }}</p>
-                <p>Identyfikator: {{ vehicle.id }}</p>
-                <p>Okres wypożyczenia:</p>
+                <p>Marka: {{ reservation.brand }}</p>
+                <p>Model: {{ reservation.model }}</p>
+                <p>Identyfikator: {{ reservation.reservationId }}</p>
+                <p>
+                  Okres wypożyczenia: {{ reservation.startTime }} -
+                  {{ reservation.endTime }}
+                </p>
               </div>
               <div
                 class="col-3 flex flex-wrap align-items-center justify-content-center"
@@ -34,13 +42,13 @@
                   <p-button
                     label="Wypożycz"
                     class="vertical-align-middle w-6rem test"
-                    (onClick)="onRentVehicle(vehicle)"
+                    (onClick)="onRentVehicle(reservation)"
                   />
                   <div class="mt-2">
                     <p-button
                       label="Anuluj rezerwację"
                       class="vertical-align-middle"
-                      (onClick)="onCancelReservation(vehicle)"
+                      (onClick)="onCancelReservation(reservation)"
                     />
                   </div>
                 </div>
