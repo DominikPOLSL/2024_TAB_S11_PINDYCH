@@ -110,6 +110,23 @@ public class VehicleService {
             list.add(model);
         }
         return list;
-
     }
+
+    public List<Model> printAvailableModelsByBrandId(int id) {
+        List<Model> list = new ArrayList<>();
+
+        for (Vehicle vehicle : vehicleRepository.findAll()) {
+            Optional<Model> modelOptional = modelRepository.findById(vehicle.getModelId());
+            if (modelOptional.isPresent()) {
+                Model model = modelOptional.get();
+                if (model.getBrandId() == id && !list.contains(model)) {
+                    list.add(model);
+                }
+            }
+        }
+
+        return list;
+    }
+
 }
+
