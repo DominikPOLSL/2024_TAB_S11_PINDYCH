@@ -1,5 +1,7 @@
 package com.example.carrent.rent;
 
+import com.example.carrent.reservation.ReservationRepository;
+import com.example.carrent.reservation.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +12,12 @@ import java.util.Optional;
 public class RentService {
 
     private final RentRepository rentRepository;
+    private final ReservationRepository reservationRepository;
 
     @Autowired
-    public RentService(RentRepository rentRepository) {
+    public RentService(RentRepository rentRepository, ReservationRepository reservationRepository) {
         this.rentRepository = rentRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     public List<Rent> getAllRents() {
@@ -21,7 +25,9 @@ public class RentService {
     }
 
     public void addRent(Rent rent) {
+
         rentRepository.save(rent);
+        //reservationRepository.deleteById(rent.getReservationId()); //baza jest zla xd
     }
 
     public Optional<Rent> getRentById(int id) {

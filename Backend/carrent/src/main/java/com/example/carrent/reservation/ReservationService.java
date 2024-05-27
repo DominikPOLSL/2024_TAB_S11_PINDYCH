@@ -2,6 +2,7 @@ package com.example.carrent.reservation;
 
 import com.example.carrent.brand.Brand;
 import com.example.carrent.brand.BrandRepository;
+import com.example.carrent.employee.Employee;
 import com.example.carrent.model.Model;
 import com.example.carrent.model.ModelRepository;
 import com.example.carrent.vehicle.Vehicle;
@@ -159,4 +160,36 @@ public class ReservationService {
         return reservation;
     }
 
+    public ArrayList<Reservation> getReservationByAttribute(String data) {
+            ArrayList<Reservation> list = new ArrayList<>();
+            for(Reservation r : reservationRepository.findAll()) {
+                Optional<Vehicle> v = vehicleRepository.findById(r.getVehicleId());
+                Optional<Model> m = modelRepository.findById(v.get().getModelId());
+                Optional<Brand> b  = brandRepository.findById(m.get().getModelId());
+                if(m.get().getModelName().contains(data)) {
+                    list.add(r);
+                }
+
+                if(b.get().getBrandName().contains(data)) {
+                    list.add(r);
+                }
+
+                if (r.getStartTime().toString().compareTo(data) <= 0 && data.compareTo(r.getEndTime().toString()) <= 0) {
+                    list.add(r);
+                }
+
+                String employeeIdString = String.valueOf(r.getEmployeeId());
+                if(employeeIdString.contains(data)) {
+                    list.add(r);
+                }
+            }
+            ArrayList<Reservation> uniqueList = new ArrayList<>();
+            for (Reservation r : list) {
+                if (!uniqueList.contains(r)) {
+                    uniqueList.add(r);
+                }
+            }
+            return uniqueList;
+
+    }
 }
