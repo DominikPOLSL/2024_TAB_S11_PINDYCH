@@ -1,12 +1,12 @@
 package com.example.carrent.rent;
 
-import com.example.carrent.reservation.ReservationRepository;
-import com.example.carrent.reservation.ReservationService;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.example.carrent.reservation.ReservationRepository;
 
 @Service
 public class RentService {
@@ -27,7 +27,7 @@ public class RentService {
     public void addRent(Rent rent) {
 
         rentRepository.save(rent);
-        //reservationRepository.deleteById(rent.getReservationId()); //baza jest zla xd
+        //reservationRepository.deleteById(rent.getReservationId()); //baza jest zla xd XD
     }
 
     public Optional<Rent> getRentById(int id) {
@@ -41,4 +41,6 @@ public class RentService {
     public void updateRent(Rent rent) {
         rentRepository.save(rent);
     }
+
+    
 }
