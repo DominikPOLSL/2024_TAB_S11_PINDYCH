@@ -17,12 +17,12 @@ public class RentController {
         this.rentService = rentService;
     }
 
-    @GetMapping
+    @GetMapping("/getAllRents")
     public List<Rent> getAllRents() {
         return rentService.getAllRents();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getRentById/{id}")
     public Optional<Rent> getRentById(@PathVariable int id) {
         return rentService.getRentById(id);
     }
@@ -32,12 +32,12 @@ public class RentController {
         rentService.addRent(rent);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteRent/{id}")
     public void deleteRent(@PathVariable int id) {
         rentService.deleteRent(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("updateRent/{id}")
     public void updateRent(@PathVariable int id, @RequestBody Rent rent) {
         rent.setRentId(id);
         rentService.updateRent(rent);
