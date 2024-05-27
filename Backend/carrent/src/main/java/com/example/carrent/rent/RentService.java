@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.carrent.reservation.ReservationRepository;
-
 @Service
 public class RentService {
 
@@ -34,6 +33,7 @@ public class RentService {
         return rentRepository.findById(id);
     }
 
+
     public void deleteRent(int id) {
         rentRepository.deleteById(id);
     }
@@ -42,5 +42,14 @@ public class RentService {
         rentRepository.save(rent);
     }
 
+        
+    // public List<Optional<?>> findRentAndReservationById(Integer id) {
+
+        
+    //     Optional<Rent> rent = rentRepository.findById(id);
+    //     Optional<Reservation> reservation = reservationRepository.findById(id);
+        
+    //     return Arrays.asList(rent, reservation);
+    // }
     
 }
