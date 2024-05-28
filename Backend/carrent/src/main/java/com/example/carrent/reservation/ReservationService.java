@@ -17,6 +17,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -160,36 +161,61 @@ public class ReservationService {
         return reservation;
     }
 
-    public ArrayList<Reservation> getReservationByAttribute(String data) {
-            ArrayList<Reservation> list = new ArrayList<>();
-            for(Reservation r : reservationRepository.findAll()) {
-                Optional<Vehicle> v = vehicleRepository.findById(r.getVehicleId());
-                Optional<Model> m = modelRepository.findById(v.get().getModelId());
-                Optional<Brand> b  = brandRepository.findById(m.get().getModelId());
-                if(m.get().getModelName().contains(data)) {
-                    list.add(r);
-                }
+    public ArrayList<ReservationRecord> getReservationByAttribute(String data) {
+        ArrayList<ReservationRecord> list = new ArrayList<>();
 
-                if(b.get().getBrandName().contains(data)) {
-                    list.add(r);
-                }
-
-                if (r.getStartTime().toString().compareTo(data) <= 0 && data.compareTo(r.getEndTime().toString()) <= 0) {
-                    list.add(r);
-                }
-                String reservationIdString = String.valueOf(r.getReservationId());
-                if(reservationIdString.contains(data)) {
-
-                    list.add(r);
-                }
+        for (Reservation r : reservationRepository.findAll()) {
+            Optional<Vehicle> vOpt = vehicleRepository.findById(r.getVehicleId());
+            if (vOpt.isEmpty()) {
+                continue;
             }
-            ArrayList<Reservation> uniqueList = new ArrayList<>();
-            for (Reservation r : list) {
-                if (!uniqueList.contains(r)) {
-                    uniqueList.add(r);
-                }
-            }
-            return uniqueList;
+            Vehicle v = vOpt.get();
 
+            Optional<Model> mOpt = modelRepository.findById(v.getModelId());
+            if (mOpt.isEmpty()) {
+                continue;
+            }
+            Model m = mOpt.get();
+
+            Optional<Brand> bOpt = brandRepository.findById(m.getBrandId());
+            if (bOpt.isEmpty()) {
+                continue;
+            }
+            Brand b = bOpt.get();
+
+            if (m.getModelName().contains(data) || b.getBrandName().contains(data)) {
+                list.add(new ReservationRecord(
+                        r.getReservationId(),
+                        b.getBrandName(),
+                        m.getModelName(),
+                        r.getStartTime().toString(),
+                        r.getEndTime().toString()
+                ));
+            }
+
+            if (r.getStartTime().toString().compareTo(data) <= 0 && data.compareTo(r.getEndTime().toString()) <= 0) {
+                list.add(new ReservationRecord(
+                        r.getReservationId(),
+                        b.getBrandName(),
+                        m.getModelName(),
+                        r.getStartTime().toString(),
+                        r.getEndTime().toString()
+                ));
+            }
+
+            String reservationIdString = String.valueOf(r.getReservationId());
+            if (reservationIdString.contains(data)) {
+                list.add(new ReservationRecord(
+                        r.getReservationId(),
+                        b.getBrandName(),
+                        m.getModelName(),
+                        r.getStartTime().toString(),
+                        r.getEndTime().toString()
+                ));
+            }
+        }
+        return list.stream().distinct().collect(Collectors.toCollection(ArrayList::new));
     }
+
+
 }

@@ -62,7 +62,7 @@ public class ReservationController {
     }
 
     @GetMapping("/searchReservation/{data}")
-    public ArrayList<Reservation> getReservationByAttribute(@PathVariable("data") String data) {
+    public ArrayList<ReservationRecord> getReservationByAttribute(@PathVariable("data") String data) {
         return reservationService.getReservationByAttribute(data);
     }
 }
