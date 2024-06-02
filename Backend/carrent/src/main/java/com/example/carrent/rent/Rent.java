@@ -35,6 +35,7 @@ public class Rent {
         return rentId;
     }
 
+    @GeneratedValue
     public void setRentId(int rentId) {
         this.rentId = rentId;
     }

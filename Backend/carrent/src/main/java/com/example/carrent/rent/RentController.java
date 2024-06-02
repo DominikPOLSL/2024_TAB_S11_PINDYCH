@@ -14,19 +14,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.carrent.brand.Brand;
+import com.example.carrent.brand.BrandRepository;
+import com.example.carrent.model.ModelRepository;
+import com.example.carrent.reservation.Reservation;
+import com.example.carrent.reservation.ReservationRepository;
 import com.example.carrent.reservation.ReservationService;
+import com.example.carrent.vehicle.Vehicle;
+import com.example.carrent.vehicle.VehicleRepository;
+import com.example.carrent.model.Model;
+//import ch.qos.logback.core.model.Model;
+
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/rents")
 public class RentController {
 
     private final RentService rentService;
-    private final ReservationService resService;
+    private final ReservationRepository resRepository;
+
+    private final RentRepository rentRepository;
+    private final VehicleRepository vehicleRepository;
+    private final ModelRepository modelRepository;
+    private final BrandRepository brandRepository;
 
     @Autowired
-    public RentController(RentService rentService, ReservationService resService) {
+    public RentController(RentService rentService, ReservationRepository resRepository, BrandRepository brandRepository, ModelRepository modelRepository, VehicleRepository vehicleRepository, RentRepository rentRepository) {
         this.rentService = rentService;
-        this.resService = resService;
+        this.resRepository = resRepository;
+        this.rentRepository = rentRepository;
+        this.vehicleRepository = vehicleRepository;
+        this.modelRepository = modelRepository;
+        this.brandRepository = brandRepository;
     }
 
 
@@ -50,11 +71,35 @@ public class RentController {
         rentService.deleteRent(id);
     }
 
-    @PutMapping("updateRent/{id}")
+    @PutMapping("/updateRent/{id}")
     public void updateRent(@PathVariable int id, @RequestBody Rent rent) {
         rent.setRentId(id);
         rentService.updateRent(rent);
     }
+
+
+    @GetMapping("/createNewRent/{id}")
+    public List<String> createNewRent(@PathVariable int id) {
+
+        Rent rent = new Rent();
+
+        Reservation reservation = resRepository.findById(id).orElseThrow();
+        Vehicle vehicle = vehicleRepository.findById(reservation.getVehicleId()).orElseThrow();
+        Model model = modelRepository.findById(vehicle.getModelId()).orElseThrow();
+        Brand brand = brandRepository.findById(model.getBrandId()).orElseThrow();
+
+        rent.setCost(0);
+        rent.setDistance(0);
+        rent.setReservationId(id);
+
+        reservation.setReserved(true);
+
+        rentRepository.save(rent);
+        
+        return Arrays.asList(reservation.getStartTime().toString(),model.getModelName(),brand.getBrandName());
+        
+    }
+    
 
     @GetMapping("/findRR/{id}")
     public List<Optional<?>> findRR(@PathVariable Integer id) {

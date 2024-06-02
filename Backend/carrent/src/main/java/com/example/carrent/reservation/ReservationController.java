@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/reservations")
@@ -37,6 +40,12 @@ public class ReservationController {
         reservation.setReservationId(id);
         reservationService.updateReservation(reservation);
     }
+    
+    @GetMapping("/printAllReservationById")
+    public List<ReservationRecord> PrintAllReservation()
+    {
+        return reservationService.PrintAllReservation();
+    }
 
     @GetMapping("/getAllReservationsByEmployeeId/{id}")
     public List<ReservationRecord> getAllReservationsByEmployeeId(@PathVariable int id) {
@@ -51,5 +60,10 @@ public class ReservationController {
     @GetMapping("/getReservationByAttribute/{data}")
     public List<Reservation> getReservationByAttribute(@PathVariable String data) {
         return reservationService.getReservationsByAttribute(data);
+    }
+
+    @GetMapping("/isReserved/{id}")
+    public boolean isReserved(@PathVariable int id) {
+        return reservationService.isReserved(id);
     }
 }

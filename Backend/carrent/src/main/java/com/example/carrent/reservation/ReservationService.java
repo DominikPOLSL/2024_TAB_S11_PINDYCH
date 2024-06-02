@@ -107,6 +107,12 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
+
+    public boolean isReserved(int id){
+        Reservation reservation = reservationRepository.findById(id).orElseThrow();
+        return reservation.getReserved();
+    }
+
     private ReservationRecord mapToReservationRecord(Reservation reservation) {
         Vehicle vehicle = vehicleRepository.findById(reservation.getVehicleId()).orElse(null);
         if (vehicle == null) return null;
