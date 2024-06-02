@@ -192,4 +192,9 @@ public class ReservationService {
             return uniqueList;
 
     }
+
+    public boolean isReserved(int id){
+        Reservation reservation = reservationRepository.findById(id).orElseThrow();
+        return reservation.getReserved();
+    }
 }

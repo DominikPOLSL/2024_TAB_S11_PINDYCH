@@ -32,6 +32,11 @@ public class Reservation {
     @Column(name = "\"vehicleId\"")
     private int vehicleId;
 
+    @Column(name = "\"reserved\"")
+    private boolean reserved;
+
+    
+
     public Reservation() {}
 
     public Reservation(int reservationId, Date startTime, Date endTime, boolean privateUsage, int employeeId, int carGiverId) {
@@ -53,6 +58,14 @@ public class Reservation {
 
     public Date getStartTime() {
         return startTime;
+    }
+
+    public boolean getReserved() {
+        return reserved;
+    }
+
+    public void setReserved(boolean reserved) {
+        this.reserved = reserved;
     }
 
     public void setStartTime(Date startTime) {

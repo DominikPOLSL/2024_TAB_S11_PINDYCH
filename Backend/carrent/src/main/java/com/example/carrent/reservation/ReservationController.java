@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/reservations")
@@ -40,6 +43,11 @@ public class ReservationController {
         reservationService.updateReservation(reservation);
     }
 
+    @GetMapping("/isReserved/{id}")
+    public boolean isReserved(@PathVariable int id) {
+        return reservationService.isReserved(id);
+    }
+    
     @GetMapping("/printAllReservationById")
     public List<ReservationRecord> PrintAllReservation()
     {
