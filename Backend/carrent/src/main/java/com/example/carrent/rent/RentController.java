@@ -1,5 +1,6 @@
 package com.example.carrent.rent;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,7 @@ public class RentController {
         this.resService = resService;
     }
 
+
     @GetMapping("/getAllRents")
     public List<Rent> getAllRents() {
         return rentService.getAllRents();
@@ -54,10 +56,21 @@ public class RentController {
         rentService.updateRent(rent);
     }
 
-    // @GetMapping("/findRR/{id}")
-    //     public List<Optional<?>> findRentAndReservationById(Integer id) {
-    //         return Arrays.asList(rentService.getRentById(id), resService.getReservationById(id));
-    //     }
+    @GetMapping("/findRR/{id}")
+    public List<Optional<?>> findRR(@PathVariable Integer id) {
+        if (id == null) {
+            // Handle null case, possibly throw an exception or return an appropriate response
+        }
+        Optional<Rent> rent = rentService.getRentById(id);
+        Optional<?> reservation = Optional.empty();
+        if (rent.isPresent()) {
+            Integer reservationId = rentService.getReservation(id);
+            if (reservationId != null) {
+                reservation = resService.getReservationById(reservationId);
+            }
+        }
+        return Arrays.asList(rent, reservation);
+    }
 
 
 }
