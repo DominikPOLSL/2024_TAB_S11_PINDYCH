@@ -7,5 +7,11 @@ import { Injectable } from '@angular/core';
 export class RentalsService {
   constructor(private http: HttpClient) {}
 
-  rentVehicle() {}
+  // getRentals(){
+  //
+  // }
+
+  // deleteRental(rentalId:number){
+
+  // }
 }

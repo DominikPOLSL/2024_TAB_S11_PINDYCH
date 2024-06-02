@@ -9,10 +9,8 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, finalize, takeUntil } from 'rxjs';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
-import { BrandsService } from '../../vehicles/brands.service';
-import { ModelsService } from '../../vehicles/models.service';
 import { Brand } from '../../vehicles/brand.interface';
 import { Model } from '../../vehicles/model.interface';
 import { CalendarModule } from 'primeng/calendar';
@@ -38,12 +36,12 @@ export class AddReservationComponent implements OnInit, OnDestroy {
   form: FormGroup;
   brands: Brand[] = [];
   models: Model[] = [];
+  brands$!: Observable<Brand[]>;
 
   private readonly _destroying$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
-    private modelsService: ModelsService,
     private reservationsService: ResertavionsService
   ) {
     this.form = this.fb.group({
@@ -54,12 +52,7 @@ export class AddReservationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.reservationsService
-      .getAvailableBrands()
-      .pipe(takeUntil(this._destroying$))
-      .subscribe((brands) => {
-        this.brands = brands;
-      });
+    this.brands$ = this.reservationsService.getAvailableBrands();
   }
 
   getModelsByBrand(): void {
@@ -83,8 +76,7 @@ export class AddReservationComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.form.valid) {
-      //this.isLoading = true;
-      //TODO
+      this.isLoading = true;
       const modelName = this.form.get('model')?.value.modelName;
       const brandName = this.form.get('brand')?.value.brandName;
       const date: Date[] = this.form.get('date')?.value;
@@ -92,12 +84,16 @@ export class AddReservationComponent implements OnInit, OnDestroy {
         .addReservation(
           modelName,
           brandName,
-          date[0].toLocaleDateString(),
-          date[1].toLocaleDateString()
+          date[0].toJSON(),
+          date[1].toJSON()
         )
-        .pipe(takeUntil(this._destroying$))
-        .subscribe((res) => {
-          console.log(res);
+        .pipe(
+          finalize(() => (this.isLoading = false)),
+          takeUntil(this._destroying$)
+        )
+        .subscribe(() => {
+          this.form.reset();
+          this.form.get('model')?.disable();
         });
     } else {
       this.form.markAllAsTouched();

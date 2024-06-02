@@ -1,10 +1,8 @@
 package com.example.carrent.reservation;
 
-import com.example.carrent.employee.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,24 +47,19 @@ public class ReservationController {
         return reservationService.PrintAllReservation();
     }
 
-    @GetMapping("/printAllReservationByEmployeeId/{id}")
-    public List<ReservationRecord> PrintAllReservationEmployeeId(@PathVariable int id)
-    {
-        return reservationService.PrintAllReservationEmployeeId(id);
+    @GetMapping("/getAllReservationsByEmployeeId/{id}")
+    public List<ReservationRecord> getAllReservationsByEmployeeId(@PathVariable int id) {
+        return reservationService.getAllReservationsByEmployeeId(id);
     }
-    @GetMapping("/printAllReservationByGiverId/{id}")
-    public List<ReservationRecord> PrintAllReservationGiverId(@PathVariable int id)
-    {
-        return reservationService.PrintAllReservationGiverId(id);
-    }
-    @PostMapping("/AddReservation")
+
+    @PostMapping
     public Reservation addReservation(@RequestBody ReservationSave reservationSave) {
         return reservationService.addReservation(reservationSave);
     }
 
-    @GetMapping("/searchReservation/{data}")
-    public ArrayList<Reservation> getReservationByAttribute(@PathVariable("data") String data) {
-        return reservationService.getReservationByAttribute(data);
+    @GetMapping("/getReservationByAttribute/{data}")
+    public List<Reservation> getReservationByAttribute(@PathVariable String data) {
+        return reservationService.getReservationsByAttribute(data);
     }
 
     @GetMapping("/isReserved/{id}")

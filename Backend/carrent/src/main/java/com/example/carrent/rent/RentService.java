@@ -33,6 +33,9 @@ public class RentService {
         return rentRepository.findById(id);
     }
 
+    public Integer getReservation(int rentId) {
+        return rentRepository.findReservationIdByRentId(rentId);
+    }
 
     public void deleteRent(int id) {
         rentRepository.deleteById(id);

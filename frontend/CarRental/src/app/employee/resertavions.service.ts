@@ -43,28 +43,22 @@ export class ResertavionsService {
       .pipe(debounceTime(400), delay(500));
   }
 
-  //TODO
   addReservation(
     brandName: string,
     modelName: string,
     dateFrom: string,
     dateTo: string
-  ): Observable<any> {
-    console.log(brandName);
-    console.log(modelName);
-    console.log(dateFrom);
-    console.log(dateTo);
+  ): Observable<Reservation> {
     const params = {
       model: modelName,
       brand: brandName,
       startTime: dateFrom,
       endTime: dateTo,
-      employeeId: 9,
+      employeeId: 2,
       carGiverId: 1,
     };
-    return this.http.post(
-      'http://localhost:8080/reservations/AddReservation',
-      params
-    );
+    return this.http
+      .post<Reservation>('http://localhost:8080/reservations', params)
+      .pipe(delay(1000));
   }
 }
