@@ -2,6 +2,12 @@ package com.example.carrent.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.carrent.employee.Employee;
+import com.example.carrent.employee.EmployeeRepository;
+import com.example.carrent.vehiclecargiver.VehicleCarGiver;
+import com.example.carrent.vehiclecargiver.VehicleCarGiverRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +18,10 @@ public class AdminService {
 
     @Autowired
     private AdminRepository adminRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
+    @Autowired
+    private VehicleCarGiverRepository vehicleCarGiverRepository;
 
     public List<Admin> getAdmins() {
         return adminRepository.findAll();
@@ -54,5 +64,22 @@ public class AdminService {
             }
         }
         return uniqueList;
+    }
+
+    @Transactional
+    public void EmployeeToCarGiver(int id){
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        
+        if (optionalEmployee.isPresent()) {
+            Employee employee = optionalEmployee.get();
+            
+            VehicleCarGiver carGiver = new VehicleCarGiver();
+            carGiver.setName(employee.getEmployeeName());
+            carGiver.setSurname(employee.getEmployeeSurname());
+            
+            vehicleCarGiverRepository.save(carGiver);
+        } else {
+            throw new RuntimeException("Employee with id " + id + " not found");
+        }
     }
 }

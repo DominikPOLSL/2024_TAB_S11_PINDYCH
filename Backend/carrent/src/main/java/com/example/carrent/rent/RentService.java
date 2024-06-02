@@ -45,14 +45,5 @@ public class RentService {
         rentRepository.save(rent);
     }
 
-        
-    // public List<Optional<?>> findRentAndReservationById(Integer id) {
-
-        
-    //     Optional<Rent> rent = rentRepository.findById(id);
-    //     Optional<Reservation> reservation = reservationRepository.findById(id);
-        
-    //     return Arrays.asList(rent, reservation);
-    // }
     
 }

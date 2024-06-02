@@ -3,7 +3,11 @@ package com.example.carrent.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.carrent.employee.Employee;
+import com.example.carrent.employee.EmployeeService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +18,7 @@ import java.util.Optional;
 public class AdminController {
 
     private final AdminService adminService;
+    //private final EmployeeService employee;
 
     @Autowired
     public AdminController(AdminService adminService) {
@@ -58,5 +63,10 @@ public class AdminController {
     @GetMapping("/searchAdmin/{data}")
     public ArrayList<Admin> getAdminsByAttribute(@PathVariable("data") String data) {
         return adminService.findByAttribute(data);
+    }
+
+    @PostMapping("/setEmployeeAsCarGiver/{id}")
+    public void transferEmployee(@PathVariable("id")int id){
+        adminService.EmployeeToCarGiver(id);
     }
 }
