@@ -42,11 +42,6 @@ public class ReservationController {
         reservation.setReservationId(id);
         reservationService.updateReservation(reservation);
     }
-
-    @GetMapping("/isReserved/{id}")
-    public boolean isReserved(@PathVariable int id) {
-        return reservationService.isReserved(id);
-    }
     
     @GetMapping("/printAllReservationById")
     public List<ReservationRecord> PrintAllReservation()
@@ -72,5 +67,10 @@ public class ReservationController {
     @GetMapping("/searchReservation/{data}")
     public ArrayList<Reservation> getReservationByAttribute(@PathVariable("data") String data) {
         return reservationService.getReservationByAttribute(data);
+    }
+
+    @GetMapping("/isReserved/{id}")
+    public boolean isReserved(@PathVariable int id) {
+        return reservationService.isReserved(id);
     }
 }
