@@ -139,3 +139,9 @@ record ReservationSave(
         int employeeId,
         int carGiverId
 ){}
+record RentRecord(
+        int id,
+        String Brand,
+        String Model,
+        String Date
+){}

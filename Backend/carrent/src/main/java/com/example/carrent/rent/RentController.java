@@ -32,9 +32,9 @@ public class RentController {
         rentService.addRent(rent);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteRent(@PathVariable int id) {
-        rentService.deleteRent(id);
+    @DeleteMapping("/deleteRent/{id}")
+    public Optional<Rent> deleteRent(@PathVariable int id) {
+        return rentService.deleteRent(id);
     }
 
     @PutMapping("/{id}")
@@ -42,4 +42,45 @@ public class RentController {
         rent.setRentId(id);
         rentService.updateRent(rent);
     }
+
+
+
+    @GetMapping("/createNewRent/{id}")
+    public List<String> createNewRent(@PathVariable int id) {
+
+        Rent rent = new Rent();
+
+        Reservation reservation = resRepository.findById(id).orElseThrow();
+        Vehicle vehicle = vehicleRepository.findById(reservation.getVehicleId()).orElseThrow();
+        Model model = modelRepository.findById(vehicle.getModelId()).orElseThrow();
+        Brand brand = brandRepository.findById(model.getBrandId()).orElseThrow();
+
+        rent.setCost(0);
+        rent.setDistance(0);
+        rent.setReservationId(id);
+
+        reservation.setReserved(true);
+
+        rentRepository.save(rent);
+        
+        return Arrays.asList(reservation.getStartTime().toString(),model.getModelName(),brand.getBrandName());
+        
+    }
+
+
+    // @GetMapping("/findRR/{id}")
+    // public List<Optional<?>> findRR(@PathVariable Integer id) {
+    //     if (id == null) {
+    //         // Handle null case, possibly throw an exception or return an appropriate response
+    //     }
+    //     Optional<Rent> rent = rentService.getRentById(id);
+    //     Optional<?> reservation = Optional.empty();
+    //     if (rent.isPresent()) {
+    //         Integer reservationId = rentService.getReservation(id);
+    //         if (reservationId != null) {
+    //             reservation = resRepository.getReservationById(reservationId);
+    //         }
+    //     }
+    //     return Arrays.asList(rent, reservation);
+    // }
 }
