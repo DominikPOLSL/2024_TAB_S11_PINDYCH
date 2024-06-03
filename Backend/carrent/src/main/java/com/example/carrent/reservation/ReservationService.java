@@ -133,7 +133,8 @@ public class ReservationService {
                 brand.getBrandName(),
                 model.getModelName(),
                 reservation.getStartTime().toString(),
-                reservation.getEndTime().toString()
+                reservation.getEndTime().toString(),
+                reservation.getReserved()
         );
     }
 
