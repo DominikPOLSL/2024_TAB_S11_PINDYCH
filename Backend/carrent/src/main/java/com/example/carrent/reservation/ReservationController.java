@@ -1,5 +1,4 @@
 package com.example.carrent.reservation;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,5 +64,16 @@ public class ReservationController {
     @GetMapping("/isReserved/{id}")
     public boolean isReserved(@PathVariable int id) {
         return reservationService.isReserved(id);
+    }
+
+    @GetMapping("/PrintAllRentsByUserId/{id}")
+    public List<RentRecord> PrintAllRentsByUserId(@PathVariable int id)
+    {
+        return reservationService.PrintAllRentsByUserId(id);
+    }
+
+    @GetMapping("/getRentByAttribute/{data}")
+    public List<RentRecord> getRentByAttribute(@PathVariable String data) {
+        return reservationService.getRentByAttribute(data);
     }
 }

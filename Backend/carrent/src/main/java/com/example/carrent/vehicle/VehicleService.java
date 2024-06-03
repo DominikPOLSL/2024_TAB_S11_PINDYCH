@@ -93,7 +93,6 @@ public class VehicleService {
                 })
                 .collect(Collectors.toList());
     }
-
     public List<Brand> printAvailableBrands() {
         return vehicleRepository.findAll().stream()
                 .map(vehicle -> modelRepository.findById(vehicle.getModelId()).orElse(null))

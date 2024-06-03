@@ -5,6 +5,9 @@ import com.example.carrent.brand.BrandRepository;
 import com.example.carrent.employee.Employee;
 import com.example.carrent.model.Model;
 import com.example.carrent.model.ModelRepository;
+import com.example.carrent.rent.Rent;
+import com.example.carrent.rent.RentRepository;
+import com.example.carrent.rent.RentService;
 import com.example.carrent.vehicle.Vehicle;
 import com.example.carrent.vehicle.VehicleRepository;
 import com.example.carrent.vehiclecargiver.VehicleCarGiverRepository;
@@ -25,13 +28,15 @@ public class ReservationService {
     private final VehicleRepository vehicleRepository;
     private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
+    private final RentRepository rentRepository;
 
     @Autowired
-    public ReservationService(ReservationRepository reservationRepository, VehicleRepository vehicleRepository, BrandRepository brandRepository, ModelRepository modelRepository, VehicleCarGiverRepository vehicleCarGiverRepository) {
+    public ReservationService(ReservationRepository reservationRepository, VehicleRepository vehicleRepository, BrandRepository brandRepository, ModelRepository modelRepository, RentRepository rentRepository) {
         this.reservationRepository = reservationRepository;
         this.vehicleRepository = vehicleRepository;
         this.brandRepository = brandRepository;
         this.modelRepository = modelRepository;
+        this.rentRepository = rentRepository;
     }
 
     public List<ReservationRecord> getAllReservations() {
@@ -107,13 +112,17 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
-
+    public boolean isReserved(int id){
+        Reservation reservation = reservationRepository.findById(id).orElseThrow();
+        return reservation.getReserved();
+    }
     public boolean isReserved(int id){
         Reservation reservation = reservationRepository.findById(id).orElseThrow();
         return reservation.getReserved();
     }
 
-    private ReservationRecord mapToReservationRecord(Reservation reservation) {
+    public ReservationRecord mapToReservationRecord(Reservation reservation) {
+
         Vehicle vehicle = vehicleRepository.findById(reservation.getVehicleId()).orElse(null);
         if (vehicle == null) return null;
 
@@ -132,5 +141,67 @@ public class ReservationService {
         );
     }
 
+    public List<RentRecord> PrintAllRentsByUserId(int id) {
+        List<RentRecord> list = new ArrayList<>();
 
+        for (Reservation reservation : reservationRepository.findAll()) {
+            if (reservation.getEmployeeId() == id) {
+                ReservationRecord reservationRecord = mapToReservationRecord(reservation);
+                if (reservationRecord != null) { // Ensure reservationRecord is not null
+                    RentRecord rentRecord = new RentRecord(
+                            reservationRecord.id(),
+                            reservationRecord.brand(),
+                            reservationRecord.model(),
+                            reservationRecord.startTime()
+                    );
+                    list.add(rentRecord);
+                }
+            }
+        }
+        return list;
+    }
+    public List<RentRecord> getRentByAttribute(String data) {
+        ArrayList<RentRecord> list = new ArrayList<>();
+
+        for (Rent rent : rentRepository.findAll()) {
+            Optional<Reservation> reservationOpt = reservationRepository.findById(rent.getReservationId());
+            if (reservationOpt.isEmpty()) {
+                continue;
+            }
+            Reservation reservation = reservationOpt.get();
+
+            Optional<Vehicle> vehicleOpt = vehicleRepository.findById(reservation.getVehicleId());
+            if (vehicleOpt.isEmpty()) {
+                continue;
+            }
+            Vehicle vehicle = vehicleOpt.get();
+
+            Optional<Model> modelOpt = modelRepository.findById(vehicle.getModelId());
+            if (modelOpt.isEmpty()) {
+                continue;
+            }
+            Model model = modelOpt.get();
+
+            Optional<Brand> brandOpt = brandRepository.findById(model.getBrandId());
+            if (brandOpt.isEmpty()) {
+                continue;
+            }
+            Brand brand = brandOpt.get();
+
+            boolean matches = model.getModelName().contains(data) ||
+                    brand.getBrandName().contains(data) ||
+                    (reservation.getStartTime().toString().compareTo(data) <= 0 && data.compareTo(reservation.getEndTime().toString()) <= 0) ||
+                    String.valueOf(reservation.getReservationId()).contains(data);
+
+            if (matches) {
+                list.add(new RentRecord(
+                        rent.getRentId(),
+                        model.getModelName(),
+                        brand.getBrandName(),
+                        reservation.getStartTime().toString()
+                ));
+            }
+        }
+        return list;
+    }
 }

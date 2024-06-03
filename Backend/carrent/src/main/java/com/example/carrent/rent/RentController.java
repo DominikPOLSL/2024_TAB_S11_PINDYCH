@@ -67,8 +67,9 @@ public class RentController {
     }
 
     @DeleteMapping("/deleteRent/{id}")
-    public void deleteRent(@PathVariable int id) {
-        rentService.deleteRent(id);
+    public Optional<Rent> deleteRent(@PathVariable int id) {
+        return rentService.deleteRent(id);
+
     }
 
     @PutMapping("/updateRent/{id}")
@@ -76,7 +77,6 @@ public class RentController {
         rent.setRentId(id);
         rentService.updateRent(rent);
     }
-
 
     @GetMapping("/createNewRent/{id}")
     public List<String> createNewRent(@PathVariable int id) {
@@ -99,7 +99,6 @@ public class RentController {
         return Arrays.asList(reservation.getStartTime().toString(),model.getModelName(),brand.getBrandName());
         
     }
-    
 
     // @GetMapping("/findRR/{id}")
     // public List<Optional<?>> findRR(@PathVariable Integer id) {
@@ -116,6 +115,4 @@ public class RentController {
     //     }
     //     return Arrays.asList(rent, reservation);
     // }
-
-
 }
