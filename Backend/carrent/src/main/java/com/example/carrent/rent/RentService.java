@@ -3,6 +3,7 @@ package com.example.carrent.rent;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.carrent.reservation.Reservation;
 import com.example.carrent.reservation.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,6 @@ public class RentService {
     public void addRent(Rent rent) {
 
         rentRepository.save(rent);
-        //reservationRepository.deleteById(rent.getReservationId()); //baza jest zla xd XD XDDDDD
     }
 
     public Optional<Rent> getRentById(int id) {
@@ -40,12 +40,25 @@ public class RentService {
     }
 
     public Optional<Rent> deleteRent(int id) {
-        Optional<Rent> rent = rentRepository.findById(id);
-      
+        Optional<Rent> rentOpt = rentRepository.findById(id);
+
+        if (!rentOpt.isPresent()) {
+            return Optional.empty();
+        }
+
+        Rent rent = rentOpt.get();
+        Optional<Reservation> reservationOpt = reservationRepository.findById(rent.getReservationId());
+
+        if (reservationOpt.isPresent()) {
+            Reservation reservation = reservationOpt.get();
+            reservation.setReserved(false);
+            reservationRepository.save(reservation);
+        }
+
         rentRepository.deleteById(id);
-      
-        return rent;
+        return rentOpt;
     }
+
 
     public void updateRent(Rent rent) {
         rentRepository.save(rent);
