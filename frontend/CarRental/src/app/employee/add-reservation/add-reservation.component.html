@@ -3,47 +3,59 @@
     <div class="col-12 text-center">
       <p class="text-4xl font-bold">Dodaj rezerwację</p>
     </div>
-    <ng-container *ngIf="!isLoading; else loading">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="flex flex-column align-items-center">
-          <div class="flex flex-column h-5rem">
-            <p-dropdown
-              [options]="brands"
-              placeholder="Marka"
-              formControlName="brand"
-              optionLabel="brandName"
-              (onChange)="getModelsByBrand()"
-            />
-            <p *ngIf="isControlValid('brand')" class="error-message ml-1 mt-1">
-              Wybierz markę!
-            </p>
-          </div>
-          <div class="flex flex-column h-5rem">
-            <p-dropdown
-              [options]="models"
-              placeholder="Model"
-              formControlName="model"
-              optionLabel="modelName"
-            />
-            <p *ngIf="isControlValid('model')" class="error-message ml-1 mt-1">
-              Wybierz model!
-            </p>
-          </div>
-          <div class="flex flex-column h-5rem mt-2">
-            <p-calendar
-              formControlName="date"
-              selectionMode="range"
-              placeholder="Okres wypożyczenia"
-            />
-            <p *ngIf="isControlValid('date')" class="error-message ml-1 mt-1">
-              Wybierz okres wypożyczenia!
-            </p>
-          </div>
-          <p-button label="Dodaj" type="submit" />
-        </div></form
-    ></ng-container>
+    <ng-container *ngIf="brands$ | async as brands; else noAvailableVehicles">
+      <ng-container *ngIf="!isLoading; else loading">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="flex flex-column align-items-center">
+            <div class="flex flex-column h-5rem">
+              <p-dropdown
+                [options]="brands"
+                placeholder="Marka"
+                formControlName="brand"
+                optionLabel="brandName"
+                (onChange)="getModelsByBrand()"
+              />
+              <p
+                *ngIf="isControlValid('brand')"
+                class="error-message ml-1 mt-1"
+              >
+                Wybierz markę!
+              </p>
+            </div>
+            <div class="flex flex-column h-5rem">
+              <p-dropdown
+                [options]="models"
+                placeholder="Model"
+                formControlName="model"
+                optionLabel="modelName"
+              />
+              <p
+                *ngIf="isControlValid('model')"
+                class="error-message ml-1 mt-1"
+              >
+                Wybierz model!
+              </p>
+            </div>
+            <div class="flex flex-column h-5rem mt-2">
+              <p-calendar
+                formControlName="date"
+                selectionMode="range"
+                placeholder="Okres wypożyczenia"
+              />
+              <p *ngIf="isControlValid('date')" class="error-message ml-1 mt-1">
+                Wybierz okres wypożyczenia!
+              </p>
+            </div>
+            <p-button label="Dodaj" type="submit" />
+          </div></form
+      ></ng-container>
+    </ng-container>
+
     <ng-template #loading>
       <app-spinner class="flex justify-content-center"></app-spinner>
+    </ng-template>
+    <ng-template #noAvailableVehicles>
+      <h3>Brak dostępnych pojazdów!</h3>
     </ng-template>
   </div>
 </div>

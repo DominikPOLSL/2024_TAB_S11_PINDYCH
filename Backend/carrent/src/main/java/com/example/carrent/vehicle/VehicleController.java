@@ -4,17 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.carrent.brand.Brand;
-import com.example.carrent.brand.BrandRepository;
-import com.example.carrent.brand.BrandService;
 import com.example.carrent.model.Model;
-import com.example.carrent.model.ModelRepository;
+import com.example.carrent.model.ModelService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.carrent.model.ModelService;
 
 @RestController
 @RequestMapping(path = "api/vehicle")
@@ -23,7 +18,7 @@ public class VehicleController {
     private final VehicleService vehicleService;
     private final ModelService modelService;
 
-    public VehicleController(VehicleService vehicleService, ModelService modelService, BrandService brandService) {
+    public VehicleController(VehicleService vehicleService, ModelService modelService) {
         this.vehicleService = vehicleService;
         this.modelService = modelService;
     }
@@ -33,12 +28,12 @@ public class VehicleController {
         return vehicleService.getVehicles();
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<?> addNewVehicle(@RequestBody Vehicle vehicle) {
         int modelId = vehicle.getModelId();
 
         if (!modelService.existById(modelId)) {
-
+            return ResponseEntity.badRequest().body("Model does not exist.");
         }
 
         Vehicle createdVehicle = vehicleService.addNewVehicle(vehicle);
@@ -47,12 +42,12 @@ public class VehicleController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateVehicle(@PathVariable("id") int id, @RequestBody Vehicle updatedVehicle) {
-
-        Vehicle existingVehicle = vehicleService.findById(id);
-        if (existingVehicle == null) {
+        Optional<Vehicle> existingVehicleOptional = vehicleService.findById(id);
+        if (!existingVehicleOptional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
+        Vehicle existingVehicle = existingVehicleOptional.get();
         existingVehicle.setEquipment(updatedVehicle.getEquipment());
         existingVehicle.setVersion(updatedVehicle.getVersion());
         existingVehicle.setPurpose(updatedVehicle.getPurpose());
@@ -63,7 +58,7 @@ public class VehicleController {
         existingVehicle.setModelId(updatedVehicle.getModelId());
         existingVehicle.setPower(updatedVehicle.getPower());
 
-        int modelId = (int) updatedVehicle.getModelId();
+        int modelId = updatedVehicle.getModelId();
         if (!modelService.existById(modelId)) {
             return ResponseEntity.badRequest().body("Model does not exist.");
         }
@@ -74,47 +69,48 @@ public class VehicleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getVehicleById(@PathVariable("id") int id) {
-        Vehicle vehicle = vehicleService.findById(id);
-        if (vehicle == null) {
+        Optional<Vehicle> vehicleOptional = vehicleService.findById(id);
+        if (!vehicleOptional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(vehicle);
+        return ResponseEntity.ok(vehicleOptional.get());
     }
 
     @DeleteMapping("/{id}")
-    public Optional<Vehicle> deleteVehicle(@PathVariable("id") int id) {
-        if (!vehicleService.existById(id)) {
-            //return ResponseEntity.notFound().build();
+    public ResponseEntity<?> deleteVehicle(@PathVariable("id") int id) {
+        if (!vehicleService.existsById(id)) {
+            return ResponseEntity.notFound().build();
         }
-        return vehicleService.deleteVehicleById(id);
+        Optional<Vehicle> deletedVehicle = vehicleService.deleteVehicleById(id);
+        return deletedVehicle.isPresent() ? ResponseEntity.ok(deletedVehicle.get()) : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
     @GetMapping("/printVehicle/{id}")
-    public VehiclePrint PrintVehicle(@PathVariable("id") int id)
-    {
-        return vehicleService.PrintVehicle(id);
+    public ResponseEntity<?> printVehicle(@PathVariable("id") int id) {
+        VehiclePrint vehiclePrint = vehicleService.printVehicle(id);
+        if (vehiclePrint == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(vehiclePrint);
     }
 
     @GetMapping("/printVehicle")
-    public List<VehiclePrint> PrintVehicle()
-    {
+    public List<VehiclePrint> printAllVehicles() {
         return vehicleService.printAllVehicles();
     }
 
     @GetMapping("/printAvailableModels")
-    public List<Model> printAvailableModels()
-    {
+    public List<Model> printAvailableModels() {
         return vehicleService.printAvailableModels();
     }
+
     @GetMapping("/printAvailableBrands")
-    public List<Brand> printAvailableBrands()
-    {
+    public List<Brand> printAvailableBrands() {
         return vehicleService.printAvailableBrands();
     }
 
     @GetMapping("/printAvailableModelsByBrandId/{id}")
-    public List<Model> printAvailableModelsByBrandId(@PathVariable("id") int id)
-    {
+    public List<Model> printAvailableModelsByBrandId(@PathVariable("id") int id) {
         return vehicleService.printAvailableModelsByBrandId(id);
     }
 }

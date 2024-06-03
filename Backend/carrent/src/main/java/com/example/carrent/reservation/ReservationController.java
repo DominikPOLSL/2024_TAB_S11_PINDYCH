@@ -2,9 +2,11 @@ package com.example.carrent.reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/reservations")
@@ -12,7 +14,7 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
-    @Autowired
+    //@Autowired
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
@@ -37,31 +39,31 @@ public class ReservationController {
         reservation.setReservationId(id);
         reservationService.updateReservation(reservation);
     }
+    
+    // @GetMapping("/printAllReservationById")
+    // public List<ReservationRecord> PrintAllReservation()
+    // {
+    //     return reservationService.PrintAllReservation();
+    // }
 
-    @GetMapping("/printAllReservationById")
-    public List<ReservationRecord> PrintAllReservation()
-    {
-        return reservationService.PrintAllReservation();
+    @GetMapping("/getAllReservationsByEmployeeId/{id}")
+    public List<ReservationRecord> getAllReservationsByEmployeeId(@PathVariable int id) {
+        return reservationService.getAllReservationsByEmployeeId(id);
     }
 
-    @GetMapping("/printAllReservationByEmployeeId/{id}")
-    public List<ReservationRecord> PrintAllReservationEmployeeId(@PathVariable int id)
-    {
-        return reservationService.PrintAllReservationEmployeeId(id);
-    }
-    @GetMapping("/printAllReservationByGiverId/{id}")
-    public List<ReservationRecord> PrintAllReservationGiverId(@PathVariable int id)
-    {
-        return reservationService.PrintAllReservationGiverId(id);
-    }
-    @PostMapping("/AddReservation")
+    @PostMapping
     public Reservation addReservation(@RequestBody ReservationSave reservationSave) {
         return reservationService.addReservation(reservationSave);
     }
 
-    @GetMapping("/searchReservation/{data}")
-    public ArrayList<Reservation> getReservationByAttribute(@PathVariable("data") String data) {
-        return reservationService.getReservationByAttribute(data);
+    @GetMapping("/getReservationByAttribute/{data}")
+    public List<Reservation> getReservationByAttribute(@PathVariable String data) {
+        return reservationService.getReservationsByAttribute(data);
+    }
+
+    @GetMapping("/isReserved/{id}")
+    public boolean isReserved(@PathVariable int id) {
+        return reservationService.isReserved(id);
     }
 
     @GetMapping("/PrintAllRentsByUserId/{id}")

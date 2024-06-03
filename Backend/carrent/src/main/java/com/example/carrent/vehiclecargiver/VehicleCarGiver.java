@@ -31,6 +31,7 @@ public class VehicleCarGiver {
         return giverId;
     }
 
+    @GeneratedValue
     public void setGiverId(int giverId) {
         this.giverId = giverId;
     }

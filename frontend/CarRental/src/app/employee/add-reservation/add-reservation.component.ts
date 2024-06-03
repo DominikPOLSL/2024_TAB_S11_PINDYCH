@@ -9,13 +9,12 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, finalize, takeUntil } from 'rxjs';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
-import { BrandsService } from '../../vehicles/brands.service';
-import { ModelsService } from '../../vehicles/models.service';
 import { Brand } from '../../vehicles/brand.interface';
 import { Model } from '../../vehicles/model.interface';
 import { CalendarModule } from 'primeng/calendar';
+import { ResertavionsService } from '../resertavions.service';
 
 @Component({
   selector: 'app-add-reservation',
@@ -37,13 +36,13 @@ export class AddReservationComponent implements OnInit, OnDestroy {
   form: FormGroup;
   brands: Brand[] = [];
   models: Model[] = [];
+  brands$!: Observable<Brand[]>;
 
   private readonly _destroying$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
-    private brandsService: BrandsService,
-    private modelsService: ModelsService
+    private reservationsService: ResertavionsService
   ) {
     this.form = this.fb.group({
       brand: ['', [Validators.required]],
@@ -53,18 +52,13 @@ export class AddReservationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.brandsService
-      .getBrands()
-      .pipe(takeUntil(this._destroying$))
-      .subscribe((brands) => {
-        this.brands = brands;
-      });
+    this.brands$ = this.reservationsService.getAvailableBrands();
   }
 
   getModelsByBrand(): void {
     const brandId = this.form.get('brand')?.value.brandId;
-    this.modelsService
-      .getModelsByBrand(brandId)
+    this.reservationsService
+      .getAvailableModels(brandId)
       .pipe(takeUntil(this._destroying$))
       .subscribe((models) => {
         this.models = models;
@@ -82,9 +76,25 @@ export class AddReservationComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.form.valid) {
-      //this.isLoading = true;
-      //TODO
-      console.log(this.form.get('date')?.value);
+      this.isLoading = true;
+      const modelName = this.form.get('model')?.value.modelName;
+      const brandName = this.form.get('brand')?.value.brandName;
+      const date: Date[] = this.form.get('date')?.value;
+      this.reservationsService
+        .addReservation(
+          modelName,
+          brandName,
+          date[0].toJSON(),
+          date[1].toJSON()
+        )
+        .pipe(
+          finalize(() => (this.isLoading = false)),
+          takeUntil(this._destroying$)
+        )
+        .subscribe(() => {
+          this.form.reset();
+          this.form.get('model')?.disable();
+        });
     } else {
       this.form.markAllAsTouched();
     }
