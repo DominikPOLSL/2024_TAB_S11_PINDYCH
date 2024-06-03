@@ -15,7 +15,7 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
-    @Autowired
+    //@Autowired
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
@@ -41,11 +41,11 @@ public class ReservationController {
         reservationService.updateReservation(reservation);
     }
     
-    @GetMapping("/printAllReservationById")
-    public List<ReservationRecord> PrintAllReservation()
-    {
-        return reservationService.PrintAllReservation();
-    }
+    // @GetMapping("/printAllReservationById")
+    // public List<ReservationRecord> PrintAllReservation()
+    // {
+    //     return reservationService.PrintAllReservation();
+    // }
 
     @GetMapping("/getAllReservationsByEmployeeId/{id}")
     public List<ReservationRecord> getAllReservationsByEmployeeId(@PathVariable int id) {

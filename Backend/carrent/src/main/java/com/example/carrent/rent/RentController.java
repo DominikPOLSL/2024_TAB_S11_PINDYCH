@@ -101,21 +101,21 @@ public class RentController {
     }
     
 
-    @GetMapping("/findRR/{id}")
-    public List<Optional<?>> findRR(@PathVariable Integer id) {
-        if (id == null) {
-            // Handle null case, possibly throw an exception or return an appropriate response
-        }
-        Optional<Rent> rent = rentService.getRentById(id);
-        Optional<?> reservation = Optional.empty();
-        if (rent.isPresent()) {
-            Integer reservationId = rentService.getReservation(id);
-            if (reservationId != null) {
-                reservation = resService.getReservationById(reservationId);
-            }
-        }
-        return Arrays.asList(rent, reservation);
-    }
+    // @GetMapping("/findRR/{id}")
+    // public List<Optional<?>> findRR(@PathVariable Integer id) {
+    //     if (id == null) {
+    //         // Handle null case, possibly throw an exception or return an appropriate response
+    //     }
+    //     Optional<Rent> rent = rentService.getRentById(id);
+    //     Optional<?> reservation = Optional.empty();
+    //     if (rent.isPresent()) {
+    //         Integer reservationId = rentService.getReservation(id);
+    //         if (reservationId != null) {
+    //             reservation = resRepository.getReservationById(reservationId);
+    //         }
+    //     }
+    //     return Arrays.asList(rent, reservation);
+    // }
 
 
 }
