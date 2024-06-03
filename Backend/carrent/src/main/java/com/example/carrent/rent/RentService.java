@@ -50,9 +50,7 @@ public class RentService {
         Optional<Reservation> reservationOpt = reservationRepository.findById(rent.getReservationId());
 
         if (reservationOpt.isPresent()) {
-            Reservation reservation = reservationOpt.get();
-            reservation.setReserved(false);
-            reservationRepository.save(reservation);
+            reservationRepository.deleteById(rent.getReservationId());
         }
 
         rentRepository.deleteById(id);
