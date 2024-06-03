@@ -142,7 +142,8 @@ record ReservationRecord(
         String model,
         String brand,
         String startTime,
-        String endTime
+        String endTime,
+        Boolean reserved
 ){}
 record ReservationSave(
         String model,
