@@ -116,10 +116,6 @@ public class ReservationService {
         Reservation reservation = reservationRepository.findById(id).orElseThrow();
         return reservation.getReserved();
     }
-    public boolean isReserved(int id){
-        Reservation reservation = reservationRepository.findById(id).orElseThrow();
-        return reservation.getReserved();
-    }
 
     public ReservationRecord mapToReservationRecord(Reservation reservation) {
 
