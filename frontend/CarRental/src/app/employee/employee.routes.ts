@@ -12,12 +12,12 @@ export const employeeRoutes: Routes = [
     redirectTo: 'rezerwacje',
   },
   {
-    path: 'dodaj-rezerwacje',
+    path: 'rezerwacje/dodaj',
     component: AddReservationComponent,
     canActivate: [authGuard],
   },
   {
-    path: 'rezerwacje',
+    path: 'rezerwacje/przegladaj',
     component: ReservationsComponent,
     canActivate: [authGuard],
   },

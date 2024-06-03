@@ -18,30 +18,31 @@
             <div class="nav-button">
               <button
                 class="dropbtn"
-                [routerLink]="['/wypozyczenia']"
+                [routerLink]="['/pojazdy']"
                 routerLinkActive="active-link"
               >
                 Pojazdy
               </button>
+              <div class="dropdown-content">
+                <a [routerLink]="['/pojazdy/przegladaj']">Przeglądaj</a>
+                <a [routerLink]="['/pojazdy/dodaj']">Dodaj</a>
+                <a [routerLink]="['/pojazdy/modele']">Modele</a>
+              </div>
             </div>
             <div class="nav-button">
               <button
                 class="dropbtn"
-                [routerLink]="['/rezerwacje']"
+                [routerLink]="['/uzytkownicy']"
                 routerLinkActive="active-link"
               >
-                Uzytkownicy
+                Użytkownicy
               </button>
+              <div class="dropdown-content">
+                <a [routerLink]="['/uzytkownicy/przegladaj']">Przeglądaj</a>
+                <a [routerLink]="['/uzytkownicy/dodaj']">Dodaj</a>
+              </div>
             </div>
-            <div class="nav-button">
-              <button
-                class="dropbtn"
-                [routerLink]="['/pojazdy']"
-                routerLinkActive="active-link"
-              >
-                Przyznaj pojazd
-              </button>
-            </div>
+
             <div class="nav-button">
               <button [routerLink]="['/profil']" routerLinkActive="active-link">
                 Profil
@@ -68,11 +69,15 @@
             <div class="nav-button">
               <button
                 class="dropbtn"
-                [routerLink]="['/rezerwacje']"
+                [routerLink]="['/uzytkownik']"
                 routerLinkActive="active-link"
               >
-                Rezerwacje
+                Użytkownicy
               </button>
+              <div class="dropdown-content">
+                <a [routerLink]="['/uzytkownik/rezerwacje']">Przeglądaj</a>
+                <a [routerLink]="['/uzytkownik/dodaj-rezerwacje']">Dodaj</a>
+              </div>
             </div>
             <div class="nav-button">
               <button
@@ -100,39 +105,39 @@
             <div class="nav-button">
               <button
                 class="dropbtn"
-                [routerLink]="['/pojazdy']"
+                [routerLink]="['uzytkownik/wypozyczenia']"
                 routerLinkActive="active-link"
               >
                 Wypozyczenia
               </button>
-              <!-- <div class="dropdown-content">
-                <a [routerLink]="['/pojazdy/przegladaj']">Przeglądaj</a>
-                <a [routerLink]="['/pojazdy/dodaj']">Dodaj</a>
-                <a [routerLink]="['/pojazdy/modele']">Modele</a>
-              </div> -->
             </div>
             <div class="nav-button">
               <button
                 class="dropbtn"
-                [routerLink]="['/uzytkownicy']"
+                [routerLink]="['/uzytkownik/rezerwacje']"
                 routerLinkActive="active-link"
               >
                 Rezerwacje
               </button>
+              <div class="dropdown-content">
+                <a [routerLink]="['/uzytkownik/rezerwacje/przegladaj']"
+                  >Przeglądaj</a
+                >
+                <a [routerLink]="['/uzytkownik/rezerwacje/dodaj']">Dodaj</a>
+              </div>
             </div>
             <div class="nav-button">
               <button [routerLink]="['/profil']" routerLinkActive="active-link">
                 Profil
               </button>
-              <ng-container *ngIf="loginState$ | async as loginState">
-                <button
-                  [routerLink]="['/login']"
-                  routerLinkActive="active-link"
-                  (click)="onLogout()"
-                >
-                  {{ loginState }}
-                </button>
-              </ng-container>
+
+              <button
+                [routerLink]="['/login']"
+                routerLinkActive="active-link"
+                (click)="onLogout()"
+              >
+                {{ loginState ? "Wyloguj" : "Zaloguj" }}
+              </button>
             </div>
           </ng-container>
         </ng-container>
