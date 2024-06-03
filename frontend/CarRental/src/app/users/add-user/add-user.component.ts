@@ -9,10 +9,10 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-import { UserRole } from '../role-enum';
-import { UsersService } from '../users.service';
 import { Subject, finalize, takeUntil } from 'rxjs';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
+import { UserRole } from '../role-enum';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-add-user',

@@ -5,10 +5,10 @@ import { ButtonModule } from 'primeng/button';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, finalize, takeUntil } from 'rxjs';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
-import { Vehicle } from '../../vehicles/vehicle.interface';
-import { VehiclesService } from '../../vehicles/vehicles.service';
+import { Rental } from '../rental.interface';
+import { RentalsService } from '../rentals.service';
 
 @Component({
   selector: 'app-rentals',
@@ -26,45 +26,52 @@ import { VehiclesService } from '../../vehicles/vehicles.service';
   styleUrl: './rentals.component.scss',
 })
 export class RentalsComponent implements OnInit, OnDestroy {
-  rentals: Vehicle[] = [];
-  results: Vehicle[] = [];
   isLoading = true;
+  query: string = '';
 
-  searchedRental: string = '';
+  rentals$: Observable<Rental[]> = this.rentalsService.getRentals();
 
   private readonly _destroying$ = new Subject<void>();
 
-  constructor(private vehicleService: VehiclesService) {}
+  constructor(private rentalsService: RentalsService) {}
 
   ngOnInit(): void {
-    this.vehicleService
-      .getVehicles()
-      .pipe(takeUntil(this._destroying$))
-      .subscribe((rentals) => {
-        this.isLoading = false;
-        this.rentals = rentals;
-        this.results = rentals;
-      });
+    this.rentals$ = this.rentalsService.getRentals();
   }
 
   onSearch(): void {
-    if (this.searchedRental.trim() === '') {
-      this.results = this.rentals;
-      return;
+    if (this.query === '') {
+      this.rentals$ = this.rentalsService.getRentals();
+    } else {
+      this.rentals$ = this.rentalsService.searchRenatals(this.query);
     }
-
-    const searchTextLower = this.searchedRental.toLowerCase();
-    this.results = this.rentals.filter(
-      (rental) =>
-        rental.brand.toLowerCase().includes(searchTextLower) ||
-        rental.model.toLowerCase().includes(searchTextLower) ||
-        rental.id.toString().includes(searchTextLower)
-    );
   }
 
-  onEndRental(vehicle: Vehicle): void {
+  onEndRental(rental: Rental): void {
     this.isLoading = true;
-    //TODO
+
+    this.rentalsService
+      .deleteRental(rental.id)
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
+      .subscribe(() => {
+        this.rentals$ = this.rentalsService.getRentals();
+      });
+  }
+
+  clearQuery() {
+    this.rentals$ = this.rentalsService.getRentals();
+    this.query = '';
+  }
+
+  getSearchIconName(): string {
+    if (this.query === '') {
+      return 'search';
+    } else {
+      return 'times';
+    }
   }
 
   ngOnDestroy(): void {

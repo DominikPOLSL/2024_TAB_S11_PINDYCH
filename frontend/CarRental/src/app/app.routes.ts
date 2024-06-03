@@ -3,11 +3,11 @@ import { LoginComponent } from './login/login.component';
 import { authGuard } from './services/auth-guard';
 
 export const routes: Routes = [
-  //   {
-  //     path: '',
-  //     redirectTo: 'profil?¿',
-  //     pathMatch: 'full',
-  //   },
+  {
+    path: '',
+    redirectTo: 'profil',
+    pathMatch: 'full',
+  },
   {
     path: 'login',
     component: LoginComponent,

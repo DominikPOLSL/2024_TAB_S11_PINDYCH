@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  ReactiveFormsModule,
-  FormGroup,
   FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { Observable, Subject, finalize, takeUntil } from 'rxjs';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { Brand } from '../../vehicles/brand.interface';
 import { Model } from '../../vehicles/model.interface';
-import { CalendarModule } from 'primeng/calendar';
 import { ResertavionsService } from '../resertavions.service';
 
 @Component({
