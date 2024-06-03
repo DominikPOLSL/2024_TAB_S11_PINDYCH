@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { SpinnerComponent } from '../components/spinner/spinner.component';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, finalize, takeUntil } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -63,7 +63,7 @@ export class LoginComponent {
         })
         .pipe(takeUntil(this._destroying$))
         .subscribe((response) => {
-          this.authService.saveToken(response.token);
+          this.authService.saveToken(response);
           this.router.navigate(['/']);
         });
     } else {

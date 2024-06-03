@@ -43,9 +43,15 @@
         <button [routerLink]="['/profil']" routerLinkActive="active-link">
           Profil
         </button>
-        <button [routerLink]="['/login']" routerLinkActive="active-link">
-          Zaloguj
-        </button>
+        <ng-container *ngIf="loginState$ | async as loginState">
+          <button
+            [routerLink]="['/login']"
+            routerLinkActive="active-link"
+            (click)="onLogut()"
+          >
+            {{ loginState }}
+          </button>
+        </ng-container>
       </div>
     </div>
   </div>
