@@ -30,10 +30,6 @@ public class RegistrationController {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
 
-
-    // @Autowired
-    // private TokenBlacklistService tokenBlacklistService;
-
     @PostMapping("/register/admin")
     public String registerAdminAndGetToken(@RequestBody Admin admin) {
         admin.setAdminPassword(passwordEncoder.encode(admin.getAdminPassword()));
@@ -49,6 +45,5 @@ public class RegistrationController {
         UserDetails userDetails = myUserDetailsService.loadUserByUsername(employee.getEmployeeLogin());
         return jwtService.generateToken(userDetails);
     }
-    
 
 }
