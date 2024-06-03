@@ -42,20 +42,19 @@ public class RentService {
     public Optional<Rent> deleteRent(int id) {
         Optional<Rent> rentOpt = rentRepository.findById(id);
 
-        if (!rentOpt.isPresent()) {
-            return Optional.empty();
+        if (rentOpt.isPresent()) {
+            Rent rent = rentOpt.get();
+            int reservationId = rent.getReservationId();
+
+            rentRepository.deleteById(id);
+
+            Optional<Reservation> reservationOpt = reservationRepository.findById(reservationId);
+            reservationOpt.ifPresent(reservation -> reservationRepository.deleteById(reservationId));
         }
 
-        Rent rent = rentOpt.get();
-        Optional<Reservation> reservationOpt = reservationRepository.findById(rent.getReservationId());
-
-        if (reservationOpt.isPresent()) {
-            reservationRepository.deleteById(rent.getReservationId());
-        }
-
-        rentRepository.deleteById(id);
         return rentOpt;
     }
+
 
 
     public void updateRent(Rent rent) {

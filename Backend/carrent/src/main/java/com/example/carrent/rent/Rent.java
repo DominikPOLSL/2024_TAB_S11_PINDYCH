@@ -14,10 +14,10 @@ public class Rent {
     private int rentId;
 
     @Column(name = "distance")
-    private double distance;
+    private double distance = 1;
 
     @Column(name = "cost")
-    private double cost;
+    private double cost = 1;
 
     @Column(name = "\"reservationId\"")
     private int reservationId;
