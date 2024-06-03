@@ -62,8 +62,7 @@ export class LoginComponent {
           password: this.form.controls['password'].value,
         })
         .pipe(takeUntil(this._destroying$))
-        .subscribe((response) => {
-          this.authService.saveToken(response);
+        .subscribe(() => {
           this.router.navigate(['/']);
         });
     } else {

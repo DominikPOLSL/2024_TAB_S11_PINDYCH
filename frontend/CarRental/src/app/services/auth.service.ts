@@ -1,17 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { UserRole } from '../users/role-enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private loggedIn$: BehaviorSubject<string> = new BehaviorSubject<string>(
-    'Zaloguj'
+  private loggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
   );
+  private roleLogged$: BehaviorSubject<UserRole | null> =
+    new BehaviorSubject<UserRole | null>(null);
 
-  get LoggedIn(): Observable<string> {
-    return this.loggedIn$.asObservable();
+  get isLoggedIn$(): Observable<boolean> {
+    return this.loggedIn$;
+  }
+
+  get roleLoggedIn$(): Observable<UserRole | null> {
+    return this.roleLogged$;
   }
 
   constructor(private http: HttpClient) {}
@@ -22,8 +29,9 @@ export class AuthService {
         responseType: 'text',
       })
       .pipe(
-        tap(() => {
-          this.loggedIn$.next('Wyloguj');
+        tap((response) => {
+          this.saveToken(response);
+          this.loggedIn$.next(true);
         })
       );
   }
@@ -43,10 +51,10 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
-    this.loggedIn$.next('Zaloguj');
+    this.loggedIn$.next(false);
   }
 
-  setLoggedIn(value: string): void {
+  setLoggedIn(value: boolean): void {
     this.loggedIn$.next(value);
   }
 }

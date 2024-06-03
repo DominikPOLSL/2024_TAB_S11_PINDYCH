@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { UserRole } from '../../users/role-enum';
 
 @Component({
   selector: 'app-header',
@@ -12,18 +13,21 @@ import { Observable } from 'rxjs';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
+  loginState$!: Observable<boolean>;
+  roleLogged$!: Observable<UserRole | null>;
+
+  userRole = UserRole.USER;
+  adminRole = UserRole.ADMIN;
+  keeperRole = UserRole.KEEPER;
+
   constructor(private authService: AuthService) {}
-  loginState$: Observable<string> = this.authService.LoggedIn;
 
   ngOnInit(): void {
-    if (this.authService.getToken()) {
-      this.authService.setLoggedIn('Wyloguj');
-    } else {
-      this.authService.setLoggedIn('Zaloguj');
-    }
+    this.loginState$ = this.authService.isLoggedIn$;
+    this.roleLogged$ = this.authService.roleLoggedIn$;
   }
 
-  onLogut(): void {
+  onLogout(): void {
     this.authService.logout();
   }
 }
