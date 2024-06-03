@@ -147,7 +147,7 @@ public class ReservationService {
                 ReservationRecord reservationRecord = mapToReservationRecord(reservation);
                 if (reservationRecord != null) { // Ensure reservationRecord is not null
                     RentRecord rentRecord = new RentRecord(
-                            reservationRecord.id(),
+                            Rent.getRentId(),
                             reservationRecord.brand(),
                             reservationRecord.model(),
                             reservationRecord.startTime()
