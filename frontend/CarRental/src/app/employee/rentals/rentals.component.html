@@ -6,25 +6,28 @@
       </div>
       <div class="col-4">
         <p-iconField iconPosition="right">
-          <p-inputIcon styleClass="pi pi-search" />
+          <p-inputIcon
+            [styleClass]="'pi pi-' + getSearchIconName()"
+            (click)="clearQuery()"
+          />
           <input
             type="text"
             pInputText
             class="mt-4"
-            [(ngModel)]="searchedRental"
+            [(ngModel)]="query"
             (input)="onSearch()"
             placeholder="Wyszukaj..."
           />
         </p-iconField>
       </div>
       <div class="col-11 max-h-24rem vehicles-list ml-6">
-        <ng-container *ngIf="!isLoading; else loading">
-          <div *ngFor="let vehicle of results">
+        <ng-container *ngIf="rentals$ | async as rentals; else loading">
+          <div *ngFor="let rental of rentals">
             <div class="vehicle-container border-round-3xl flex">
               <div class="col-8 font-semibold ml-5">
-                <p>Marka: {{ vehicle.brand }}</p>
-                <p>Model: {{ vehicle.model }}</p>
-                <p>Identyfikator: {{ vehicle.id }}</p>
+                <p>Marka: {{ rental.Brand }}</p>
+                <p>Model: {{ rental.Model }}</p>
+                <p>Identyfikator: {{ rental.id }}</p>
                 <p>Okres wypożyczenia:</p>
               </div>
               <div
@@ -34,7 +37,7 @@
                   <p-button
                     label="Zakończ wypożyczenie"
                     class="vertical-align-middle w-6rem test"
-                    (onClick)="onEndRental(vehicle)"
+                    (onClick)="onEndRental(rental)"
                   />
                 </div>
               </div>
@@ -42,6 +45,7 @@
             <br />
           </div>
         </ng-container>
+
         <ng-template #loading>
           <div class="col-12 text-center mt-8">
             <app-spinner></app-spinner>
