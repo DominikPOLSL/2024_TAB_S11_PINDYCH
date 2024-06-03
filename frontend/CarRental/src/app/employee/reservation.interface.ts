@@ -6,4 +6,5 @@ export interface Reservation {
   endTime: string;
   employeeId: number;
   carGiverId: number;
+  reserved: boolean;
 }

@@ -82,8 +82,8 @@ export class AddReservationComponent implements OnInit, OnDestroy {
       const date: Date[] = this.form.get('date')?.value;
       this.reservationsService
         .addReservation(
-          modelName,
           brandName,
+          modelName,
           date[0].toJSON(),
           date[1].toJSON()
         )

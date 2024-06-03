@@ -40,7 +40,15 @@ export class ReservationsComponent implements OnInit, OnDestroy {
 
   onRentVehicle(reservation: Reservation): void {
     this.isLoading = true;
-    //TODO
+    this.reservationsService
+      .addRental(reservation)
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this._destroying$)
+      )
+      .subscribe(() => {
+        this.reservations$ = this.reservationsService.getAllReservations();
+      });
   }
 
   onCancelReservation(reservation: Reservation): void {
@@ -60,7 +68,6 @@ export class ReservationsComponent implements OnInit, OnDestroy {
     if (this.query === '') {
       this.reservations$ = this.reservationsService.getAllReservations();
     } else {
-      //TODO
       this.reservations$ = this.reservationsService.searchReservations(
         this.query
       );

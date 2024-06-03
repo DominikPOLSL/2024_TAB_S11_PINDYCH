@@ -43,6 +43,12 @@ export class ResertavionsService {
       .pipe(debounceTime(400), delay(500));
   }
 
+  addRental(reservation: Reservation) {
+    return this.http.get(
+      `http://localhost:8080/rents/createNewRent/${reservation.id}`
+    );
+  }
+
   addReservation(
     brandName: string,
     modelName: string,
@@ -54,7 +60,7 @@ export class ResertavionsService {
       brand: brandName,
       startTime: dateFrom,
       endTime: dateTo,
-      employeeId: 2,
+      employeeId: 9,
       carGiverId: 1,
     };
     return this.http
