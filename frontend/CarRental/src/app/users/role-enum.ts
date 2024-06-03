@@ -1,5 +1,5 @@
 export enum UserRole {
-  ADMIN = 'Admin',
-  KEEPER = 'Opiekun',
-  USER = 'Użytkownik',
+  ADMIN = 'ROLE_ADMIN',
+  KEEPER = 'ROLE_KEEPER',
+  USER = 'ROLE_EMPLOYEE',
 }

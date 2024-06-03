@@ -12,47 +12,136 @@
   </div>
   <div class="col-7 flex flex flex-wrap align-items-center justify-content-end">
     <div class="flex flex-row flex-wrap h-5rem">
-      <div class="nav-button">
-        <button
-          class="dropbtn"
-          [routerLink]="['/pojazdy']"
-          routerLinkActive="active-link"
-        >
-          Pojazdy
-        </button>
-        <div class="dropdown-content">
-          <a [routerLink]="['/pojazdy/przegladaj']">Przeglądaj</a>
-          <a [routerLink]="['/pojazdy/dodaj']">Dodaj</a>
-          <a [routerLink]="['/pojazdy/modele']">Modele</a>
-        </div>
-      </div>
-      <div class="nav-button">
-        <button
-          class="dropbtn"
-          [routerLink]="['/uzytkownicy']"
-          routerLinkActive="active-link"
-        >
-          Użytkownicy
-        </button>
-        <div class="dropdown-content">
-          <a [routerLink]="['/uzytkownicy/przegladaj']">Przeglądaj</a>
-          <a [routerLink]="['/uzytkownicy/dodaj']">Dodaj</a>
-        </div>
-      </div>
-      <div class="nav-button">
-        <button [routerLink]="['/profil']" routerLinkActive="active-link">
-          Profil
-        </button>
-        <ng-container *ngIf="loginState$ | async as loginState">
-          <button
-            [routerLink]="['/login']"
-            routerLinkActive="active-link"
-            (click)="onLogut()"
-          >
-            {{ loginState }}
-          </button>
+      <ng-container *ngIf="loginState$ | async as loginState">
+        <ng-container *ngIf="roleLogged$ | async as role">
+          <ng-container *ngIf="role == adminRole">
+            <div class="nav-button">
+              <button
+                class="dropbtn"
+                [routerLink]="['/pojazdy']"
+                routerLinkActive="active-link"
+              >
+                Pojazdy
+              </button>
+              <div class="dropdown-content">
+                <a [routerLink]="['/pojazdy/przegladaj']">Przeglądaj</a>
+                <a [routerLink]="['/pojazdy/dodaj']">Dodaj</a>
+                <a [routerLink]="['/pojazdy/modele']">Modele</a>
+              </div>
+            </div>
+            <div class="nav-button">
+              <button
+                class="dropbtn"
+                [routerLink]="['/uzytkownicy']"
+                routerLinkActive="active-link"
+              >
+                Użytkownicy
+              </button>
+              <div class="dropdown-content">
+                <a [routerLink]="['/uzytkownicy/przegladaj']">Przeglądaj</a>
+                <a [routerLink]="['/uzytkownicy/dodaj']">Dodaj</a>
+              </div>
+            </div>
+
+            <div class="nav-button">
+              <button [routerLink]="['/profil']" routerLinkActive="active-link">
+                Profil
+              </button>
+              <button
+                [routerLink]="['/login']"
+                routerLinkActive="active-link"
+                (click)="onLogout()"
+              >
+                {{ loginState ? "Wyloguj" : "Zaloguj" }}
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="role == keeperRole">
+            <div class="nav-button">
+              <button
+                class="dropbtn"
+                [routerLink]="['/wypozyczenia']"
+                routerLinkActive="active-link"
+              >
+                Wypozyczenia
+              </button>
+            </div>
+            <div class="nav-button">
+              <button
+                class="dropbtn"
+                [routerLink]="['/uzytkownik']"
+                routerLinkActive="active-link"
+              >
+                Użytkownicy
+              </button>
+              <div class="dropdown-content">
+                <a [routerLink]="['/uzytkownik/rezerwacje']">Przeglądaj</a>
+                <a [routerLink]="['/uzytkownik/dodaj-rezerwacje']">Dodaj</a>
+              </div>
+            </div>
+            <div class="nav-button">
+              <button
+                class="dropbtn"
+                [routerLink]="['/pojazdy']"
+                routerLinkActive="active-link"
+              >
+                Moje pojazdy
+              </button>
+            </div>
+            <div class="nav-button">
+              <button [routerLink]="['/profil']" routerLinkActive="active-link">
+                Profil
+              </button>
+              <button
+                [routerLink]="['/login']"
+                routerLinkActive="active-link"
+                (click)="onLogout()"
+              >
+                {{ loginState ? "Wyloguj" : "Zaloguj" }}
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="role == userRole">
+            <div class="nav-button">
+              <button
+                class="dropbtn"
+                [routerLink]="['uzytkownik/wypozyczenia']"
+                routerLinkActive="active-link"
+              >
+                Wypozyczenia
+              </button>
+            </div>
+            <div class="nav-button">
+              <button
+                class="dropbtn"
+                [routerLink]="['/uzytkownik/rezerwacje']"
+                routerLinkActive="active-link"
+              >
+                Rezerwacje
+              </button>
+              <div class="dropdown-content">
+                <a [routerLink]="['/uzytkownik/rezerwacje/przegladaj']"
+                  >Przeglądaj</a
+                >
+                <a [routerLink]="['/uzytkownik/rezerwacje/dodaj']">Dodaj</a>
+              </div>
+            </div>
+            <div class="nav-button">
+              <button [routerLink]="['/profil']" routerLinkActive="active-link">
+                Profil
+              </button>
+
+              <button
+                [routerLink]="['/login']"
+                routerLinkActive="active-link"
+                (click)="onLogout()"
+              >
+                {{ loginState ? "Wyloguj" : "Zaloguj" }}
+              </button>
+            </div>
+          </ng-container>
         </ng-container>
-      </div>
+      </ng-container>
     </div>
   </div>
 </div>

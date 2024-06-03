@@ -1,29 +1,37 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { UserRole } from '../users/role-enum';
+import { Response } from './response.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private loggedIn$: BehaviorSubject<string> = new BehaviorSubject<string>(
-    'Zaloguj'
+  private loggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
   );
+  private roleLogged$: BehaviorSubject<UserRole | null> =
+    new BehaviorSubject<UserRole | null>(null);
 
-  get LoggedIn(): Observable<string> {
-    return this.loggedIn$.asObservable();
+  get isLoggedIn$(): Observable<boolean> {
+    return this.loggedIn$;
+  }
+
+  get roleLoggedIn$(): Observable<UserRole | null> {
+    return this.roleLogged$;
   }
 
   constructor(private http: HttpClient) {}
 
   login(credentials: { password: string; username: string }): Observable<any> {
     return this.http
-      .post(`http://localhost:8080/authenticate`, credentials, {
-        responseType: 'text',
-      })
+      .post<Response>(`http://localhost:8080/authenticate`, credentials)
       .pipe(
-        tap(() => {
-          this.loggedIn$.next('Wyloguj');
+        tap((response: Response) => {
+          this.saveLoginData(response, true);
+          this.loggedIn$.next(true);
+          this.roleLogged$.next(response.role);
         })
       );
   }
@@ -33,8 +41,10 @@ export class AuthService {
     // return this.http.post(`${this.apiURL}/register`, user);
   }
 
-  saveToken(token: string): void {
-    localStorage.setItem('token', token);
+  saveLoginData(response: Response, isLogged: boolean): void {
+    localStorage.setItem('token', response.token);
+    localStorage.setItem('role', response.role);
+    localStorage.setItem('isLogged', JSON.stringify(isLogged));
   }
 
   getToken(): string | null {
@@ -42,11 +52,14 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    this.loggedIn$.next('Zaloguj');
+    localStorage.clear();
+    this.loggedIn$.next(false);
   }
 
-  setLoggedIn(value: string): void {
+  setLoggedIn(value: boolean): void {
     this.loggedIn$.next(value);
+  }
+  setRole(value: UserRole): void {
+    this.roleLogged$.next(value);
   }
 }
