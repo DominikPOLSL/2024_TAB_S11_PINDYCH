@@ -1,4 +1,4 @@
-package com.example.carrent.config;
+package com.example.carrent;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
