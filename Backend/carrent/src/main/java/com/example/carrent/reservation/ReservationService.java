@@ -137,27 +137,19 @@ public class ReservationService {
         );
     }
 
-    public List<RentRecord> PrintAllRentsByUserId(int id) {
-        List<RentRecord> list = new ArrayList<>();
+    public List<ReservationRecord> PrintAllRentsByUserId(int id) {
+        List<ReservationRecord> list = new ArrayList<>();
 
         for (Reservation reservation : reservationRepository.findAll()) {
             if (reservation.getEmployeeId() == id) {
                 ReservationRecord reservationRecord = mapToReservationRecord(reservation);
-                if (reservationRecord != null) { // Ensure reservationRecord is not null
-                    RentRecord rentRecord = new RentRecord(
-                            reservationRecord.id(),
-                            reservationRecord.brand(),
-                            reservationRecord.model(),
-                            reservationRecord.startTime()
-                    );
-                    list.add(rentRecord);
-                }
+                list.add(reservationRecord);
             }
         }
         return list;
     }
-    public List<RentRecord> getRentByAttribute(String data) {
-        ArrayList<RentRecord> list = new ArrayList<>();
+    public List<ReservationRecord> getRentByAttribute(String data) {
+        ArrayList<ReservationRecord> list = new ArrayList<>();
 
         for (Rent rent : rentRepository.findAll()) {
             Optional<Reservation> reservationOpt = reservationRepository.findById(rent.getReservationId());
@@ -190,11 +182,12 @@ public class ReservationService {
                     String.valueOf(reservation.getReservationId()).contains(data);
 
             if (matches) {
-                list.add(new RentRecord(
+                list.add(new ReservationRecord(
                         rent.getRentId(),
                         model.getModelName(),
                         brand.getBrandName(),
-                        reservation.getStartTime().toString()
+                        reservation.getStartTime().toString(),
+                        reservation.getEndTime().toString()
                 ));
             }
         }
