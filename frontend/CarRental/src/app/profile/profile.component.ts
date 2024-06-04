@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -6,7 +6,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject, takeUntil, finalize, Observable } from 'rxjs';
+import { Observable, Subject, combineLatest } from 'rxjs';
+import { takeUntil, finalize, switchMap } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -14,6 +15,7 @@ import { SpinnerComponent } from '../components/spinner/spinner.component';
 import { ProfileService } from './profile.service';
 import { AuthService } from '../services/auth.service';
 import { UserRole } from '../users/role-enum';
+import { LoggedUser } from './logged-user.interface';
 
 @Component({
   selector: 'app-profile',
@@ -28,10 +30,12 @@ import { UserRole } from '../users/role-enum';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   isLoading = true;
-  roleLogged$!: Observable<UserRole | null>;
+  roleLogged$ = this.authService.roleLoggedIn$;
+  loggedUser$!: Observable<LoggedUser>;
+  userId: string | null = '';
   userRole = UserRole.USER;
   adminRole = UserRole.ADMIN;
   keeperRole = UserRole.KEEPER;
@@ -41,45 +45,52 @@ export class ProfileComponent {
   constructor(
     private fb: FormBuilder,
     private profileService: ProfileService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
       login: ['', Validators.required],
       password: ['', Validators.required],
-      role: [{ value: '', disabled: true }, Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.roleLogged$ = this.authService.roleLoggedIn$;
+    combineLatest([
+      this.authService.idLoggedIn$,
+      this.authService.roleLoggedIn$,
+    ])
+      .pipe(
+        takeUntil(this._destroying$),
+        switchMap(([id, role]) => {
+          this.userId = id;
+          return this.profileService
+            .getProfileDataById(id, role)
+            .pipe(finalize(() => (this.isLoading = false)));
+        })
+      )
+      .subscribe((user) => {
+        this.form.patchValue({
+          name: user?.name,
+          surname: user?.surname,
+          login: user?.login,
+          password: user?.password,
+        });
+      });
   }
 
   onEdit(): void {
     if (this.form.valid) {
       this.isLoading = true;
-
-      // this.usersService
-      //   .editUser({ ...this.form.value, id: this.usersService.userIdentifier })
-      //   .pipe(
-      //     finalize(() => (this.isLoading = false)),
-      //     takeUntil(this._destroying$)
-      //   )
-      //   .subscribe();
+      // TODO
     } else {
       this.form.markAllAsTouched();
     }
   }
 
   onDelete(): void {
-    // this.usersService
-    //   .deleteUser()
-    //   .pipe(
-    //     finalize(() => this.router.navigate(['uzytkownicy'])),
-    //     takeUntil(this._destroying$)
-    //   )
-    //   .subscribe();
+    // TODO
   }
 
   isControlValid(controlName: string): boolean {

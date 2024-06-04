@@ -11,8 +11,8 @@ export class AuthService {
   private loggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
-  private roleLogged$: BehaviorSubject<UserRole | null> =
-    new BehaviorSubject<UserRole | null>(null);
+  private roleLogged$: BehaviorSubject<UserRole> =
+    new BehaviorSubject<UserRole>(UserRole.ADMIN);
 
   private idLogged$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
@@ -24,7 +24,7 @@ export class AuthService {
     return this.loggedIn$;
   }
 
-  get roleLoggedIn$(): Observable<UserRole | null> {
+  get roleLoggedIn$(): Observable<UserRole> {
     return this.roleLogged$;
   }
 
@@ -35,7 +35,6 @@ export class AuthService {
       .post<Response>(`http://localhost:8080/authenticate`, credentials)
       .pipe(
         tap((response: Response) => {
-          console.log(response);
           this.saveLoginData(response, true);
           this.loggedIn$.next(true);
           this.roleLogged$.next(response.role);

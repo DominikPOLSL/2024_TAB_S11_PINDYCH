@@ -9,6 +9,7 @@ import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { Observable, Subject, finalize, takeUntil } from 'rxjs';
 import { ResertavionsService } from '../resertavions.service';
 import { Reservation } from '../reservation.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-reservations',
@@ -29,13 +30,24 @@ export class ReservationsComponent implements OnInit, OnDestroy {
   reservations$!: Observable<Reservation[]>;
   isLoading = true;
   query: string = '';
+  userId: string | null = '';
 
   private readonly _destroying$ = new Subject<void>();
 
-  constructor(private reservationsService: ResertavionsService) {}
+  constructor(
+    private reservationsService: ResertavionsService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.reservations$ = this.reservationsService.getAllReservations();
+    this.authService.idLoggedIn$
+      .pipe(takeUntil(this._destroying$))
+      .subscribe((id) => {
+        this.userId = id;
+      });
+    this.reservations$ = this.reservationsService.getAllReservations(
+      this.userId
+    );
   }
 
   onRentVehicle(reservation: Reservation): void {
@@ -47,7 +59,9 @@ export class ReservationsComponent implements OnInit, OnDestroy {
         takeUntil(this._destroying$)
       )
       .subscribe(() => {
-        this.reservations$ = this.reservationsService.getAllReservations();
+        this.reservations$ = this.reservationsService.getAllReservations(
+          this.userId
+        );
       });
   }
 
@@ -60,13 +74,17 @@ export class ReservationsComponent implements OnInit, OnDestroy {
         takeUntil(this._destroying$)
       )
       .subscribe(() => {
-        this.reservations$ = this.reservationsService.getAllReservations();
+        this.reservations$ = this.reservationsService.getAllReservations(
+          this.userId
+        );
       });
   }
 
   onSearch(): void {
     if (this.query === '') {
-      this.reservations$ = this.reservationsService.getAllReservations();
+      this.reservations$ = this.reservationsService.getAllReservations(
+        this.userId
+      );
     } else {
       this.reservations$ = this.reservationsService.searchReservations(
         this.query
@@ -83,7 +101,9 @@ export class ReservationsComponent implements OnInit, OnDestroy {
   }
 
   clearQuery() {
-    this.reservations$ = this.reservationsService.getAllReservations();
+    this.reservations$ = this.reservationsService.getAllReservations(
+      this.userId
+    );
     this.query = '';
   }
 

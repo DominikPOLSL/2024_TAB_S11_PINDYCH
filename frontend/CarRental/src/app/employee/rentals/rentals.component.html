@@ -28,7 +28,10 @@
                 <p>Marka: {{ rental.Brand }}</p>
                 <p>Model: {{ rental.Model }}</p>
                 <p>Identyfikator: {{ rental.id }}</p>
-                <p>Okres wypożyczenia:</p>
+                <p>
+                  Okres wypożyczenia: {{ rental.startTime }} -
+                  {{ rental.endTime }}
+                </p>
               </div>
               <div
                 class="col-3 flex flex-wrap align-items-center justify-content-center"

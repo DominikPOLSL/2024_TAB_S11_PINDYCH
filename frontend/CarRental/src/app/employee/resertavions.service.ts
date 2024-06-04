@@ -23,9 +23,11 @@ export class ResertavionsService {
     );
   }
 
-  getAllReservations(): Observable<Reservation[]> {
+  getAllReservations(userId: string | null): Observable<Reservation[]> {
     return this.http
-      .get<Reservation[]>('http://localhost:8080/reservations')
+      .get<Reservation[]>(
+        `http://localhost:8080/reservations/getAllReservationsByEmployeeId/${userId}`
+      )
       .pipe(delay(1000));
   }
 

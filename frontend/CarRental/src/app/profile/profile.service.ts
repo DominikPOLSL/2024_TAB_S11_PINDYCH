@@ -1,15 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
-interface Employee {
-  employeeId: number;
-  employeeName: string;
-  employeeSurname: string;
-  employeeLogin: string;
-  employeePassword: string;
-  roleType: string;
-}
+import { Observable, delay, tap } from 'rxjs';
+import { LoggedUser } from './logged-user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +9,27 @@ interface Employee {
 export class ProfileService {
   constructor(private http: HttpClient) {}
 
-  getProfileDataById(): Observable<Employee> {
-    return this.http.get<Employee>(`http://localhost:8080/api/employee/14`);
+  getProfileDataById(
+    loggedUserId: string | null,
+    role: string
+  ): Observable<LoggedUser> {
+    const mappedRole = this.mapRole(role);
+
+    return this.http
+      .get<LoggedUser>(
+        `http://localhost:8080/api/${mappedRole}/${loggedUserId}`
+      )
+      .pipe(delay(1000));
+  }
+
+  mapRole(role: string) {
+    if (role == 'ROLE_EMPLOYEE') {
+      return 'employee';
+    } else if (role == 'ROLE_ADMIN') {
+      return 'admin';
+    } else {
+      return 'keeper';
+    }
   }
 
   editProfile() {}
