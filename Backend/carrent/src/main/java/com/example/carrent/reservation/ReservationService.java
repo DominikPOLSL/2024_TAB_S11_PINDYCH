@@ -59,7 +59,7 @@ public class ReservationService {
 
     public List<ReservationRecord> getAllReservationsByEmployeeId(int id) {
         return reservationRepository.findAll().stream()
-                .filter(reservation -> reservation.getCarGiverId() == id)
+                .filter(reservation -> reservation.getEmployeeId() == id)
                 .map(this::mapToReservationRecord)
                 .collect(Collectors.toList());
     }
@@ -88,28 +88,28 @@ public class ReservationService {
         return reservation;
     }
 
-    public List<Reservation> getReservationsByAttribute(String data) {
-        return reservationRepository.findAll().stream()
-                .filter(r -> {
-                    Optional<Vehicle> vehicleOpt = vehicleRepository.findById(r.getVehicleId());
-                    if (vehicleOpt.isEmpty()) return false;
+    public List<ReservationRecord> getReservationsByAttribute(String data) {
+        ArrayList<ReservationRecord> list  = new ArrayList<>();
 
-                    Vehicle vehicle = vehicleOpt.get();
-                    Model model = modelRepository.findById(vehicle.getModelId()).orElse(null);
-                    if (model == null) return false;
+        for(Reservation reservation : reservationRepository.findAll()) {
 
-                    Brand brand = brandRepository.findById(model.getBrandId()).orElse(null);
-                    if (brand == null) return false;
+            Vehicle vehicle = vehicleRepository.findById(reservation.getVehicleId()).orElse(null);
+            if (vehicle == null) return null;
 
-                    boolean matches = model.getModelName().contains(data) ||
-                            brand.getBrandName().contains(data) ||
-                            (r.getStartTime().toString().compareTo(data) <= 0 && data.compareTo(r.getEndTime().toString()) <= 0) ||
-                            String.valueOf(r.getReservationId()).contains(data);
+            Model model = modelRepository.findById(vehicle.getModelId()).orElse(null);
+            if (model == null) return null;
 
-                    return matches;
-                })
-                .distinct()
-                .collect(Collectors.toList());
+            Brand brand = brandRepository.findById(model.getBrandId()).orElse(null);
+            if (brand == null) return null;
+
+            if(model.getModelName().contains(data))
+                list.add(mapToReservationRecord(reservation));
+            if(brand.getBrandName().contains(data))
+                list.add(mapToReservationRecord(reservation));
+            if(model.getModelName().contains(data))
+                list.add(mapToReservationRecord(reservation));
+        }
+        return list;
     }
 
     public boolean isReserved(int id){
