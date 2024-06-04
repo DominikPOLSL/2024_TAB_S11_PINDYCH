@@ -23,9 +23,11 @@ export class ResertavionsService {
     );
   }
 
-  getAllReservations(): Observable<Reservation[]> {
+  getAllReservations(userId: string | null): Observable<Reservation[]> {
     return this.http
-      .get<Reservation[]>('http://localhost:8080/reservations')
+      .get<Reservation[]>(
+        `http://localhost:8080/reservations/getAllReservationsByEmployeeId/${userId}`
+      )
       .pipe(delay(1000));
   }
 
@@ -53,14 +55,15 @@ export class ResertavionsService {
     brandName: string,
     modelName: string,
     dateFrom: string,
-    dateTo: string
+    dateTo: string,
+    userId: string | null
   ): Observable<Reservation> {
     const params = {
       model: modelName,
       brand: brandName,
       startTime: dateFrom,
       endTime: dateTo,
-      employeeId: 9,
+      employeeId: userId,
       carGiverId: 1,
     };
     return this.http

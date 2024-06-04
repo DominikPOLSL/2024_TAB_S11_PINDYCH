@@ -197,6 +197,6 @@ public class ReservationService {
         List<ReservationRecord> uniqueList = list.stream()
                 .distinct()
                 .toList();
-        return list;
+        return uniqueList;
     }
 }

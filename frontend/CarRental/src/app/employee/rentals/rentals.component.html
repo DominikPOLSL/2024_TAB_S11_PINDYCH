@@ -25,10 +25,13 @@
           <div *ngFor="let rental of rentals">
             <div class="vehicle-container border-round-3xl flex">
               <div class="col-8 font-semibold ml-5">
-                <p>Marka: {{ rental.Brand }}</p>
-                <p>Model: {{ rental.Model }}</p>
+                <p>Marka: {{ rental.brand }}</p>
+                <p>Model: {{ rental.model }}</p>
                 <p>Identyfikator: {{ rental.id }}</p>
-                <p>Okres wypożyczenia:</p>
+                <p>
+                  Okres wypożyczenia: {{ rental.startTime }} -
+                  {{ rental.endTime }}
+                </p>
               </div>
               <div
                 class="col-3 flex flex-wrap align-items-center justify-content-center"
