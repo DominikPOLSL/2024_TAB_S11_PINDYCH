@@ -144,7 +144,15 @@ public class ReservationService {
         for (Rent Rent : rentRepository.findAll()) {
             Reservation reservation = reservationRepository.getReferenceById(Rent.getReservationId());
             if (reservation.getEmployeeId() == id) {
-                ReservationRecord reservationRecord = mapToReservationRecord(reservation);
+                ReservationRecord temp = mapToReservationRecord(reservation);
+                ReservationRecord reservationRecord = (new ReservationRecord(
+                        Rent.getRentId(),
+                        temp.model(),
+                        temp.brand(),
+                        temp.startTime(),
+                        temp.endTime(),
+                        temp.reserved()
+                ));
                 list.add(reservationRecord);
             }
         }
@@ -177,23 +185,18 @@ public class ReservationService {
                 continue;
             }
             Brand brand = brandOpt.get();
-
-            boolean matches = model.getModelName().contains(data) ||
-                    brand.getBrandName().contains(data) ||
-                    (reservation.getStartTime().toString().compareTo(data) <= 0 && data.compareTo(reservation.getEndTime().toString()) <= 0) ||
-                    String.valueOf(reservation.getReservationId()).contains(data);
-
-            if (matches) {
-                list.add(new ReservationRecord(
-                        rent.getRentId(),
-                        model.getModelName(),
-                        brand.getBrandName(),
-                        reservation.getStartTime().toString(),
-                        reservation.getEndTime().toString(),
-                        reservation.getReserved()
-                ));
-            }
+            list.add(new ReservationRecord(
+                    rent.getRentId(),
+                    model.getModelName(),
+                    brand.getBrandName(),
+                    reservation.getStartTime().toString(),
+                    reservation.getEndTime().toString(),
+                    reservation.getReserved()
+            ));
         }
+        List<ReservationRecord> uniqueList = list.stream()
+                .distinct()
+                .toList();
         return list;
     }
 }
