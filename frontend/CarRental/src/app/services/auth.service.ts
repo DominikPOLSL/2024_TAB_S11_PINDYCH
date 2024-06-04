@@ -1,18 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { UserRole } from '../users/role-enum';
+import { Response } from './response.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiURL = 'http://localhost:8080';
+  private loggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+  private roleLogged$: BehaviorSubject<UserRole | null> =
+    new BehaviorSubject<UserRole | null>(null);
+
+  get isLoggedIn$(): Observable<boolean> {
+    return this.loggedIn$;
+  }
+
+  get roleLoggedIn$(): Observable<UserRole | null> {
+    return this.roleLogged$;
+  }
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { username: string; password: string }): Observable<any> {
-    return of(undefined);
-    // return this.http.post(`${this.apiURL}/login`, credentials);
+  login(credentials: { password: string; username: string }): Observable<any> {
+    return this.http
+      .post<Response>(`http://localhost:8080/authenticate`, credentials)
+      .pipe(
+        tap((response: Response) => {
+          this.saveLoginData(response, true);
+          this.loggedIn$.next(true);
+          this.roleLogged$.next(response.role);
+        })
+      );
   }
 
   register(user: any): Observable<any> {
@@ -20,8 +41,10 @@ export class AuthService {
     // return this.http.post(`${this.apiURL}/register`, user);
   }
 
-  saveToken(token: string): void {
-    localStorage.setItem('token', token);
+  saveLoginData(response: Response, isLogged: boolean): void {
+    localStorage.setItem('token', response.token);
+    localStorage.setItem('role', response.role);
+    localStorage.setItem('isLogged', JSON.stringify(isLogged));
   }
 
   getToken(): string | null {
@@ -29,6 +52,14 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.clear();
+    this.loggedIn$.next(false);
+  }
+
+  setLoggedIn(value: boolean): void {
+    this.loggedIn$.next(value);
+  }
+  setRole(value: UserRole): void {
+    this.roleLogged$.next(value);
   }
 }

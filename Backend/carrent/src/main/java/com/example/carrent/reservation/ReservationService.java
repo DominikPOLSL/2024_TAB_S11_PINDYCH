@@ -133,14 +133,16 @@ public class ReservationService {
                 brand.getBrandName(),
                 model.getModelName(),
                 reservation.getStartTime().toString(),
-                reservation.getEndTime().toString()
+                reservation.getEndTime().toString(),
+                reservation.getReserved()
         );
     }
 
     public List<ReservationRecord> PrintAllRentsByUserId(int id) {
         List<ReservationRecord> list = new ArrayList<>();
 
-        for (Reservation reservation : reservationRepository.findAll()) {
+        for (Rent Rent : rentRepository.findAll()) {
+            Reservation reservation = reservationRepository.getReferenceById(Rent.getReservationId());
             if (reservation.getEmployeeId() == id) {
                 ReservationRecord reservationRecord = mapToReservationRecord(reservation);
                 list.add(reservationRecord);

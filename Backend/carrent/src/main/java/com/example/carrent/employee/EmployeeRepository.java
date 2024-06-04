@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    Optional<Employee> findByEmployeeLogin(String login);
+    Optional<Employee> findByLogin(String login);
 }

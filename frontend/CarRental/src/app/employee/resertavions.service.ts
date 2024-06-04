@@ -38,9 +38,15 @@ export class ResertavionsService {
   searchReservations(query: string): Observable<Reservation[]> {
     return this.http
       .get<Reservation[]>(
-        `http://localhost:8080/reservations/searchReservation/${query}`
+        `http://localhost:8080/reservations/getReservationByAttribute/${query}`
       )
       .pipe(debounceTime(400), delay(500));
+  }
+
+  addRental(reservation: Reservation) {
+    return this.http.get(
+      `http://localhost:8080/rents/createNewRent/${reservation.id}`
+    );
   }
 
   addReservation(
@@ -54,7 +60,7 @@ export class ResertavionsService {
       brand: brandName,
       startTime: dateFrom,
       endTime: dateTo,
-      employeeId: 2,
+      employeeId: 9,
       carGiverId: 1,
     };
     return this.http
