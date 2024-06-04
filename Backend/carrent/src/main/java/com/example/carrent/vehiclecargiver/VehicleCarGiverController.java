@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/vehiclecargivers")
+@RequestMapping("/api/vehiclecargiver")
 public class VehicleCarGiverController {
 
     private final VehicleCarGiverService vehicleCarGiverService;
@@ -39,7 +39,7 @@ public class VehicleCarGiverController {
 
     @PutMapping("/{id}")
     public void updateVehicleCarGiver(@PathVariable int id, @RequestBody VehicleCarGiver vehicleCarGiver) {
-        vehicleCarGiver.setGiverId(id);
+        vehicleCarGiver.setId(id);
         vehicleCarGiverService.updateVehicleCarGiver(vehicleCarGiver);
     }
 }

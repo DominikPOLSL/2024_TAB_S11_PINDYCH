@@ -42,8 +42,8 @@ public class AdminService {
     public ArrayList<Admin> findByAttribute(String data) {
         ArrayList<Admin> list = new ArrayList<>();
         for (Admin admin : adminRepository.findAll()) {
-            if (admin.getAdminName().contains(data) || admin.getAdminSurname().contains(data) ||
-                String.valueOf(admin.getAdminId()).contains(data)) {
+            if (admin.getName().contains(data) || admin.getSurname().contains(data) ||
+                    String.valueOf(admin.getId()).contains(data)) {
                 list.add(admin);
             }
         }

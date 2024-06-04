@@ -10,55 +10,59 @@ public class Employee {
     @SequenceGenerator(name = "employee_sequence", sequenceName = "employee_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_sequence")
     @Column(name = "\"employeeId\"")
-    private int employeeId;
+    private int id;
 
     @Column(name = "\"name\"")
-    private String employeeName;
+    private String name;
 
     @Column(name = "\"surname\"")
-    private String employeeSurname;
+    private String surname;
 
     @Column(name = "\"login\"")
-    private String employeeLogin;
+    private String login;
 
     @Column(name = "\"password\"")
-    private String employeePassword;
+    private String password;
 
     @Column(name = "\"roletype\"")
     private String roleType;
+
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String employeeSurname, String employeeLogin, String employeePassword, String roleType) {
-        this.employeeId = employeeId;
-        this.employeeName = employeeName;
-        this.employeeSurname = employeeSurname;
-        this.employeeLogin = employeeLogin;
-        this.employeePassword = employeePassword;
-        this.roleType = roleType;
-    }
-    public Employee(String employeeName, String employeeSurname, String employeeLogin, String employeePassword, String roleType) {
-        this.employeeName = employeeName;
-        this.employeeSurname = employeeSurname;
-        this.employeeLogin = employeeLogin;
-        this.employeePassword = employeePassword;
+    public Employee(int employeeId, String employeeName, String employeeSurname, String employeeLogin,
+            String employeePassword, String roleType) {
+        this.id = employeeId;
+        this.name = employeeName;
+        this.surname = employeeSurname;
+        this.login = employeeLogin;
+        this.password = employeePassword;
         this.roleType = roleType;
     }
 
-    public String getEmployeeLogin() {
-        return employeeLogin;
+    public Employee(String employeeName, String employeeSurname, String employeeLogin, String employeePassword,
+            String roleType) {
+        this.name = employeeName;
+        this.surname = employeeSurname;
+        this.login = employeeLogin;
+        this.password = employeePassword;
+        this.roleType = roleType;
     }
 
-    public void setEmployeeLogin(String employeeLogin) {
-        this.employeeLogin = employeeLogin;
+    public String getLogin() {
+        return login;
     }
 
-    public String getEmployeePassword() {
-        return employeePassword;
+    public void setLogin(String employeeLogin) {
+        this.login = employeeLogin;
     }
 
-    public void setEmployeePassword(String employeePassword) {
-        this.employeePassword = employeePassword;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String employeePassword) {
+        this.password = employeePassword;
     }
 
     public String getRoleType() {
@@ -69,36 +73,36 @@ public class Employee {
         this.roleType = roleType;
     }
 
-    public int getEmployeeId() {
-        return this.employeeId;
+    public int getId() {
+        return this.id;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setId(int employeeId) {
+        this.id = employeeId;
     }
 
-    public String getEmployeeName() {
-        return this.employeeName;
+    public String getName() {
+        return this.name;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setName(String employeeName) {
+        this.name = employeeName;
     }
 
-    public String getEmployeeSurname() {
-        return this.employeeSurname;
+    public String getSurname() {
+        return this.surname;
     }
 
-    public void setEmployeeSurname(String employeeSurname) {
-        this.employeeSurname = employeeSurname;
+    public void setSurname(String employeeSurname) {
+        this.surname = employeeSurname;
     }
 
     @Override
     public String toString() {
         return "{" +
-                " brandId='" + getEmployeeId() + "'" +
-                ", brandName='" + getEmployeeName() + "'" +
-                ", brandName='" + getEmployeeSurname() + "'" +
+                " brandId='" + getId() + "'" +
+                ", brandName='" + getName() + "'" +
+                ", brandName='" + getSurname() + "'" +
                 "}";
     }
 

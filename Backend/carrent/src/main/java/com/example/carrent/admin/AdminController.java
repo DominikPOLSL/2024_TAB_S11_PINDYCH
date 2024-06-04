@@ -24,7 +24,8 @@ public class AdminController {
     private final VehicleCarGiverRepository vehicleCarGiverRepository;
 
     @Autowired
-    public AdminController(AdminService adminService, EmployeeRepository employeeRepository, VehicleCarGiverRepository vehicleCarGiverRepository) {
+    public AdminController(AdminService adminService, EmployeeRepository employeeRepository,
+            VehicleCarGiverRepository vehicleCarGiverRepository) {
         this.adminService = adminService;
         this.employeeRepository = employeeRepository;
         this.vehicleCarGiverRepository = vehicleCarGiverRepository;
@@ -50,16 +51,14 @@ public class AdminController {
         return ResponseEntity.ok(admin);
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<?> updateAdmin(@PathVariable("id") int id, @RequestBody Admin updatedAdmin) {
         Admin existingAdmin = adminService.findById(id);
-        existingAdmin.setAdminId(updatedAdmin.getAdminId());
-        existingAdmin.setAdminName(updatedAdmin.getAdminName());
-        existingAdmin.setAdminSurname(updatedAdmin.getAdminSurname());
-        existingAdmin.setAdminLogin(updatedAdmin.getAdminLogin());
-        existingAdmin.setAdminPassword(updatedAdmin.getAdminPassword());
-       
+        existingAdmin.setId(updatedAdmin.getId());
+        existingAdmin.setName(updatedAdmin.getName());
+        existingAdmin.setSurname(updatedAdmin.getSurname());
+        existingAdmin.setLogin(updatedAdmin.getLogin());
+        existingAdmin.setPassword(updatedAdmin.getPassword());
 
         Admin savedAdmin = adminService.save(existingAdmin);
         return ResponseEntity.ok(savedAdmin);
@@ -71,15 +70,16 @@ public class AdminController {
     }
 
     @PostMapping("/setNewRole/{id}")
-    public void setNewRole(@PathVariable("id") int id){
+    public void setNewRole(@PathVariable("id") int id) {
         Employee employee = employeeRepository.findById(id).orElseThrow();
         VehicleCarGiver carGiver = new VehicleCarGiver();
-        carGiver.setName(employee.getEmployeeName());
-        carGiver.setSurname(employee.getEmployeeSurname());
+        carGiver.setName(employee.getName());
+        carGiver.setSurname(employee.getSurname());
 
         vehicleCarGiverRepository.save(carGiver);
 
-        //else throw new RuntimeException("Error while transferring employee to VehicleCarGiver");
+        // else throw new RuntimeException("Error while transferring employee to
+        // VehicleCarGiver");
     }
 
 }
