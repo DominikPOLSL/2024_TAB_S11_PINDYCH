@@ -9,10 +9,10 @@ import { Rental } from './rental.interface';
 export class RentalsService {
   constructor(private http: HttpClient) {}
 
-  getRentals(): Observable<Rental[]> {
+  getRentals(userId: string | null): Observable<Rental[]> {
     return this.http
       .get<Rental[]>(
-        `http://localhost:8080/reservations/PrintAllRentsByUserId/9`
+        `http://localhost:8080/reservations/PrintAllRentsByUserId/${userId}`
       )
       .pipe(delay(1000));
   }
@@ -26,7 +26,6 @@ export class RentalsService {
   }
 
   deleteRental(rentalId: number) {
-    console.log(rentalId);
     return this.http.delete(
       `http://localhost:8080/rents/deleteRent/${rentalId}`
     );

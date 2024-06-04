@@ -6,12 +6,14 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject, takeUntil, finalize } from 'rxjs';
+import { Subject, takeUntil, finalize, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SpinnerComponent } from '../components/spinner/spinner.component';
 import { ProfileService } from './profile.service';
+import { AuthService } from '../services/auth.service';
+import { UserRole } from '../users/role-enum';
 
 @Component({
   selector: 'app-profile',
@@ -29,23 +31,30 @@ import { ProfileService } from './profile.service';
 export class ProfileComponent {
   form!: FormGroup;
   isLoading = true;
+  roleLogged$!: Observable<UserRole | null>;
+  userRole = UserRole.USER;
+  adminRole = UserRole.ADMIN;
+  keeperRole = UserRole.KEEPER;
 
   private readonly _destroying$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
     private profileService: ProfileService,
-    private router: Router
+    private authService: AuthService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
       login: ['', Validators.required],
       password: ['', Validators.required],
+      role: [{ value: '', disabled: true }, Validators.required],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.roleLogged$ = this.authService.roleLoggedIn$;
+  }
 
   onEdit(): void {
     if (this.form.valid) {

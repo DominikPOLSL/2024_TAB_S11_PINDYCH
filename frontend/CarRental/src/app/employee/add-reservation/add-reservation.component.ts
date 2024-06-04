@@ -15,6 +15,7 @@ import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { Brand } from '../../vehicles/brand.interface';
 import { Model } from '../../vehicles/model.interface';
 import { ResertavionsService } from '../resertavions.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-add-reservation',
@@ -34,15 +35,16 @@ import { ResertavionsService } from '../resertavions.service';
 export class AddReservationComponent implements OnInit, OnDestroy {
   isLoading = false;
   form: FormGroup;
-  brands: Brand[] = [];
   models: Model[] = [];
   brands$!: Observable<Brand[]>;
+  userId: string | null = '';
 
   private readonly _destroying$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
-    private reservationsService: ResertavionsService
+    private reservationsService: ResertavionsService,
+    private authService: AuthService
   ) {
     this.form = this.fb.group({
       brand: ['', [Validators.required]],
@@ -53,6 +55,11 @@ export class AddReservationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.brands$ = this.reservationsService.getAvailableBrands();
+    this.authService.idLoggedIn$
+      .pipe(takeUntil(this._destroying$))
+      .subscribe((id) => {
+        this.userId = id;
+      });
   }
 
   getModelsByBrand(): void {
@@ -85,7 +92,8 @@ export class AddReservationComponent implements OnInit, OnDestroy {
           brandName,
           modelName,
           date[0].toJSON(),
-          date[1].toJSON()
+          date[1].toJSON(),
+          this.userId
         )
         .pipe(
           finalize(() => (this.isLoading = false)),

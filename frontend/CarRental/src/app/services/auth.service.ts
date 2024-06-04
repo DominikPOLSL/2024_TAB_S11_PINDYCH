@@ -14,6 +14,12 @@ export class AuthService {
   private roleLogged$: BehaviorSubject<UserRole | null> =
     new BehaviorSubject<UserRole | null>(null);
 
+  private idLogged$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+  get idLoggedIn$(): Observable<string | null> {
+    return this.idLogged$;
+  }
+
   get isLoggedIn$(): Observable<boolean> {
     return this.loggedIn$;
   }
@@ -29,6 +35,7 @@ export class AuthService {
       .post<Response>(`http://localhost:8080/authenticate`, credentials)
       .pipe(
         tap((response: Response) => {
+          console.log(response);
           this.saveLoginData(response, true);
           this.loggedIn$.next(true);
           this.roleLogged$.next(response.role);
@@ -44,6 +51,7 @@ export class AuthService {
   saveLoginData(response: Response, isLogged: boolean): void {
     localStorage.setItem('token', response.token);
     localStorage.setItem('role', response.role);
+    localStorage.setItem('id', response.id);
     localStorage.setItem('isLogged', JSON.stringify(isLogged));
   }
 
@@ -61,5 +69,9 @@ export class AuthService {
   }
   setRole(value: UserRole): void {
     this.roleLogged$.next(value);
+  }
+
+  setId(value: string): void {
+    this.idLogged$.next(value);
   }
 }

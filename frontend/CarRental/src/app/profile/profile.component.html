@@ -58,7 +58,7 @@
               <div class="flex flex-column h-3rem mt-6">
                 <input
                   class="h-3rem w-20rem"
-                  type="text"
+                  type="password"
                   pInputText
                   formControlName="password"
                   placeholder="Hasło"
@@ -72,8 +72,23 @@
               </div>
             </div>
           </div>
+          <div class="col-12 flex justify-content-center flex-wrap">
+            <div class="flex flex-column h-3rem mt-4">
+              <ng-container *ngIf="roleLogged$ | async as role">
+                <ng-container *ngIf="role == userRole">
+                  <h2>Zalogowany jako: Użytkownik</h2>
+                </ng-container>
+                <ng-container *ngIf="role == adminRole">
+                  <h2>Zalogowany jako: Administrator</h2></ng-container
+                >
+                <ng-container *ngIf="role == keeperRole">
+                  <h2>Zalogowany jako: Opiekun</h2></ng-container
+                >
+              </ng-container>
+            </div>
+          </div>
 
-          <div class="col-12 flex justify-content-center mt-6 gap-6">
+          <div class="col-12 flex justify-content-center mt-5 gap-6">
             <p-button
               label="Edytuj"
               class="vertical-align-middle"
