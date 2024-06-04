@@ -32,17 +32,17 @@ public class RegistrationController {
 
     @PostMapping("/register/admin")
     public String registerAdminAndGetToken(@RequestBody Admin admin) {
-        admin.setAdminPassword(passwordEncoder.encode(admin.getAdminPassword()));
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         adminRepository.save(admin);
-        UserDetails userDetails = myUserDetailsService.loadUserByUsername(admin.getAdminLogin());
+        UserDetails userDetails = myUserDetailsService.loadUserByUsername(admin.getLogin());
         return jwtService.generateToken(userDetails);
     }
 
     @PostMapping("/register/employee")
     public String registerEmployeeAndGetToken(@RequestBody Employee employee) {
-        employee.setEmployeePassword(passwordEncoder.encode(employee.getEmployeePassword()));
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         employeeRepository.save(employee);
-        UserDetails userDetails = myUserDetailsService.loadUserByUsername(employee.getEmployeeLogin());
+        UserDetails userDetails = myUserDetailsService.loadUserByUsername(employee.getLogin());
         return jwtService.generateToken(userDetails);
     }
 

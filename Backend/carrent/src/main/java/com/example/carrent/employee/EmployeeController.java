@@ -1,4 +1,5 @@
 package com.example.carrent.employee;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     public Optional<Employee> deleteEmployee(@PathVariable("id") int id) {
         if (!employeeService.existById(id)) {
-            //return ResponseEntity.notFound().build();
+            // return ResponseEntity.notFound().build();
         }
         Employee emp = employeeService.findById(id);
 
@@ -63,21 +64,20 @@ public class EmployeeController {
 
         Employee existingEmployee = employeeService.findById(id);
 
-        existingEmployee.setEmployeeId(updatedEmployee.getEmployeeId());
-        existingEmployee.setEmployeeName(updatedEmployee.getEmployeeName());
-        existingEmployee.setEmployeeSurname(updatedEmployee.getEmployeeSurname());
-        existingEmployee.setEmployeeLogin(updatedEmployee.getEmployeeLogin());
-        existingEmployee.setEmployeePassword(updatedEmployee.getEmployeePassword());
+        existingEmployee.setId(updatedEmployee.getId());
+        existingEmployee.setName(updatedEmployee.getName());
+        existingEmployee.setSurname(updatedEmployee.getSurname());
+        existingEmployee.setLogin(updatedEmployee.getLogin());
+        existingEmployee.setPassword(updatedEmployee.getPassword());
         existingEmployee.setRoleType(updatedEmployee.getRoleType());
-
 
         Employee saveEmployee = employeeService.save(existingEmployee);
         return ResponseEntity.ok(saveEmployee);
     }
+
     @GetMapping("/searchEmployee/{data}")
-    public ArrayList<Employee>  getEmployeesByAttribute(@PathVariable("data") String data) {
+    public ArrayList<Employee> getEmployeesByAttribute(@PathVariable("data") String data) {
         return employeeService.findByAttribute(data);
     }
-    
-    
+
 }

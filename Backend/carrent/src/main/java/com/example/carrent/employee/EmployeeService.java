@@ -29,7 +29,7 @@ public class EmployeeService {
         return employeeRepository.existsById(id);
     }
 
-    public  Optional<Employee> deleteEmployeeById(int id) {
+    public Optional<Employee> deleteEmployeeById(int id) {
         Optional<Employee> e = employeeRepository.findById(id);
         employeeRepository.deleteById(id);
         return e;
@@ -45,22 +45,22 @@ public class EmployeeService {
 
     public ArrayList<Employee> findByAttribute(String data) {
         ArrayList<Employee> list = new ArrayList<>();
-        for(Employee e : employeeRepository.findAll()) {
+        for (Employee e : employeeRepository.findAll()) {
 
-            if(e.getEmployeeName().contains(data)) {
+            if (e.getName().contains(data)) {
                 list.add(e);
             }
 
-            if(e.getEmployeeSurname().contains(data)) {
+            if (e.getSurname().contains(data)) {
                 list.add(e);
             }
 
-            if(e.getRoleType().contains(data)) {
+            if (e.getRoleType().contains(data)) {
                 list.add(e);
             }
 
-            String employeeIdString = String.valueOf(e.getEmployeeId());
-            if(employeeIdString.contains(data)) {
+            String employeeIdString = String.valueOf(e.getId());
+            if (employeeIdString.contains(data)) {
                 list.add(e);
             }
 

@@ -44,15 +44,15 @@ public class AuthenticateController {
             String token = jwtService.generateToken(userDetails);
             String id = "";
 
-            Optional<Employee> employee = employeeRepository.findByEmployeeLogin(loginForm.username());
+            Optional<Employee> employee = employeeRepository.findByLogin(loginForm.username());
             if (employee.isPresent()) {
-                id = String.valueOf(employee.get().getEmployeeId());
+                id = String.valueOf(employee.get().getId());
 
             }
 
-            Optional<Admin> admin = adminRepository.findByAdminLogin(loginForm.username());
+            Optional<Admin> admin = adminRepository.findByLogin(loginForm.username());
             if (admin.isPresent()) {
-                id = String.valueOf(admin.get().getAdminId());
+                id = String.valueOf(admin.get().getId());
 
             }
 

@@ -25,29 +25,28 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-         Optional<Admin> admin = adminRepository.findByAdminLogin(username);
-        
-        if (admin.isPresent()){
-            var adminObj = admin.get();    
+        Optional<Admin> admin = adminRepository.findByLogin(username);
+
+        if (admin.isPresent()) {
+            var adminObj = admin.get();
             return User.builder()
-                    .username(adminObj.getAdminLogin())
-                    .password(adminObj.getAdminPassword())
-                    .roles("ADMIN") 
+                    .username(adminObj.getLogin())
+                    .password(adminObj.getPassword())
+                    .roles("ADMIN")
                     .build();
-        }else {
-            Optional<Employee> employee = employeeRepository.findByEmployeeLogin(username);
-            if (employee.isPresent()){
-            var employeeObj = employee.get();    
-            return User.builder()
-                    .username(employeeObj.getEmployeeLogin())
-                    .password(employeeObj.getEmployeePassword())
-                    .roles("EMPLOYEE") 
-                    .build();
+        } else {
+            Optional<Employee> employee = employeeRepository.findByLogin(username);
+            if (employee.isPresent()) {
+                var employeeObj = employee.get();
+                return User.builder()
+                        .username(employeeObj.getLogin())
+                        .password(employeeObj.getPassword())
+                        .roles("EMPLOYEE")
+                        .build();
             } else
-            throw new UsernameNotFoundException("User not found with username: " + username);
+                throw new UsernameNotFoundException("User not found with username: " + username);
 
         }
     }
-
 
 }

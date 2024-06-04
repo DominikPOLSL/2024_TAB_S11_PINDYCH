@@ -67,13 +67,13 @@ public class ReservationController {
     }
 
     @GetMapping("/PrintAllRentsByUserId/{id}")
-    public List<RentRecord> PrintAllRentsByUserId(@PathVariable int id)
+    public List<ReservationRecord> PrintAllRentsByUserId(@PathVariable int id)
     {
         return reservationService.PrintAllRentsByUserId(id);
     }
 
     @GetMapping("/getRentByAttribute/{data}")
-    public List<RentRecord> getRentByAttribute(@PathVariable String data) {
+    public List<ReservationRecord> getRentByAttribute(@PathVariable String data) {
         return reservationService.getRentByAttribute(data);
     }
 }
