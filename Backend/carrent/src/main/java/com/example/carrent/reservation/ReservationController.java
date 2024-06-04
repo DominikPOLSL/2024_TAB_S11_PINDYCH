@@ -57,7 +57,7 @@ public class ReservationController {
     }
 
     @GetMapping("/getReservationByAttribute/{data}")
-    public List<Reservation> getReservationByAttribute(@PathVariable String data) {
+    public List<ReservationRecord> getReservationByAttribute(@PathVariable String data) {
         return reservationService.getReservationsByAttribute(data);
     }
 
