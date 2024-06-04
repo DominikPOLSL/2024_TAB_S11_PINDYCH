@@ -1,7 +1,7 @@
 export interface Rental {
   id: number;
-  Brand: string;
-  Model: string;
+  brand: string;
+  model: string;
   startTime: string;
   endTime: string;
 }
