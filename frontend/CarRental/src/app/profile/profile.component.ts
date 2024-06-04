@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   roleLogged$ = this.authService.roleLoggedIn$;
   loggedUser$!: Observable<LoggedUser>;
   userId: string | null = '';
+  role: string = '';
   userRole = UserRole.USER;
   adminRole = UserRole.ADMIN;
   keeperRole = UserRole.KEEPER;
@@ -65,6 +66,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         takeUntil(this._destroying$),
         switchMap(([id, role]) => {
           this.userId = id;
+          this.role = role;
           return this.profileService
             .getProfileDataById(id, role)
             .pipe(finalize(() => (this.isLoading = false)));
@@ -83,14 +85,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
   onEdit(): void {
     if (this.form.valid) {
       this.isLoading = true;
-      // TODO
+      this.profileService
+        .editProfile(
+          { ...this.form.value, id: this.userId, roleType: null },
+          this.userId,
+          this.role
+        )
+        .pipe(
+          finalize(() => (this.isLoading = false)),
+          takeUntil(this._destroying$)
+        )
+        .subscribe();
     } else {
       this.form.markAllAsTouched();
     }
-  }
-
-  onDelete(): void {
-    // TODO
   }
 
   isControlValid(controlName: string): boolean {
