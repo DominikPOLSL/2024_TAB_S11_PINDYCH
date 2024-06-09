@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RentRepository extends JpaRepository<Rent, Integer> {
+
     @Query("SELECT r.reservationId FROM Rent r WHERE r.rentId = :rentId")
     Integer findReservationIdByRentId(int rentId);
 }
