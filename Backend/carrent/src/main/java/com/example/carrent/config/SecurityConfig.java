@@ -19,6 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.example.carrent.webtoken.JwtAuthenticationFilter;
 import com.example.carrent.webtoken.MyUserDetailsService;
 
+/**
+ * Security configuration class for the car rental application.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -27,45 +30,71 @@ public class SecurityConfig {
 	private MyUserDetailsService myUserDetailsService;
 
 	@Autowired
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
+	private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-	 @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/home", "/register/**", "/authenticate").permitAll();
-                    registry.requestMatchers("/admin/**").hasRole("ADMIN");
-                    registry.requestMatchers("/employee/**").hasRole("EMPLOYEE");
+	/**
+	 * Configures the security filter chain.
+	 * 
+	 * @param httpSecurity the HTTP security configuration
+	 * @return the security filter chain
+	 * @throws Exception if an error occurs while configuring the security filter
+	 *                   chain
+	 */
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+		return httpSecurity
+				.csrf(AbstractHttpConfigurer::disable)
+				.authorizeHttpRequests(registry -> {
+					registry.requestMatchers("/home", "/register/**", "/authenticate").permitAll();
+					registry.requestMatchers("/admin/**").hasRole("ADMIN");
+					registry.requestMatchers("/employee/**").hasRole("EMPLOYEE");
 					registry.requestMatchers("/api/brand/**").hasRole("ADMIN");
 					registry.requestMatchers("/api/model/**").hasRole("ADMIN");
-                    registry.anyRequest().authenticated();
-                })
-                //.formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
-    }
+					registry.anyRequest().authenticated();
+				})
+				// .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+				.build();
+	}
 
-
+	/**
+	 * Provides the user details service.
+	 * 
+	 * @return the user details service
+	 */
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return myUserDetailsService;
 	}
 
+	/**
+	 * Configures the authentication provider.
+	 * 
+	 * @return the authentication provider
+	 */
 	@Bean
 	AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(myUserDetailsService);
 		provider.setPasswordEncoder(passwordEncoder());
 		return provider;
-
 	}
 
+	/**
+	 * Provides the authentication manager.
+	 * 
+	 * @return the authentication manager
+	 */
 	@Bean
-    public AuthenticationManager authenticationManager() {
-        return new ProviderManager(authenticationProvider());
-    }
+	public AuthenticationManager authenticationManager() {
+		return new ProviderManager(authenticationProvider());
+	}
 
+	/**
+	 * Configures the password encoder.
+	 * 
+	 * @return the password encoder
+	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

@@ -12,6 +12,10 @@ import com.example.carrent.admin.AdminRepository;
 import com.example.carrent.employee.Employee;
 import com.example.carrent.employee.EmployeeRepository;
 
+/**
+ * Controller for handling user registration and providing authentication
+ * tokens.
+ */
 @RestController
 public class RegistrationController {
 
@@ -30,6 +34,12 @@ public class RegistrationController {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
 
+    /**
+     * Registers a new admin user and returns an authentication token.
+     *
+     * @param admin the admin user to register
+     * @return the authentication token for the registered admin user
+     */
     @PostMapping("/register/admin")
     public String registerAdminAndGetToken(@RequestBody Admin admin) {
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
@@ -38,6 +48,12 @@ public class RegistrationController {
         return jwtService.generateToken(userDetails);
     }
 
+    /**
+     * Registers a new employee user and returns an authentication token.
+     *
+     * @param employee the employee user to register
+     * @return the authentication token for the registered employee user
+     */
     @PostMapping("/register/employee")
     public String registerEmployeeAndGetToken(@RequestBody Employee employee) {
         employee.setPassword(passwordEncoder.encode(employee.getPassword()));

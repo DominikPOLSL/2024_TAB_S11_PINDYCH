@@ -1,5 +1,7 @@
 package com.example.carrent.webtoken;
 
-
-public record LoginForm (String username, String password) {
+/**
+ * Represents a login form containing username and password.
+ */
+public record LoginForm(String username, String password) {
 }
