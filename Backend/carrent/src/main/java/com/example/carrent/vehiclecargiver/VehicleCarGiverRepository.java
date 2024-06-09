@@ -8,9 +8,6 @@ package com.example.carrent.vehiclecargiver;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- * @brief Repository interface for VehicleCarGiver entities.
- */
 @Repository
 public interface VehicleCarGiverRepository extends JpaRepository<VehicleCarGiver, Integer> {
 }

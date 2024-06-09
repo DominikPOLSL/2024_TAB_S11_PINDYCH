@@ -1,0 +1,12 @@
+com.example.carrent
+com.example.carrent.admin
+com.example.carrent.brand
+com.example.carrent.config
+com.example.carrent.employee
+com.example.carrent.managegiver
+com.example.carrent.model
+com.example.carrent.rent
+com.example.carrent.reservation
+com.example.carrent.vehicle
+com.example.carrent.vehiclecargiver
+com.example.carrent.webtoken
