@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
+/**
+ * Entity class representing a reservation.
+ */
 @Entity
 @Table(name = "\"Reservation\"")
 public class Reservation {
@@ -35,11 +38,17 @@ public class Reservation {
     @Column(name = "\"reserved\"")
     private boolean reserved;
 
-    
+    /**
+     * Default constructor.
+     */
+    public Reservation() {
+    }
 
-    public Reservation() {}
-
-    public Reservation(int reservationId, Date startTime, Date endTime, boolean privateUsage, int employeeId, int carGiverId) {
+    /**
+     * Parameterized constructor.
+     */
+    public Reservation(int reservationId, Date startTime, Date endTime, boolean privateUsage, int employeeId,
+            int carGiverId) {
         this.reservationId = reservationId;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -48,76 +57,128 @@ public class Reservation {
         this.carGiverId = carGiverId;
     }
 
+    /**
+     * Getter for reservationId.
+     */
     public int getReservationId() {
         return reservationId;
     }
 
+    /**
+     * Setter for reservationId.
+     */
     public void setReservationId(int reservationId) {
         this.reservationId = reservationId;
     }
 
+    /**
+     * Getter for startTime.
+     */
     public Date getStartTime() {
         return startTime;
     }
 
-    public boolean getReserved() {
-        return reserved;
-    }
-
-    public void setReserved(boolean reserved) {
-        this.reserved = reserved;
-    }
-
+    /**
+     * Setter for startTime.
+     */
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
+    /**
+     * Getter for endTime.
+     */
     public Date getEndTime() {
         return endTime;
     }
 
+    /**
+     * Setter for endTime.
+     */
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
-    public boolean isPrivateUsage() {
+    /**
+     * Getter for privateUsage.
+     */
+    public boolean getPrivateUsage() {
         return privateUsage;
     }
 
+    /**
+     * Setter for privateUsage.
+     */
     public void setPrivateUsage(boolean privateUsage) {
         this.privateUsage = privateUsage;
     }
 
+    /**
+     * Getter for employeeId.
+     */
     public int getEmployeeId() {
         return employeeId;
     }
 
+    /**
+     * Setter for employeeId.
+     */
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
 
+    /**
+     * Getter for carGiverId.
+     */
     public int getCarGiverId() {
         return carGiverId;
     }
 
+    /**
+     * Setter for carGiverId.
+     */
     public void setCarGiverId(int carGiverId) {
         this.carGiverId = carGiverId;
     }
 
+    /**
+     * Getter for vehicleId.
+     */
     public int getVehicleId() {
         return vehicleId;
     }
 
+    /**
+     * Setter for vehicleId.
+     */
     public void setVehicleId(int vehicleId) {
         this.vehicleId = vehicleId;
     }
 
+    /**
+     * Getter for reserved.
+     */
+    public boolean getReserved() {
+        return reserved;
+    }
+
+    /**
+     * Setter for reserved.
+     */
+    public void setReserved(boolean reserved) {
+        this.reserved = reserved;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Reservation)) return false;
+        if (this == o)
+            return true;
+        if (!(o instanceof Reservation))
+            return false;
         Reservation that = (Reservation) o;
-        return reservationId == that.reservationId && privateUsage == that.privateUsage && employeeId == that.employeeId && carGiverId == that.carGiverId && Objects.equals(startTime, that.startTime) && Objects.equals(endTime, that.endTime);
+        return reservationId == that.reservationId && privateUsage == that.privateUsage && employeeId == that.employeeId
+                && carGiverId == that.carGiverId && Objects.equals(startTime, that.startTime)
+                && Objects.equals(endTime, that.endTime);
     }
 
     @Override
@@ -137,25 +198,37 @@ public class Reservation {
                 '}';
     }
 }
+
+/**
+ * Record representing a reservation for presentation purposes.
+ */
 record ReservationRecord(
         int id,
         String model,
         String brand,
         String startTime,
         String endTime,
-        Boolean reserved
-){}
+        Boolean reserved) {
+}
+
+/**
+ * Record for saving a reservation.
+ */
 record ReservationSave(
         String model,
         String brand,
         String startTime,
         String endTime,
         int employeeId,
-        int carGiverId
-){}
+        int carGiverId) {
+}
+
+/**
+ * Record representing a rent for presentation purposes.
+ */
 record RentRecord(
         int id,
         String Brand,
         String Model,
-        String Date
-){}
+        String Date) {
+}

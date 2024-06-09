@@ -14,6 +14,9 @@ import com.example.carrent.admin.AdminRepository;
 import com.example.carrent.employee.Employee;
 import com.example.carrent.employee.EmployeeRepository;
 
+/**
+ * Service for loading user-specific data during authentication.
+ */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
@@ -23,6 +26,14 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    /**
+     * Load user-specific data by username.
+     *
+     * @param username the username to load user data for
+     * @return the UserDetails object containing user data
+     * @throws UsernameNotFoundException if the user with the given username is not
+     *                                   found
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Admin> admin = adminRepository.findByLogin(username);

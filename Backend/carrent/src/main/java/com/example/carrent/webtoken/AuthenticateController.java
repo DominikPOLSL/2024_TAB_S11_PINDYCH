@@ -20,20 +20,36 @@ import com.example.carrent.admin.AdminRepository;
 import com.example.carrent.employee.Employee;
 import com.example.carrent.employee.EmployeeRepository;
 
+/**
+ * Controller class for handling authentication requests and issuing JWT tokens.
+ */
 @RestController
 public class AuthenticateController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @Autowired
     private JwtService jwtService;
+
     @Autowired
     private MyUserDetailsService myUserDetailsService;
+
     @Autowired
     private AdminRepository adminRepository;
+
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    /**
+     * Authenticate user credentials and generate a JWT token upon successful
+     * authentication.
+     * 
+     * @param loginForm The login form containing username and password.
+     * @return A map containing the generated JWT token, user role, and user ID.
+     * @throws UsernameNotFoundException If the authentication fails due to invalid
+     *                                   credentials.
+     */
     @PostMapping("/authenticate")
     public Map<String, String> authenticateAndGetToken(@RequestBody LoginForm loginForm) {
         Authentication authentication = authenticationManager.authenticate(
@@ -47,13 +63,11 @@ public class AuthenticateController {
             Optional<Employee> employee = employeeRepository.findByLogin(loginForm.username());
             if (employee.isPresent()) {
                 id = String.valueOf(employee.get().getId());
-
             }
 
             Optional<Admin> admin = adminRepository.findByLogin(loginForm.username());
             if (admin.isPresent()) {
                 id = String.valueOf(admin.get().getId());
-
             }
 
             String role = userDetails.getAuthorities().stream()
