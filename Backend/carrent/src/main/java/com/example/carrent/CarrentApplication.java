@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The Lab1 class is the main class for a Counter Strike Match results program.
  *
  * @author Przemyslaw Bednarz, Dominik Pindych, Dawid Flis, Mateusz Jasek, Jakub Deska
  * @version 1.0
