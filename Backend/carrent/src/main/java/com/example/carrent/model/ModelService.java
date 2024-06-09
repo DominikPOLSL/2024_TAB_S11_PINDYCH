@@ -13,13 +13,20 @@ public class ModelService {
 
     private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
-
+    /**
+     * Constructor for ModelService.
+     * @param brandRepository The repository for brands.
+     * @param modelRepository The repository for models.
+     */
     @Autowired
     public ModelService(BrandRepository brandRepository, ModelRepository modelRepository) {
         this.brandRepository = brandRepository;
         this.modelRepository = modelRepository;
     }
-
+    /**
+     * Retrieves all models.
+     * @return A list of all models.
+     */
     public List<Model> getModels() {
         return modelRepository.findAll();
     }

@@ -5,27 +5,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The Lab1 class is the main class for a Counter Strike Match results program.
+ *
+ * @author Przemyslaw Bednarz, Dominik Pindych, Dawid Flis, Mateusz Jasek, Jakub Deska
+ * @version 1.0
+ */
 @SpringBootApplication
 @RestController
 public class CarrentApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CarrentApplication.class, args);
-	}
-
-	@GetMapping("/home")
-    public String handleWelcome(){
-        return "home";
+    /**
+     * The entry point of the Car Rent application.
+     *
+     * @param args The command-line arguments passed to the application.
+     */
+    public static void main(String[] args) {
+        SpringApplication.run(CarrentApplication.class, args);
     }
-    
-    @GetMapping("/admin/home")
-    public String handleAdminWelcome(){
-        return "home_admin";
-    }  
-
-    @GetMapping("employee/home")
-    public String handleEmployeeWelcome(){
-        return "home_employee";
-    }  
-
 }

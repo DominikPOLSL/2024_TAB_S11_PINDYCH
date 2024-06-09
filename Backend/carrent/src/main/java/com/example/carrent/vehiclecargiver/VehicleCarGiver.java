@@ -1,6 +1,6 @@
 /**
  * @file VehicleCarGiver.java
- * @brief This file contains the VehicleCarGiver entity class.
+ *  This file contains the VehicleCarGiver entity class.
  */
 
 package com.example.carrent.vehiclecargiver;
@@ -9,14 +9,14 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 /**
- * @brief Entity class representing a Vehicle Car Giver.
+ *  Entity class representing a Vehicle Car Giver.
  */
 @Entity
 @Table(name = "\"VehicleCarGiver\"")
 public class VehicleCarGiver {
 
     /**
-     * @brief Unique identifier for the Vehicle Car Giver.
+     *  Unique identifier for the Vehicle Car Giver.
      */
     @Id
     @SequenceGenerator(name = "giver_sequence", sequenceName = "giver_sequence", allocationSize = 1)
@@ -25,25 +25,25 @@ public class VehicleCarGiver {
     private int id;
 
     /**
-     * @brief Name of the Vehicle Car Giver.
+     *  Name of the Vehicle Car Giver.
      */
     @Column(name = "name")
     private String name;
 
     /**
-     * @brief Surname of the Vehicle Car Giver.
+     *  Surname of the Vehicle Car Giver.
      */
     @Column(name = "surname")
     private String surname;
 
     /**
-     * @brief Default constructor.
+     *  Default constructor.
      */
     public VehicleCarGiver() {
     }
 
     /**
-     * @brief Parameterized constructor.
+     *  Parameterized constructor.
      * @param giverId Unique identifier for the Vehicle Car Giver.
      * @param name Name of the Vehicle Car Giver.
      * @param surname Surname of the Vehicle Car Giver.
@@ -55,7 +55,7 @@ public class VehicleCarGiver {
     }
 
     /**
-     * @brief Gets the unique identifier of the Vehicle Car Giver.
+     *  Gets the unique identifier of the Vehicle Car Giver.
      * @return Unique identifier.
      */
     public int getId() {
@@ -63,7 +63,7 @@ public class VehicleCarGiver {
     }
 
     /**
-     * @brief Sets the unique identifier of the Vehicle Car Giver.
+     *  Sets the unique identifier of the Vehicle Car Giver.
      * @param giverId Unique identifier.
      */
     @GeneratedValue
@@ -72,7 +72,7 @@ public class VehicleCarGiver {
     }
 
     /**
-     * @brief Gets the name of the Vehicle Car Giver.
+     *  Gets the name of the Vehicle Car Giver.
      * @return Name.
      */
     public String getName() {
@@ -80,7 +80,7 @@ public class VehicleCarGiver {
     }
 
     /**
-     * @brief Sets the name of the Vehicle Car Giver.
+     *  Sets the name of the Vehicle Car Giver.
      * @param name Name.
      */
     public void setName(String name) {
@@ -88,7 +88,7 @@ public class VehicleCarGiver {
     }
 
     /**
-     * @brief Gets the surname of the Vehicle Car Giver.
+     *  Gets the surname of the Vehicle Car Giver.
      * @return Surname.
      */
     public String getSurname() {
@@ -96,7 +96,7 @@ public class VehicleCarGiver {
     }
 
     /**
-     * @brief Sets the surname of the Vehicle Car Giver.
+     *  Sets the surname of the Vehicle Car Giver.
      * @param surname Surname.
      */
     public void setSurname(String surname) {
@@ -104,7 +104,7 @@ public class VehicleCarGiver {
     }
 
     /**
-     * @brief Checks if this object is equal to another object.
+     *  Checks if this object is equal to another object.
      * @param o Object to compare.
      * @return True if objects are equal, false otherwise.
      */
@@ -119,7 +119,7 @@ public class VehicleCarGiver {
     }
 
     /**
-     * @brief Generates a hash code for this object.
+     *  Generates a hash code for this object.
      * @return Hash code.
      */
     @Override
@@ -128,7 +128,7 @@ public class VehicleCarGiver {
     }
 
     /**
-     * @brief Generates a string representation of this object.
+     *  Generates a string representation of this object.
      * @return String representation.
      */
     @Override

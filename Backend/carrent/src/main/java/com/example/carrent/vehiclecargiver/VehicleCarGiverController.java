@@ -1,6 +1,6 @@
 /**
  * @file VehicleCarGiverController.java
- * @brief This file contains the REST controller for managing VehicleCarGiver entities.
+ *  This file contains the REST controller for managing VehicleCarGiver entities.
  */
 
 package com.example.carrent.vehiclecargiver;
@@ -12,19 +12,19 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @brief REST controller for VehicleCarGiver entity.
+ *  REST controller for VehicleCarGiver entity.
  */
 @RestController
 @RequestMapping("/api/vehiclecargiver")
 public class VehicleCarGiverController {
 
     /**
-     * @brief Service for VehicleCarGiver operations.
+     * Service for VehicleCarGiver operations.
      */
     private final VehicleCarGiverService vehicleCarGiverService;
 
     /**
-     * @brief Constructor with dependency injection.
+     *  Constructor with dependency injection.
      * @param vehicleCarGiverService Service for VehicleCarGiver operations.
      */
     @Autowired
@@ -33,7 +33,7 @@ public class VehicleCarGiverController {
     }
 
     /**
-     * @brief Gets all VehicleCarGivers.
+     *  Gets all VehicleCarGivers.
      * @return List of all VehicleCarGivers.
      */
     @GetMapping
@@ -42,7 +42,7 @@ public class VehicleCarGiverController {
     }
 
     /**
-     * @brief Gets a VehicleCarGiver by ID.
+     *  Gets a VehicleCarGiver by ID.
      * @param id ID of the VehicleCarGiver.
      * @return Optional containing the VehicleCarGiver if found, empty otherwise.
      */
@@ -52,7 +52,7 @@ public class VehicleCarGiverController {
     }
 
     /**
-     * @brief Adds a new VehicleCarGiver.
+     *  Adds a new VehicleCarGiver.
      * @param vehicleCarGiver VehicleCarGiver entity to add.
      */
     @PostMapping
@@ -61,7 +61,7 @@ public class VehicleCarGiverController {
     }
 
     /**
-     * @brief Deletes a VehicleCarGiver by ID.
+     *  Deletes a VehicleCarGiver by ID.
      * @param id ID of the VehicleCarGiver to delete.
      */
     @DeleteMapping("/{id}")
@@ -70,7 +70,7 @@ public class VehicleCarGiverController {
     }
 
     /**
-     * @brief Updates a VehicleCarGiver.
+     *  Updates a VehicleCarGiver.
      * @param id ID of the VehicleCarGiver to update.
      * @param vehicleCarGiver Updated VehicleCarGiver entity.
      */
