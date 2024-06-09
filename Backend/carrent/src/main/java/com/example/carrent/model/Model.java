@@ -1,12 +1,6 @@
 package com.example.carrent.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -25,14 +19,7 @@ public class Model {
     @Column(name = "\"brandId\"")
     private int brandId;
 
-    public Model() {
-    }
-
-    public Model(int modelId, String modelName, int brandId) {
-        this.modelId = modelId;
-        this.modelName = modelName;
-        this.brandId = brandId;
-    }
+    public Model() {}
 
     public Model(String modelName, int brandId) {
         this.modelName = modelName;
@@ -40,7 +27,7 @@ public class Model {
     }
 
     public int getModelId() {
-        return this.modelId;
+        return modelId;
     }
 
     public void setModelId(int modelId) {
@@ -48,7 +35,7 @@ public class Model {
     }
 
     public String getModelName() {
-        return this.modelName;
+        return modelName;
     }
 
     public void setModelName(String modelName) {
@@ -56,34 +43,32 @@ public class Model {
     }
 
     public int getBrandId() {
-        return this.brandId;
+        return brandId;
     }
 
     public void setBrandId(int brandId) {
         this.brandId = brandId;
     }
 
-    public Model modelId(int modelId) {
-        setModelId(modelId);
-        return this;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Model)) return false;
+        Model model = (Model) o;
+        return modelId == model.modelId && brandId == model.brandId && Objects.equals(modelName, model.modelName);
     }
 
-    public Model modelName(String modelName) {
-        setModelName(modelName);
-        return this;
-    }
-
-    public Model brandId(int brandId) {
-        setBrandId(brandId);
-        return this;
+    @Override
+    public int hashCode() {
+        return Objects.hash(modelId, modelName, brandId);
     }
 
     @Override
     public String toString() {
-        return "{" +
-                " modelId='" + getModelId() + "'" +
-                ", modelName='" + getModelName() + "'" +
-                ", brandId='" + getBrandId() + "'" +
-                "}";
+        return "Model{" +
+                "modelId=" + modelId +
+                ", modelName='" + modelName + '\'' +
+                ", brandId=" + brandId +
+                '}';
     }
 }

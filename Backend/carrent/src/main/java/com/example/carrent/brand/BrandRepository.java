@@ -3,6 +3,7 @@ package com.example.carrent.brand;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+
 /**
  * Repository interface for managing {@link Brand} entities.
  */
